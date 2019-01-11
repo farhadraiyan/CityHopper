@@ -1,8 +1,8 @@
 var a =5;
 if(a==5)
 {
-    console.log("nice")
+    console.log(" not nice")
 }
 else{
-    console.log("not nice")
+    console.log("nice")
 }
