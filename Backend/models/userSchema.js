@@ -5,32 +5,41 @@ const mongoose = require('mongoose');
 const earnings = mongoose.Schema({
     name:{
         firstName: {
-            type:String
+            type:String,
+            required:true
         },
         lastName:{
-            type:String
+            type:String,
+            required:true
         }
     },
     email:{
-        type:String
+        type:String,    
+        required:true
     },
     password:{
-        type:String
+        type:String,
+        required:true
     },
     country:{
-        type:String
+        type:String,
+        required:true
     },
     province:{
-        type:String
+        type:String,
+        require:true
     },
     city:{
-        type:String
+        type:String,
+        required:true
     },
     phoneNumber:{
-        type:String
+        type:String,
+        required:true
     },
     termsCondition:{
-        type:boolean
+        type:boolean,
+        required:true
     },
     userType:{
         type:String
@@ -38,4 +47,4 @@ const earnings = mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('earnings', earningsSchema);
+module.exports = mongoose.model('user', userSchema);
