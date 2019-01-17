@@ -23,6 +23,10 @@ const carSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    seatCapacity: {
+        type: String,
+        require: true
+    },
     licencePlateNum: {
         type: String,
         require: true
