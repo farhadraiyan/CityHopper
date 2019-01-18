@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // ***** Build Your Model Schema here *****
-const earnings = mongoose.Schema({
+const userSchema = mongoose.Schema({
     name:{
         firstName: {
             type:String,
