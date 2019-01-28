@@ -5,7 +5,7 @@ const earnings = mongoose.Schema({
     tripEarnings: String,
     paidTrips: String,
     tips:String,
-    balance:string
+    balance: String
 })
 
 module.exports = mongoose.model('earnings', earningsSchema);
