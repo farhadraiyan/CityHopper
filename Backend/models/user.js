@@ -3,16 +3,15 @@ const mongoose = require('mongoose');
 
 // ***** Build Your Model Schema here *****
 const userSchema = mongoose.Schema({
-    name:{
-        firstName: {
-            type:String,
-            required:true
-        },
-        lastName:{
-            type:String,
-            required:true
-        }
+    
+    firstName: {
+        type:String,
+        required:true
     },
+    lastName:{
+        type:String,
+        required:true
+    },    
     email:{
         type:String,    
         required:true
@@ -38,7 +37,7 @@ const userSchema = mongoose.Schema({
         required:true
     },
     termsCondition:{
-        type:boolean,
+        type: Boolean,
         required:true
     },
     userType:{
