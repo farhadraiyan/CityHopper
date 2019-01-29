@@ -5,35 +5,38 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
     
     firstName: {
-        type:String,
+        type: String,
         required:true
     },
     lastName:{
-        type:String,
+        type: String,
         required:true
     },    
     email:{
-        type:String,    
+        type: String,    
         required:true
     },
     password:{
-        type:String,
+        type: String,
         required:true
     },
+    salt:{
+        type: String
+    },
     country:{
-        type:String,
+        type: String,
         required:true
     },
     province:{
-        type:String,
+        type: String,
         require:true
     },
     city:{
-        type:String,
+        type: String,
         required:true
     },
     phoneNumber:{
-        type:String,
+        type: String,
         required:true
     },
     termsCondition:{
@@ -41,7 +44,7 @@ const userSchema = mongoose.Schema({
         required:true
     },
     userType:{
-        type:String
+        type: String
     }
 
 })

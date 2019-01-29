@@ -6,8 +6,6 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const dbUrl = 'mongodb://cityhopper:cityhopper1@ds113845.mlab.com:13845/capstone_project_db';
 
-// use port 3000 or any enviroment variable port that is configured by host
-const port = process.env.PORT || 3000;
 const app = express();
 
 // Require user
@@ -40,8 +38,9 @@ mongoose.connection.on('error', (err) => {
 // Passport Initiaziation 
 app.use(passport.initialize());
 // Creates server and lisitens to port 3000
-app.listen(port, () => {
-    // callback to informe
-    console.log(`listning to port ${port}`)
-})
+// app.listen(port, () => {
+//     // callback to informe
+//     console.log(`listning to port ${port}`)
+// })
 
+module.exports = app;
