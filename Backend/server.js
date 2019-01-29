@@ -8,9 +8,6 @@ const dbUrl = 'mongodb://cityhopper:cityhopper1@ds113845.mlab.com:13845/capstone
 
 const app = express();
 
-// Require user
-const userRouter = require('./routes/users')
-
 // use cross-origin domain
 app.use(cors())
 // Convert body to json object

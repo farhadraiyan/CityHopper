@@ -46,7 +46,6 @@ const userSchema = mongoose.Schema({
     userType:{
         type: String
     }
-
 })
 
 module.exports = mongoose.model('user', userSchema);
