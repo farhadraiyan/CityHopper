@@ -45,7 +45,11 @@ const userSchema = mongoose.Schema({
     },
     userType:{
         type: String
-    }
+    },
+    cars:[{
+        type: mongoose.Schema.ObjectId,
+        ref: 'car'
+    }]
 })
 
 module.exports = mongoose.model('user', userSchema);
