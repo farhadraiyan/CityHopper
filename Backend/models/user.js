@@ -49,7 +49,7 @@ const userSchema = mongoose.Schema({
     cars:[{
         type: mongoose.Schema.ObjectId,
         ref: 'car'
-    }]
+    }] 
 })
 
 module.exports = mongoose.model('user', userSchema);
