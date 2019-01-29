@@ -33,10 +33,20 @@ let findCarByUserId = async function (req, res) {
 
     let userCars
     try {
-        userCars = await car.find
+        userCars = await car.findById(data.userId)
+        if (!userCars) {
+            res.status(400).send({
+                message: "Error getting user car"
+            })
+        }
+        res.status(200).send({
+            message: "Found user vehicle details",
+            vehicle: userCars
+        })
     } catch (error) {
-        
+        res.status(400).send({
+            message: "Error getting user cars",
+            error: error
+        })
     }
-
-
 }
