@@ -56,11 +56,11 @@ exports.register = (req, res) => {
 
 exports.find = (req, res) => {
     User.findOne({
-        useremail: req.params.useremail,
-        userPass: req.params.password
+        email: req.params.email,
+        password: req.params.password
     }).then(
         (result) => {
-            if(result) {
+            if(!result) {
                 res.json({message: 'User does not Exists'})
             }else{
                 res.json(result)

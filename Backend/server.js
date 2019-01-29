@@ -16,7 +16,7 @@ app.use(cors())
 // Convert body to json object
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use('/api', userRouter)
+
 
 // Connect to Database
 mongoose.connect(dbUrl,{
@@ -37,10 +37,6 @@ mongoose.connection.on('error', (err) => {
 
 // Passport Initiaziation 
 app.use(passport.initialize());
-// Creates server and lisitens to port 3000
-// app.listen(port, () => {
-//     // callback to informe
-//     console.log(`listning to port ${port}`)
-// })
+
 
 module.exports = app;
