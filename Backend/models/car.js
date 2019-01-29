@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-// Car Schema 
-
 const carSchema = mongoose.Schema({
     make: {
         type: String,
@@ -38,4 +36,4 @@ const carSchema = mongoose.Schema({
     
 })
 
-module.exports = mongoose.exports('car', carSchema);
+module.exports = mongoose.model('car', carSchema);
