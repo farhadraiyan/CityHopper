@@ -13,6 +13,37 @@ let findAll = async function(req, res) {
     }
 }
 
+let findCarByCarId = async function(req, res) {
+    let errors = {}
+    let reqFields = ['carId']
+    // add fields to error if errors getting user information
+    reqFields.forEach(function(field) {
+        if(!req.body[field] || req.body[field] === '') {
+            errors[field] = `${field.replace(/_/g, ' ')} is required`
+        }
+    })
+    if(Object.keys(errors).length) {
+        return res.status(400).send({
+            msg: 'error finding car',
+            errors: errors,
+        })
+    }
+    let foundcar
+    try {
+        foundcar = await car.findById(data.carId)
+        if (!foundcar) {
+            return res.status(400).send({
+                msg: 'error finding car'
+            })
+        }
+    } catch (error) {
+        return res.status(400).send({
+            msg: 'error finding car',
+            error: error
+        })
+    }
+}
+
 let findCarByUserId = async function (req, res) {
     let errors = {}
     let reqFields = ['userId']
@@ -33,7 +64,7 @@ let findCarByUserId = async function (req, res) {
 
     let userCars
     try {
-        userCars = await car.findById(data.userId)
+        userCars = await car.find({userId: data.userId})
         if (!userCars) {
             res.status(400).send({
                 message: "Error getting user car"
@@ -100,6 +131,49 @@ let createCar = async function(req, res) {
         return res.status(400).send({
             msg: 'error saving car',
             errors: error,
+        })
+    }
+}
+
+let updateCar = async function(req, res) {
+    let errors = {}
+    let reqFields = ['carId', 'make', 'model', 'year', 'color', 'type', 
+                    'seatCapacity', 'licencePlateNum', 'luggageCapacity']
+    // add fields to error if errors getting user information
+    reqFields.forEach(function(field) {
+        if(!req.body[field] || req.body[field] === '') {
+            errors[field] = `${field.replace(/_/g, ' ')} is required`
+        }
+    })
+
+    // send error
+    if(Object.keys(errors).length) {
+        return res.status(400).send({
+            msg: 'error creating car',
+            errors: errors,
+        })
+    }
+
+    let data = _.pick(req.body, reqFields)
+
+    try {
+        let updatedCar = await car.findByIdAndUpdate(data.carId, {$set:data}, {new: true})
+
+        if (!updatedCar) {
+            return res.status(400).send({
+                error:"could not update the car. Please try again later"
+            })
+        }
+
+        // if all good
+        return res.status(200).send({
+            message: "Car updated successfully",
+            vehicle: updatedCar
+        })
+    } catch (error) {
+        return res.status(400).send({
+            message: "Error updating car",
+            error: error
         })
     }
 }
