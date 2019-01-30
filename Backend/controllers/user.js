@@ -42,7 +42,8 @@ exports.register = (req, res) => {
                     })
                 }else{
                     res.json({
-                        msg: newUser.firstName + "-> User Added"
+                        msg: newUser.firstName + "-> User Added",
+                        user: newUser
                     })
                 }
             })
