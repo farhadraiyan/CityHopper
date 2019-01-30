@@ -4,7 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const passport = require('passport')
-const dbUrl = 'mongodb://admin:cityhopper123@ds131814.mlab.com:31814/cityhopper';
+const dbUrl = 'mongodb://admin:admin123@ds131814.mlab.com:31814/cityhopper';
 
 const app = express();
 

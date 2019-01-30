@@ -1,9 +1,11 @@
 var User = require('../models/user');
 
+
+
 exports.findAll = (req, res) => {
     User.find().then(
         (result) => {
-            res.json(result)
+            res.json(["SOME BULL SHIT"])
         }
     ).catch(err => {
         console.log(err)
@@ -69,5 +71,22 @@ exports.find = (req, res) => {
     ).catch(err => {
         console.log(err)
     })
+}
+
+
+
+exports.deleteOne =  async function(req,res){
+    try{
+        await User.deleteOne({_id:req.params.id})
+        res.status(200).send({
+            message: "User deleted"
+        })  
+    }catch(error){
+        res.status(404).send({
+            message: "Error to delete",
+            error: "cannot find the user"
+        })
+
+    }
 }
 
