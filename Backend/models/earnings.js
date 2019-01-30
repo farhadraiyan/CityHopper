@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const earnings = mongoose.Schema({
     tripEarnings: String,
     paidTrips: String,
-    tips:String,
-    balance:string
+    tips: String,
+    balance: String
 })
 
-module.exports = mongoose.model('earnings', earningsSchema);
+module.exports = mongoose.model('earnings', earnings);

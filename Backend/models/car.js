@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
-// Car Schema 
-
 const carSchema = mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'user'
+    },
     make: {
         type: String,
         require: true
@@ -35,7 +37,6 @@ const carSchema = mongoose.Schema({
         type: Number,
         require: true
     }
-    
 })
 
-module.exports = mongoose.exports('cars', carSchema);
+module.exports = mongoose.model('car', carSchema);

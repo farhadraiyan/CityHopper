@@ -37,7 +37,7 @@ const trip = mongoose.Schema({
     },
     car: {
         type: mongoose.Schema.ObjectId,
-        ref: 'carSchema'
+        ref: 'car'
     }
 })
 
