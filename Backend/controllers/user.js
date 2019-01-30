@@ -5,7 +5,7 @@ var User = require('../models/user');
 exports.findAll = (req, res) => {
     User.find().then(
         (result) => {
-            res.json(["SOME BULL SHIT"])
+            res.json(result)
         }
     ).catch(err => {
         console.log(err)
@@ -42,7 +42,8 @@ exports.register = (req, res) => {
                     })
                 }else{
                     res.json({
-                        msg: newUser.firstName + "-> User Added"
+                        msg: newUser.firstName + "-> User Added",
+                        user: newUser
                     })
                 }
             })

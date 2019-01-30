@@ -7,31 +7,31 @@ const carSchema = mongoose.Schema({
     },
     make: {
         type: String,
-        require: true
+        required: true
     },
     model: {
         type: String,
-        require: true
+        required: true
     },
     year: {
         type: Number,
-        require: true
+        required: true
     },
     color: {
         type: String,
-        require: true
+        required: true
     },
     type: {
         type: String,
-        require: true
+        required: true
     },
     seatCapacity: {
         type: Number,
-        require: true
+        required: true
     },
     licencePlateNum: {
         type: String,
-        require: true
+        required: true
     },
     luggageCapacity: {
         type: Number,

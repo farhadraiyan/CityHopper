@@ -4,18 +4,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
+import { BodyComponent } from './body/body.component';
+import { HomeComponent } from './body/home/home.component';
 
 
 
 const appRoutes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '',
     pathMatch: 'full'
   },
 
@@ -28,6 +30,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
+    FooterComponent,
+    BodyComponent,
     HomeComponent
   ],
   exports: [ RouterModule ],

@@ -28,6 +28,9 @@ let findCarByCarId = async function(req, res) {
             errors: errors,
         })
     }
+
+    let data = _.pick(req.body, ['userId'])
+
     let foundcar
     try {
         foundcar = await car.findById(data.carId)
@@ -216,4 +219,13 @@ let deleteCar = async function(req, res) {
             error: error
         })
     }
+}
+
+module.exports = {
+    findAll,
+    findCarByCarId,
+    findCarByUserId,
+    createCar,
+    updateCar,
+    deleteCar
 }
