@@ -177,3 +177,43 @@ let updateCar = async function(req, res) {
         })
     }
 }
+
+let deleteCar = async function(req, res) {
+    let errors = {}
+    let reqFields = ['carId']
+    // add fields to error if errors getting user information
+    reqFields.forEach(function(field) {
+        if(!req.body[field] || req.body[field] === '') {
+            errors[field] = `${field.replace(/_/g, ' ')} is required`
+        }
+    })
+    if(Object.keys(errors).length) {
+        return res.status(400).send({
+            msg: 'error deleting car',
+            errors: errors,
+        })
+    }
+    let data = _.pick(req.body, reqFields)
+    let deleteCar
+
+    try {
+        deleteCar = await car.findByIdAndDelete(data.carId)
+        if (!deleteCar) {
+            return res.status(400).send({
+                error:"could not delete the car. Please try again later"
+            })
+        }
+
+        // if all good
+        return res.status(200).send({
+            message: "Car deleted successfully",
+            deletedCar: deleteCar
+        })
+
+    } catch (error) {
+        return res.status(400).send({
+            message:"could not update the car. Please try again later",
+            error: error
+        })
+    }
+}
