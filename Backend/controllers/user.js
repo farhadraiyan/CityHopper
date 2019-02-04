@@ -22,18 +22,31 @@ exports.register = (req, res) => {
                 })
             }else{
                 // Creates an object From userSchema
-                var newUser = new User({
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    email: req.body.email,
-                    password: req.body.password,
-                    country: req.body.country,
-                    province: req.body.province,
-                    city: req.body.city,
-                    phoneNumber: req.body.phoneNumber,
-                    termsCondition: req.body.termsCondition,
-                    userType: req.body.userType
-                });   
+                var newUser = new User(
+                    //{
+                    // firstName: req.body.firstName,
+                    // lastName: req.body.lastName,
+                    // email: req.body.email,
+                    // hash: req.body.hash,
+                    // country: req.body.country,
+                    // province: req.body.province,
+                    // city: req.body.city,
+                    // phoneNumber: req.body.phoneNumber,
+                    // termsCondition: req.body.termsCondition,
+                    // userType: req.body.userType
+               // }
+                );   
+                newUser.firstName = req.body.firstName;
+                newUser.lastName = req.body.lastName;
+                newUser.email = req.body.email;
+                newUser.hash = newUser.setPassword(req.body.password);
+                newUser.country = req.body.country;
+                newUser.province = req.body.province;
+                newUser.city = req.body.city;
+                newUser.phoneNumber = req.body.phoneNumber;
+                newUser.termsCondition = req.body.termsCondition;
+                newUser.userType = req.body.userType;
+                
 
                User.create(newUser, (err) => {
                 if(err){
