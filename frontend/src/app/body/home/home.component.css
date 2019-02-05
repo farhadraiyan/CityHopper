@@ -2,8 +2,63 @@
     margin: 0px;
     padding: 0px;
 }
-.home{
-    width: 100%;
-    min-height: 500px;
-    background-color: #3419af;
+.icon{
+  font-size: 120%
 }
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.img{
+  width:100%;
+  height:100%
+}
+
+
+
+
+button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #335680;
+}
+input{
+  font-family:'Font Awesome 5 Free';
+  font-weight: 700;
+  font-size: 20px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  border:none;
+  background-color:#EBEBFF
+}
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color:  black;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color:  black;
+}
+
+
+

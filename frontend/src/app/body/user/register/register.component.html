@@ -1,0 +1,16 @@
+<fieldset>
+  <legend>Register</legend>
+      <input type="text" placeholder="First Name" #fn><br>
+      <input type="text" placeholder="Last Name" #ln><br>
+      <input type="text" placeholder="Email" #email><br>
+      <input type="password" placeholder="Password" #pwd><br>
+      <input type="password" placeholder="Confirm Password" #cpwd><br>
+      <input type="text" placeholder="Country" #cntry><br>
+      <input type="text" placeholder="Province" #prov><br>
+      <input type="text" placeholder="City" #cty><br>
+      <button (click)="register(fn.value, ln.value, email.value, pwd.value, cpwd.value, cntry.value, prov.value, cty.value)">Register</button>
+      <!-- <button routerLink="/login">Back</button> -->
+</fieldset>
+<div *ngIf="errorMessage">
+<span style="color:red">{{errorMessage}}</span>
+</div>
