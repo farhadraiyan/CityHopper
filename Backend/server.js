@@ -4,8 +4,8 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 // const passport = require('passport')
-const dbUrl = 'mongodb://admin:admin123@ds131814.mlab.com:31814/cityhopper';
-
+//const dbUrl = 'mongodb://admin:admin123@ds131814.mlab.com:31814/cityhopper';
+const dbUrl = 'mongodb://localhost/cityhopper';
 const app = express();
 // require passport config and user Model
 //require('./models/user');

@@ -23,20 +23,21 @@ const trip = mongoose.Schema({
         required: true
     },
     driver: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'userSchema',
         required: true
     },
     passengers: [{
-        type: mongoose.Schema.ObjectId,
-        ref: 'userSchema'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userSchema',
+        required: true
     }],
     rating: {
         type: Number,
         require: true
     },
     car: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'car'
     }
 })

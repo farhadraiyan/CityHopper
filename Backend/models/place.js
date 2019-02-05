@@ -5,33 +5,60 @@ const Place = mongoose.Schema({
         type: String,
         required: true
     },
-    coordinates: {
-        type: Point,
-        required: true
+    from: 
+    {
+        street: {
+            type:String,
+            required:true
+        },
+        geoLocationFrom:{
+            coordinates:[Number]
+        },
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        country: {
+            type: String,
+            required: true
+        },
+        postalCode: {
+            type: String,
+            required: true
+        }
     },
-    addressLine1: {
-        type: String,
-        required: true
-    },
-    addressLine2: {
-        type: String
-    },
-    city: {
-        type: String,
-        required: true
-    },
-    state: {
-        type: String,
-        required: true
-    },
-    country: {
-        type: String,
-        required: true
-    },
-    postalCode: {
-        type: String,
-        required: true
+    to: 
+    {
+        street: {
+            type:String,
+            required:true
+        },
+        geoLocationTo:{
+            coordinates:[Number]
+        },
+        city: {
+            type: String,
+            required: true
+        },
+        
+        state: {
+            type: String,
+            required: true
+        },
+        country: {
+            type: String,
+            required: true
+        },
+        postalCode: {
+            type: String,
+            required: true
+        }
     }
+
 })
 
 module.exports = mongoose.model('Place', Place);
