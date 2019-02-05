@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Headers, Http} from '@angular/http';
 import {throwError as observableThrowError, Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import 'rxjs/add/operator/map';
 import {User} from '../models/User';
 
 @Injectable({
@@ -9,16 +11,16 @@ import {User} from '../models/User';
 })
 export class UserServiceService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: Http) { }
 
   registerUser(newUser: User){
-    let options = {
-      headers : new HttpHeaders({'Content-Type' : 'application/json'})
-    }
-    return this.http.post('http://localhost:3000/user/register', JSON.parse(JSON.stringify(newUser)), options)
-    .pipe(
-      catchError(this.errorHandler)
-    )
+    const head=new Headers();
+    head.append('Content-Type' , 'application/json')
+      // headers : new HttpHeaders({'Content-Type' : 'application/json'})
+    return this.http.post('http://localhost:3000/user/register/', newUser,{headers:head})
+    .map(res=>console.log(res))
+  
+
   }
 
 

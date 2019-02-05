@@ -9,6 +9,7 @@ import { BodyComponent } from './body/body.component';
 import { HomeComponent } from './body/home/home.component';
 import { RegisterComponent } from './body/user/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 
 
@@ -43,7 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
     //RouterModule.forRoot(appRoutes),
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

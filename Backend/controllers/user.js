@@ -32,23 +32,23 @@ exports.register = (req, res) => {
                     // province: req.body.province,
                     // city: req.body.city,
                     // phoneNumber: req.body.phoneNumber,
-                    // termsCondition: req.body.termsCondition,
+                    // termsCondition: req.body.termsCondition, 
                     // userType: req.body.userType
                // }
                 );   
-                newUser.firstName = req.body.firstName;
-                newUser.lastName = req.body.lastName;
+                //console.log(req.body);
+                newUser.firstName = req.body.firstname;
+                newUser.lastName = req.body.lastname;
                 newUser.email = req.body.email;
-                //newUser.hash = newUser.setPassword(req.body.password);
-                newUser.hash = req.body.hash;
+                newUser.hash = newUser.setPassword(req.body.password);
                 newUser.country = req.body.country;
                 newUser.province = req.body.province;
                 newUser.city = req.body.city;
                 // newUser.phoneNumber = req.body.phoneNumber;
                 // newUser.termsCondition = req.body.termsCondition;
                 // newUser.userType = req.body.userType;
-                
-                console.log(newUser.firstName);
+            
+               console.log(newUser);
                User.create(newUser, (err) => {
                 if(err){
                     res.json({
@@ -61,9 +61,7 @@ exports.register = (req, res) => {
                     })
                 }
             })
-
         }
-
     }
 
     ).catch(err => {

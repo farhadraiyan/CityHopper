@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  register(firstName:string, lastName:string, email:string,
+  register(firstname:string, lastname:string, email:string,
     password:string, cpassword:string, country:string,
     province:string, city:string){
       if(password !== cpassword){
@@ -24,17 +24,18 @@ export class RegisterComponent implements OnInit {
       }else{
         this.errorMessage="";
         let user = new User();
-        user.firstname = firstName;
-        user.lastname = lastName;
+        user.firstname = firstname;
+        user.lastname = lastname;
         user.email = email;
         user.password = password;
         user.country = country;
         user.province = province;
         user.city = city;
-
+    
         this.addUsr.registerUser(user).subscribe(
           result =>{
-            console.log(result)
+            console.log({result})
+            console.log(user);
             // if(result){
             //   this.errorMessage = JSON.parse(JSON.stringify(result)).message;
             // }else{

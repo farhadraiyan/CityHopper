@@ -40,7 +40,7 @@ const userSchema = mongoose.Schema({
     city:{
         type: String,
         required:true
-    },
+    }
     // phoneNumber:{
     //     type: String,
     //     required:true
@@ -66,6 +66,7 @@ userSchema.methods.setPassword = function(password){
     // var buffer = new Buffer(this.salt, 'binary')
     // console.log(buffer);
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex'); 
+    console.log(this.hash);
     return this.hash
 };
 
