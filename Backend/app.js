@@ -12,6 +12,7 @@ require('./config/passport');
 var usersRoutes = require('./routes/users');
 var carRoutes = require('./routes/car');
 let placeRoutes=require('./routes/place');
+let tripRoutes=require("./routes/trip");
 var app = express();
 
 app.use(logger('dev'));
@@ -26,5 +27,6 @@ app.use(passport.initialize());
 app.use('/user', usersRoutes);
 app.use('/car', carRoutes);
 app.use('/place', placeRoutes);
+app.use('/trip',tripRoutes)
 
 module.exports = app;

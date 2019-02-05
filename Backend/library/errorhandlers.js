@@ -1,7 +1,7 @@
 
 const Joi=require("joi")
-
-let joiConfig=function(reqbody)
+//place config
+let joiConfigPlace=function(reqbody)
 {
     
     const joiSchema=Joi.object().keys({
@@ -11,6 +11,7 @@ let joiConfig=function(reqbody)
     let joiRes=Joi.validate(reqbody,joiSchema,{abortEarly:false})
     return joiRes;
 }
+
 //place errors functionality
 let placeErrors=function(errorsdetails)
 {
@@ -26,7 +27,10 @@ let placeErrors=function(errorsdetails)
 
 }
 
+//trip errors
+
+
 module.exports={
-    joiConfig,
+    joiConfigPlace,
     placeErrors
 }
