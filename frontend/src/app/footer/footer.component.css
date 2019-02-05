@@ -2,6 +2,11 @@
 .footer{
     width: 100%;
     min-height: 200px;
-    background-color: #ffddaa;
+    background-color: #1C1C1C;
     clear: both;
+}
+
+.circle{
+  width:180px;
+  height: 180px
 }
