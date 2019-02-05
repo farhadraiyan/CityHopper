@@ -22,8 +22,7 @@ passport.use(new LocalStrategy({
             return done(null, false, {
                 message: "Password is wrong"
             });
-        }
-
+        } 
         return done(null, user);
 
     });

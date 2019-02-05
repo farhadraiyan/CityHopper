@@ -1,35 +1,36 @@
 const mongoose = require('mongoose')
-const place = require('./place')
+//const Place = require('./place')
 
-const trip = mongoose.Schema({
+const Trip = mongoose.Schema({
     from: {
-        type: place,
+        type: mongoose.Schema.ObjectId,
+        ref: 'trip',
         required: true
     },
     to: {
-        type: place,
+        type: mongoose.Schema.ObjectId,
+        ref: 'trip',
         required: true
     },
     cost: {
         type: Number,
         required: true
     },
-    departureTime:{
-        type: Date,
-        required: true
+    departureTime:{ 
+        type: Date, 
+        default: Date.now 
     },
-    arrivalTime:{
-        type: Date,
-        required: true
+    arivalTime:{ 
+        type: Date, 
+        default: Date.now 
     },
     driver: {
         type: mongoose.Schema.ObjectId,
-        ref: 'userSchema',
-        required: true
+        ref: 'driver'
     },
     passengers: [{
         type: mongoose.Schema.ObjectId,
-        ref: 'userSchema'
+        ref: 'passengers'
     }],
     rating: {
         type: Number,
@@ -41,4 +42,4 @@ const trip = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('trip', trip);
+module.exports = mongoose.model('Trip', Trip);
