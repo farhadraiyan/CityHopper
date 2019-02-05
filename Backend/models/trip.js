@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
-const place = require('./place')
+const Place = require('./place')
 
 const trip = mongoose.Schema({
     from: {
-        type: place,
+        type: Place.from,
         required: true
     },
     to: {
-        type: place,
+        type: Place.to,
         required: true
     },
     cost: {

@@ -3,7 +3,7 @@ const _ = require('lodash');
 const erroHandler=require("../library/errorhandlers")
 let generatePlace = async function(req, res) {
     
-    let reqFields = ['name','from', 'to']
+    let reqFields = ['name','location']
     //erro handle with Joi
     let joiResult=erroHandler.joiConfig(req.body,res);
     //if error handler return errors

@@ -5,7 +5,7 @@ const Place = mongoose.Schema({
         type: String,
         required: true
     },
-    from: 
+    location: 
     {
         street: {
             type:String,
@@ -30,34 +30,8 @@ const Place = mongoose.Schema({
             type: String,
             required: true
         }
-    },
-    to: 
-    {
-        street: {
-            type:String,
-            required:true
-        },
-        geoLocationTo:{
-            coordinates:[Number]
-        },
-        city: {
-            type: String,
-            required: true
-        },
-        
-        state: {
-            type: String,
-            required: true
-        },
-        country: {
-            type: String,
-            required: true
-        },
-        postalCode: {
-            type: String,
-            required: true
-        }
     }
+    
 
 })
 

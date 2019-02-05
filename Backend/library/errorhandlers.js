@@ -6,8 +6,7 @@ let joiConfig=function(reqbody)
     
     const joiSchema=Joi.object().keys({
         name:Joi.string().required(),
-        from:Joi.required(),
-        to:Joi.required()
+        location:Joi.required()
     })
     let joiRes=Joi.validate(reqbody,joiSchema,{abortEarly:false})
     return joiRes;
