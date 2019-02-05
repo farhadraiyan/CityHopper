@@ -17,6 +17,8 @@ app.use(cors())
 // Convert body to json object
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+
 // // Passport Initializer
 // app.use(passport.initialize());
 

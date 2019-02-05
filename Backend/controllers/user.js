@@ -43,9 +43,9 @@ exports.register = (req, res) => {
                 newUser.country = req.body.country;
                 newUser.province = req.body.province;
                 newUser.city = req.body.city;
-                newUser.phoneNumber = req.body.phoneNumber;
-                newUser.termsCondition = req.body.termsCondition;
-                newUser.userType = req.body.userType;
+                // newUser.phoneNumber = req.body.phoneNumber;
+                // newUser.termsCondition = req.body.termsCondition;
+                // newUser.userType = req.body.userType;
                 
 
                User.create(newUser, (err) => {

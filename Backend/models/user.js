@@ -24,10 +24,7 @@ const userSchema = mongoose.Schema({
     },
     hash:{
         type: String,
-       // required:true
-    },
-    salt:{
-        type: String
+        required:true
     },
     salt:{
         type: String
@@ -44,31 +41,32 @@ const userSchema = mongoose.Schema({
         type: String,
         required:true
     },
-    phoneNumber:{
-        type: String,
-        required:true
-    },
-    termsCondition:{
-        type: Boolean,
-        required:true
-    },
-    userType:{
-        type: String
-    },
-    cars:[{
-        type: mongoose.Schema.ObjectId,
-        ref: 'car'
-    }]
+    // phoneNumber:{
+    //     type: String,
+    //     required:true
+    // },
+    // termsCondition:{
+    //     type: Boolean,
+    //     required:true
+    // },
+    // userType:{
+    //     type: String
+    // },
+    // cars:[{
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'car'
+    // }]
 
 });
 
 // Setting Salt and hash for user password
 userSchema.methods.setPassword = function(password){
-    this.salt = crypto.randomBytes(16).toString('base64');
+    this.salt = crypto.randomBytes(16).toString('hex');
     console.log(this.salt);
     // var buffer = new Buffer(this.salt, 'binary')
     // console.log(buffer);
-    return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'binary'), 1000, 64, 'sha512').toString('base64'); 
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex'); 
+    console.log(this.hash);
 };
 
 // Varifying User Password
@@ -91,7 +89,7 @@ userSchema.methods.generateJwt = function(){
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
-        phoneNumber: this.phoneNumber,
+        //phoneNumber: this.phoneNumber,
         exp: parseInt(expiry.getTime / 1000)
     }, privateKey)
 }
@@ -99,3 +97,14 @@ userSchema.methods.generateJwt = function(){
 
 
 module.exports = mongoose.model('user', userSchema);
+
+
+// function setPassword(password){
+//     this.salt = crypto.randomBytes(16).toString('hex');
+// //     console.log(this.salt);
+// //     // var buffer = new Buffer(this.salt, 'binary')
+// //     // console.log(buffer);
+//      this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+//      console.log(this.hash)
+// }
+// setPassword("HelloWorld")

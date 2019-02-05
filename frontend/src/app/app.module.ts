@@ -7,23 +7,25 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
 import { HomeComponent } from './body/home/home.component';
+import { RegisterComponent } from './body/user/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
-const appRoutes: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  },
-  {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full'
-  },
+// const appRoutes: Routes = [
+//   {
+//     path: '',
+//     component: HomeComponent
+//   },
+//   {
+//     path: '',
+//     redirectTo: '',
+//     pathMatch: 'full'
+//   },
 
-  { path: '**', component: HomeComponent }
+//   { path: '**', component: HomeComponent }
 
-]
+// ]
 
 
 @NgModule({
@@ -32,14 +34,16 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     BodyComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   exports: [ RouterModule ],
 
   imports: [
-    RouterModule.forRoot(appRoutes),
+    //RouterModule.forRoot(appRoutes),
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
