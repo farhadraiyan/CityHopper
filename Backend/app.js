@@ -14,10 +14,9 @@ require('./models/user');
 require('./config/passport');
 const config=require("./config/dbconfig")
 //database setup
-mongoose.connect(config.dbUrllocal)
+config.dbLocalConnection()
     .then(()=>console.log("connected to database"))
-    .catch((err)=>console.error("cannot connect to db",err))
-
+    .catch((err)=>console.error("cannot connect to database",err))
 
 var usersRoutes = require('./routes/users');
 var carRoutes = require('./routes/car');

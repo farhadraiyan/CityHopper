@@ -13,14 +13,14 @@ let createTrip = async function (req, res) {
     //from to has type issue need to fix
     let reqField=["from", "to","cost","departureTime","arivalTime","driver",
 "passengers","rating","car"]
-    // //erro handle with Joi
-    // let joiResult=erroHandler.joiConfig(req.body,res);
-    // //if error handler return errors
-    // if(joiResult.error)
-    // {
-    //     res.status(400).send(erroHandler.placeErrors(joiResult.error.details))
-    //     return;
-    // }
+    //erro handle with Joi
+    let joiResult=erroHandler.joiConfigTrip(req.body);
+    //if error handler return errors
+    if(joiResult.error)
+    {
+        res.status(400).send(erroHandler.tripErrors(joiResult.error.details))
+        return;
+    }
 
     let tripData=_.pick(req.body, reqField)
 
