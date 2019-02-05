@@ -114,7 +114,6 @@ let createCar = async function(req, res) {
             error: error
         })
     }
-    console.log('CAR', createdCar )
     let savedCar
     // try catch to catch error for saving created car to mongodb
     try {
