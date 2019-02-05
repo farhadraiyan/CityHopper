@@ -2,7 +2,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const passport = require('passport')
+const passport = require('passport');
+const cors = require('cors')
 require('./server');
 
 // require passport config and user Model
@@ -12,6 +13,8 @@ require('./config/passport');
 var usersRoutes = require('./routes/users');
 var carRoutes = require('./routes/car');
 var app = express();
+// use cross-origin domain
+app.use(cors())
 
 app.use(logger('dev'));
 app.use(express.json());

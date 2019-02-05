@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     password:string, cpassword:string, country:string,
     province:string, city:string){
       if(password !== cpassword){
-        this.errorMessage = "password and confirm do not match"
+        this.errorMessage = "password and confirm password do not match"
       }else{
         this.errorMessage="";
         let user = new User();
@@ -33,13 +33,17 @@ export class RegisterComponent implements OnInit {
         user.city = city;
 
         this.addUsr.registerUser(user).subscribe(
-          (result) =>{
-            if(result){
-              this.errorMessage = JSON.parse(JSON.stringify(result)).message;
-            }else{
-              // where user should be redirected
-              this.errorMessage = "User Added"
-            }
+          result =>{
+            console.log(result)
+            // if(result){
+            //   this.errorMessage = JSON.parse(JSON.stringify(result)).message;
+            // }else{
+            //   // where user should be redirected
+            //   this.errorMessage = "User Added"
+            // }
+          },
+          err =>{
+            console.log(err)
           }
         );
       }

@@ -39,7 +39,8 @@ exports.register = (req, res) => {
                 newUser.firstName = req.body.firstName;
                 newUser.lastName = req.body.lastName;
                 newUser.email = req.body.email;
-                newUser.hash = newUser.setPassword(req.body.password);
+                //newUser.hash = newUser.setPassword(req.body.password);
+                newUser.hash = req.body.hash;
                 newUser.country = req.body.country;
                 newUser.province = req.body.province;
                 newUser.city = req.body.city;
@@ -47,7 +48,7 @@ exports.register = (req, res) => {
                 // newUser.termsCondition = req.body.termsCondition;
                 // newUser.userType = req.body.userType;
                 
-
+                console.log(newUser.firstName);
                User.create(newUser, (err) => {
                 if(err){
                     res.json({

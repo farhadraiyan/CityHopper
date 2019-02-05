@@ -1,6 +1,6 @@
 /* required NPM */
 const express = require('express')
-const cors = require('cors')
+//const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 // const passport = require('passport')
@@ -13,7 +13,7 @@ const app = express();
 
 
 // use cross-origin domain
-app.use(cors())
+//app.use(cors())
 // Convert body to json object
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
