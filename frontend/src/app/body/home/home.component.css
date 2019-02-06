@@ -47,6 +47,25 @@ input{
 }
 
 
+
+@media only screen and (max-width: 600px) {
+  button {
+    padding: 15px 32px;
+
+  }
+  input{
+    font-weight: 700;
+    font-size: 20px;
+    padding: 5px 8px;
+    width: 100%;
+  }
+  .drivers{
+    padding: 0% !important;
+  }
+
+}
+
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: black;
   opacity: 1; /* Firefox */
@@ -61,4 +80,10 @@ input{
 }
 
 
+.carousel {
+  width: 100%;
+}
+.img{
+  width: 100%;
+}
 
