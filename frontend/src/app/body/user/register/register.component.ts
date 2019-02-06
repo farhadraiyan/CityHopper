@@ -33,9 +33,9 @@ export class RegisterComponent implements OnInit {
         user.city = city;
     
         this.addUsr.registerUser(user).subscribe(
-          result =>{
-            console.log({result})
-            console.log(user);
+          (result) =>{
+            console.log(result);
+            window.alert("The User has been added");
             // if(result){
             //   this.errorMessage = JSON.parse(JSON.stringify(result)).message;
             // }else{
