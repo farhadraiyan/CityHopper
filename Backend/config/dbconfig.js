@@ -11,7 +11,7 @@ module.exports={
 
         }
     },
-    dbMlabConnection:function()
+    connectMlabDb:function()
     {
         return mongoose.connect(
             this.dbMlab.uri,
@@ -25,7 +25,7 @@ module.exports={
             }
         )
     },
-    dbLocalConnection:function()
+    connectLocalDb:function()
     {
         return mongoose.connect(this.dbUrllocal)
     }
