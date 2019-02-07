@@ -10,6 +10,7 @@ import { HomeComponent } from './body/home/home.component';
 import { RegisterComponent } from './body/user/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { LoginComponent } from './body/user/login/login.component';
 
 
 
@@ -36,7 +37,8 @@ import { HttpModule } from '@angular/http';
     FooterComponent,
     BodyComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   exports: [ RouterModule ],
 
