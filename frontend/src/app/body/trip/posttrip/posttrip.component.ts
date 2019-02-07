@@ -2,6 +2,7 @@ import { Component, ElementRef, NgZone, OnInit, ViewChild, DoCheck } from '@angu
 import { MapsAPILoader } from "@agm/core";
 import { FormControl } from '@angular/forms';
 // import { } from 'googlemaps';
+declare var google: any
 @Component({
   selector: 'app-posttrip',
   templateUrl: './posttrip.component.html',
