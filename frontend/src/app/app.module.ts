@@ -13,6 +13,7 @@ import { HttpModule } from '@angular/http';
 
 
 
+
 // const appRoutes: Routes = [
 //   {
 //     path: '',
@@ -36,7 +37,8 @@ import { HttpModule } from '@angular/http';
     FooterComponent,
     BodyComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+
   ],
   exports: [ RouterModule ],
 
