@@ -9,7 +9,6 @@ import {User} from '../../../models/User';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   private errorMessage = "";
   constructor(private addUsr: UserServiceService, private _router: Router) { }
 
@@ -18,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   register(firstname:string, lastname:string, email:string,
     password:string, cpassword:string, country:string,
-    province:string, city:string){
+    province:string, city:string, phone:number, terms:boolean){
       if(password !== cpassword){
         this.errorMessage = "password and confirm password do not match"
       }else{
@@ -31,7 +30,9 @@ export class RegisterComponent implements OnInit {
         user.country = country;
         user.province = province;
         user.city = city;
-    
+        user.phone = phone;
+        user.terms = terms;
+
         this.addUsr.registerUser(user).subscribe(
           (result) =>{
             console.log(result);

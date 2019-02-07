@@ -6,4 +6,6 @@ export class User {
     country: String;
     province: String;
     city: String;
+    phone: Number;
+    terms: Boolean;
 }
