@@ -11,6 +11,7 @@ import { RegisterComponent } from './body/user/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { LoginComponent } from './body/user/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -49,7 +50,8 @@ import { LoginComponent } from './body/user/login/login.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

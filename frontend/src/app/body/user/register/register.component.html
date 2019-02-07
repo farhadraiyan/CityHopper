@@ -1,8 +1,13 @@
 <div class="container">
-  <div class="row">
-    <div class="offset-sm-2 col-sm-8">
-          <div class="form-group">
-          <legend>Register</legend>
+  <div class="container">
+  <div class="panel panel-heading">
+    	<h2 class="panel-title">Please sign up here <small>It's free!</small></h2>
+  </div>
+  <br>
+  <form class="form-group" #userReg="ngForm">
+    <!-- <div class="offset-sm-2 col-sm-12"> -->
+          <div class="row">
+          <!-- <legend>Register</legend>
               <input type="text" placeholder="First Name" class="form-control" #fn><br>
               <input type="text" placeholder="Last Name" class="form-control" #ln><br>
               <input type="text" placeholder="Email" class="form-control" #email><br>
@@ -14,14 +19,100 @@
               <input type="number" placeholder="Phone Number" class="form-control" #phn><br>
               <input type="checkbox" name="checkbox" value="checked" id="agree" #trm/> I agree to terms and Conditions <br><br>
               <button class="form-control" (click)="register(fn.value, ln.value, email.value, pwd.value, cpwd.value, cntry.value, prov.value, cty.value, phn.value, trm.value)">Register</button>
-              <!-- <button routerLink="/login">Back</button> -->
+              <button routerLink="/login">Back</button> -->
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" name="firstname" id="firstname" [(ngModel)]="user.firstname"  #firstname="ngModel" class="form-control input-sm" placeholder="First Name" required>
+                  <div [hidden]="firstname.valid || firstname.pristine" class="alert alert-danger">First Name is required</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" name="lastname" id="last_name" #lastname="ngModel" [(ngModel)]="user.lastname" class="form-control input-sm" placeholder="Last Name" required>
+                  <div [hidden]="lastname.valid || lastname.pristine" class="alert alert-danger">Last Name is required</div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <input type="email" name="email" id="email" #email="ngModel" [(ngModel)]="user.email" (change)="log(email)" [pattern]="emailPattern" class="form-control input-sm" placeholder="Email Address" required>
+                  <div *ngIf="email.touched && !email.valid" class="alert alert-danger">
+                    <div *ngIf="email.errors.required">Email is required</div>
+                    <div *ngIf="email.errors.pattern">Not a valid email</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="form-group">
+                      <input type="text" name="password" id="password" minlength="8" #password="ngModel" (change)="log(password)"[(ngModel)]="user.password" class="form-control input-sm" placeholder="Password" required>
+                      <div  *ngIf="!password.valid && password.touched" class="alert alert-danger">
+                        <div *ngIf="password.errors.required">Password is requried</div>
+                        <div *ngIf="password.errors.minlength">Password must be atleaset 8 charcters long</div>
+                        <div *ngIf="password.errors.pattern">Password Pattern Does not match</div>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                      <input type="password" name="password_confirmation" id="password_confirmation" #cPassword="ngModel"  [pattern]="passwordPattern" [(ngModel)]="user.password_confirmation" class="form-control input-sm" placeholder="Confirm Password" required>
+                      <div  *ngIf="!cPassword.valid && cPassword.touched" class="alert alert-danger">
+                          <div *ngIf="cPassword.errors.required">Password is requried</div>
+                          <div *ngIf="cPassword.errors.minlength">Password must be atleaset 8 charcters long</div>
+                          <div *ngIf="cPassword.errors.pattern">Password Pattern Does not match</div>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                      <input type="text" name="country" id="country" #country="ngModel" [(ngModel)]="user.country" class="form-control input-sm" placeholder="Country" required>
+                      <div [hidden]="country.valid || country.pristine" class="alert alert-danger">Country is required</div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      <input type="text" name="province" id="province" #province="ngModel" [(ngModel)]="user.province" class="form-control input-sm" placeholder="Province" required>
+                      <div [hidden]="province.valid || province.pristine" class="alert alert-danger">Province is required</div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <input type="text" name="city" id="city" #city="ngModel" [(ngModel)]="user.city" class="form-control input-sm" placeholder="Enter City" required>
+                      <div [hidden]="city.valid || city.pristine" class="alert alert-danger">City is required</div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                      <div class="form-group">
+                        <input type="number" name="number" id="Number" #number="ngModel" [(ngModel)]="user.number" class="form-control input-sm" placeholder="Phone Number" required>
+                        <div [hidden]="number.valid || number.pristine" class="alert alert-danger">Number is required</div>
+                      </div>
+                  </div>
+                  <div class="col-sm-12">
+                      <div class="form-group">
+                          <input type="checkbox" name="terms" value="checked" id="agree" #terms="ngModel" [(ngModel)]="user.terms" required/> I agree to <a href="#">Terms and Conditions </a>
+                          <div [hidden]="terms.valid || terms.pristine" class="alert alert-danger">Please check Terms and Conditions before proceeding</div>
+                      </div>
+                  </div>
+                  <div class="col-sm-5">
+                      <div class="form-group">
+                        <button class="form-control btn-primary" [disabled]="!userReg.valid" (click)="register()">Register</button>
+                      </div>
+                  </div>
+                  <div class="col-sm-2">
+                      <div class="form-group">
+                          <h3 class="text-center"><i>or</i></h3>
+                      </div>
+                  </div>
+                  <div class="col-sm-5">
+                      <div class="form-group">
+                          <button class="form-control btn-success">Login</button>
+                      </div>
+                  </div>
             </div>
         <div *ngIf="errorMessage">
           <span style="color:red">{{errorMessage}}</span>
         </div>
-    </div>
-  </div>
+    <!-- </div> -->
+  </form>
 </div>
-
-<input 
-
+</div>
+ 
+<!-- <div [hidden]="password.valid || password.pristine" -->
