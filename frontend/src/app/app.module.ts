@@ -10,10 +10,13 @@ import { HomeComponent } from './body/home/home.component';
 import { RegisterComponent } from './body/user/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { SettingsComponent } from './body/user/account_settings/settings/settings.component';
+import { RootComponent } from './body/user/settings/root/root.component';
+import { SettingsRootComponent } from './body/user/settings/settings-root/settings-root.component';
+import { SettingsPersonalDetailsComponent } from './body/user/settings/settings-personal-details/settings-personal-details.component';
+import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicles/settings-vehicles.component';
+import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
 import { LoginComponent } from './body/user/login/login.component';
-
-
-
 
 // const appRoutes: Routes = [
 //   {
@@ -39,6 +42,12 @@ import { LoginComponent } from './body/user/login/login.component';
     BodyComponent,
     HomeComponent,
     RegisterComponent,
+    SettingsComponent,
+    RootComponent,
+    SettingsRootComponent,
+    SettingsPersonalDetailsComponent,
+    SettingsVehiclesComponent,
+    SettingsPaymentComponent,
     LoginComponent
 
   ],
