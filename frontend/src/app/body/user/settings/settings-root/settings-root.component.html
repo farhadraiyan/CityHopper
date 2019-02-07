@@ -1,0 +1,26 @@
+<div class="container-fluid parent ">
+  <div class="row">
+    <div class="col-12 col-sm-3">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Account Settings</h5>
+          <br>
+          <div>
+            <a routerLink="/settings/personaldetails" >Personal Details</a>
+            <br>
+            <a >Account Details</a>
+            <br>
+            <a routerLink="/settings/payment" >Payment</a>
+            <br>
+            <a routerLink="/settings/vehicles" >Vehicles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-9">
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
