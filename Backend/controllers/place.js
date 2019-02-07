@@ -5,7 +5,7 @@ let generatePlace = async function(req, res) {
     
     let reqFields = ['name','location']
     //erro handle with Joi
-    let joiResult=erroHandler.joiConfigPlace(req.body,res);
+    let joiResult=erroHandler.joiConfigPlace(req.body);
     //if error handler return errors
     if(joiResult.error)
     {

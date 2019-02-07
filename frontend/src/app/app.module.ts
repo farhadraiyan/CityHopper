@@ -14,6 +14,7 @@ import { LoginComponent } from './body/user/login/login.component';
 
 
 
+
 // const appRoutes: Routes = [
 //   {
 //     path: '',
@@ -39,6 +40,7 @@ import { LoginComponent } from './body/user/login/login.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent
+
   ],
   exports: [ RouterModule ],
 

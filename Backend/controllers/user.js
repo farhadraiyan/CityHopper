@@ -1,4 +1,5 @@
 var User = require('../models/user');
+const errorHandler = require('../library/userErrorHandler');
 
 
 
@@ -98,4 +99,30 @@ exports.deleteOne =  async function(req,res){
 
     }
 }
+
+
+exports.editOne = async function(req,res){
+
+    let result = errorHandler.userRequirements(req.body.firstName,req.body.lastName,req.body.country,req.body.province,req.body.city);
+
+    try{
+        await User.updateOne({_id:req.params.id},{
+            firstName: req.body.firstname,
+            lastName: req.body.lastname,
+            country:req.body.country,
+            province: req.body.province,
+            city: req.body.city
+        })
+        res.status(200).send({
+            message:result
+        })
+    }catch(error){
+        res.status(404).send({
+            message: "Error to edit",
+            error: "cannot find the user"
+        })
+    }
+  
+}
+    
 
