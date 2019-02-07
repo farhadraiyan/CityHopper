@@ -10,24 +10,29 @@ import { HomeComponent } from './body/home/home.component';
 import { RegisterComponent } from './body/user/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { PersonalDetailsComponent } from './body/user/personal-details/personal-details.component';
+import { AccountSettingsComponent } from './body/user/account-settings/account-settings.component';
 
 
 
 
-// const appRoutes: Routes = [
-//   {
-//     path: '',
-//     component: HomeComponent
-//   },
-//   {
-//     path: '',
-//     redirectTo: '',
-//     pathMatch: 'full'
-//   },
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full'
+  },
+  {
+    path: 'personalDetails',
+    component: PersonalDetailsComponent
+  },
+  { path: '**', component: HomeComponent },
 
-//   { path: '**', component: HomeComponent }
-
-// ]
+]
 
 
 @NgModule({
@@ -38,12 +43,14 @@ import { HttpModule } from '@angular/http';
     BodyComponent,
     HomeComponent,
     RegisterComponent,
+    PersonalDetailsComponent,
+    AccountSettingsComponent,
 
   ],
   exports: [ RouterModule ],
 
   imports: [
-    //RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

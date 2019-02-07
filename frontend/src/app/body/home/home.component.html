@@ -2,7 +2,7 @@
 
 
   <div class="row m-4">
-    <div class="col-sm-12 col-lg-6  text-center"><h3> Find your ride</h3></div>
+    <div class="col-sm-12 col-lg-6  text-center"><h3>Find your ride</h3></div>
     <div class="col"></div>
   </div>
 
@@ -13,10 +13,11 @@
 
           <input type="text" class="rounded"  placeholder='&#xf3c5; From'>
 
-          <i class="fas fa-chevron-circle-right m-3 fa-2x"></i>
+          <i *ngIf="!mobile" class="fas fa-chevron-circle-right m-3 fa-2x"></i>
+          <i *ngIf="mobile" class="fas fa-chevron-circle-down m-3 fa-2x"></i>
 
           <input type="text" class="rounded"  placeholder="&#xf5a0; To">
-          <button type="submit" class="rounded m-3 p-2 ">Let's go!</button>
+          <h3><button type="submit" class="rounded m-3 p-2 ">Let's go!</button></h3>
         </form>
 
       </div>
@@ -52,8 +53,8 @@
 
 <div class="text-center p-5">
 
-  <h4>City Hopper connects drivers and riders, making the travel between cities
-more affordable and easier! </h4>
+  <h5>City Hopper connects drivers and riders, making the travel between cities
+more affordable and easier! </h5>
 
 </div>
 
@@ -62,20 +63,24 @@ more affordable and easier! </h4>
   <div class="row">
     <div class="col-sm col-md-12 col-lg p-3 drivers ">
     <img src="../../../assets/driver.png" class="rounded mx-auto d-block" alt="driver">
-    <h1> Drivers</h1>
-    <h4> Drivers makes extra money sharing their
- car with others riders </h4>
+    <h2> Drivers</h2>
+    <h5> Drivers makes extra money sharing their
+ car with others riders </h5>
     </div>
-    <div class="col-sm col-md-12 col-lg pt-5">
+    <div class="col-sm col-md-12 col-lg pt-1">
+
+    <i *ngIf="!mobile" class="fas fa-sync-alt fa-3x p-5 drivers "></i>
+    <i *ngIf="mobile" class="fas fa-exchange-alt fa-3x p-5 drivers "></i>
     <img src="../../../assets/logo.png" class="rounded mx-auto d-block " alt="rider" width="100">
-   <h3> City Hopper</h3>
-   <i class="fas fa-exchange-alt fa-4x p-5 drivers "></i>
+   <h4> City Hopper</h4>
+   <i *ngIf="!mobile" class="fas fa-exchange-alt fa-3x p-5 drivers "></i>
+  <i *ngIf="mobile" class="fas fa-exchange-alt fa-3x p-5 drivers "></i>
     </div>
     <div class="col-sm col-md-12 col-lg p-3 drivers">
     <img src="../../../assets/rider.png" class="rounded mx-auto d-block" alt="rider" width="250">
-    <h1> Riders</h1>
-    <h4> Drivers makes extra money sharing their
- car with others riders   </h4>
+    <h2> Riders</h2>
+    <h5> Drivers makes extra money sharing their
+ car with others riders   </h5>
     </div>
   </div>
 </div>
@@ -88,9 +93,9 @@ more affordable and easier! </h4>
     </div>
     <div class="col-sm p-sm-5 ">
 
-    <h2>Best solution for business travel and family visiting.
+    <h3>Best solution for business travel and family visiting.
 We make the travel much better
-Start using it now! </h2>
+Start using it now! </h3>
     </div>
   </div>
 
