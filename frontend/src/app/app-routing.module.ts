@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
 import { HomeComponent } from './body/home/home.component';
 import { RegisterComponent } from './body/user/register/register.component';
+import { PosttripComponent } from './body/trip/posttrip/posttrip.component';
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'posttrip',
+    component: PosttripComponent
   },
  // { path: '**', component: HomeComponent }
 ];

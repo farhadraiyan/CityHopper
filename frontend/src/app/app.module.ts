@@ -10,7 +10,10 @@ import { HomeComponent } from './body/home/home.component';
 import { RegisterComponent } from './body/user/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-
+import { AgmCoreModule } from '@agm/core';
+import { TripComponent } from './body/trip/trip.component';
+import { PosttripComponent } from './body/trip/posttrip/posttrip.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -38,7 +41,8 @@ import { HttpModule } from '@angular/http';
     BodyComponent,
     HomeComponent,
     RegisterComponent,
-
+    TripComponent,
+    PosttripComponent
   ],
   exports: [ RouterModule ],
 
@@ -47,7 +51,13 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey:"AIzaSyByS3ej9cs4aNa9YsnHtvkPudbpRFafs7U",
+      libraries:["places"]
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

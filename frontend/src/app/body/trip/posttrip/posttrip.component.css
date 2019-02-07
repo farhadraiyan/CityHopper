@@ -1,0 +1,15 @@
+.mymap{
+    min-height: 200px;
+}
+agm-map {
+    height: 100%;
+    width: 100%;
+    min-height: 200px;
+  }
+
+  .container{
+      background-color: #E1EEF5;
+  }
+  .btn{
+      background-color: #335680;
+  }
