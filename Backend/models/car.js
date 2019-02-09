@@ -35,8 +35,8 @@ const carSchema = mongoose.Schema({
     },
     luggageCapacity: {
         type: Number,
-        require: true
+        required: true
     }
 })
 
-module.exports = mongoose.model('car', carSchema);
+module.exports = mongoose.model('Car', carSchema);

@@ -8,3 +8,13 @@
     cursor: pointer;
     background-color: #335680;
 }
+
+.userImage {
+    background: rgb(226, 226, 226);
+    min-width: 300px;
+    min-height: 300px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
