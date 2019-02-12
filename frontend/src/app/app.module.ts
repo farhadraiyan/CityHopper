@@ -16,6 +16,7 @@ import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicle
 import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
 import { LoginComponent } from './body/user/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { PasswordvalidationDirective } from './directives/passwordvalidation.directive';
 
 // const appRoutes: Routes = [
 //   {
@@ -45,7 +46,8 @@ import { FormsModule } from '@angular/forms';
     SettingsPersonalDetailsComponent,
     SettingsVehiclesComponent,
     SettingsPaymentComponent,
-    LoginComponent
+    LoginComponent,
+    PasswordvalidationDirective
 
   ],
   exports: [ RouterModule ],
