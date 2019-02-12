@@ -48,16 +48,18 @@
                         <div *ngIf="password.errors.required">Password is requried</div>
                         <div *ngIf="password.errors.minlength">Password must be atleaset 8 charcters long</div>
                         <div *ngIf="password.errors.pattern">Password Pattern Does not match</div>
+                        <div *ngIf="password.error.notEqual">Password and Confirm Password doesn't match</div>
                       </div>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                      <input type="password" name="password_confirmation" id="password_confirmation" #cPassword="ngModel"  [pattern]="passwordPattern" [(ngModel)]="user.password_confirmation" class="form-control input-sm" placeholder="Confirm Password" required>
+                      <input type="password" name="password_confirmation" id="password_confirmation" #cPassword="ngModel" appPasswordvalidation="password"  [pattern]="passwordPattern" [(ngModel)]="user.password_confirmation" class="form-control input-sm" placeholder="Confirm Password" required>
                       <div  *ngIf="!cPassword.valid && cPassword.touched" class="alert alert-danger">
                           <div *ngIf="cPassword.errors.required">Password is requried</div>
                           <div *ngIf="cPassword.errors.minlength">Password must be atleaset 8 charcters long</div>
                           <div *ngIf="cPassword.errors.pattern">Password Pattern Does not match</div>
+                          <div *ngIf="cPassword.errors.notEqual">Password and Confirm Password doesn't match</div>
                       </div>
                   </div>
                 </div>
