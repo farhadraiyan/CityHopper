@@ -1,5 +1,4 @@
 <div class="container">
-  <div class="container">
   <div class="panel panel-heading">
     	<h2 class="panel-title">Please sign up here <small>It's free!</small></h2>
   </div>
@@ -41,6 +40,7 @@
                   </div>
                 </div>
               </div>
+              <!-- <div ngModelGroup="cPassword" #nameCtrl="ngModelGroup"> -->
               <div class="col-sm-6">
                   <div class="form-group">
                       <input type="text" name="password" id="password" minlength="8" #password="ngModel" (change)="log(password)"[(ngModel)]="user.password" class="form-control input-sm" placeholder="Password" required>
@@ -63,6 +63,7 @@
                       </div>
                   </div>
                 </div>
+              <!-- </div> -->
                 <div class="col-sm-12">
                     <div class="form-group">
                       <input type="text" name="country" id="country" #country="ngModel" [(ngModel)]="user.country" class="form-control input-sm" placeholder="Country" required>
@@ -114,7 +115,7 @@
         </div>
     <!-- </div> -->
   </form>
-</div>
+
 </div>
  
 <!-- <div [hidden]="password.valid || password.pristine" -->
