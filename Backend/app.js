@@ -14,10 +14,14 @@ require('./models/user');
 require('./config/passport');
 const config=require("./config/dbconfig")
 //database setup
+<<<<<<< HEAD
 // <<<<<<< HEAD
 // mongoose.connect(config.dbUrlMlab,{ useNewUrlParser: true })
 // =======
 config.connectMlabDb()
+=======
+config.connectLocalDb()
+>>>>>>> googlemap
     .then(()=>console.log("connected to database"))
     .catch((err)=>console.error("cannot connect to database",err))
 

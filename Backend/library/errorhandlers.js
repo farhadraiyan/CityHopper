@@ -7,6 +7,7 @@ let joiConfigPlace=function(reqbody)
     const joiSchema=Joi.object().keys({
         
         name:Joi.string().required(),
+        navPointType:Joi.string().required(),
         location:Joi.required()
     })
     let joiRes=Joi.validate(reqbody,joiSchema,{abortEarly:false})
@@ -39,6 +40,8 @@ let joiConfigTrip=function(reqBody)
         cost:Joi.number().strict().required(),
         departureTime:Joi.date().iso(),
         arivalTime:Joi.date().iso().min(Joi.ref('departureTime')),
+        seatsAvailable:Joi.number().required(),
+        luggage:Joi.string().required(),
         driver:Joi.required(),
         passengers:Joi.array().required(),
         rating:Joi.number().strict().required(),

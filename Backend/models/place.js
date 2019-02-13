@@ -30,7 +30,12 @@ const Place = mongoose.Schema({
             type: String,
             required: true
         }
+    },
+    navPointType:{
+        type:String,
+        required:true
     }
+    
     
 
 })

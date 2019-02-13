@@ -5,9 +5,6 @@
           <h2>Post Trip</h2>
         </div>
       </div>
-      <div class="form-group">
-          <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-        </div>
       
       <div class="row">
         <div class="col-md-6 col-12 mb-3">
@@ -15,13 +12,13 @@
             <div class="form-group row">
               <label for="from" class="col-sm-4 col-md-4 col-12 col-form-label">Departure From</label>
               <div class="col-sm-8 col-md-8 col-12">
-                <input type="text" class="form-control" id="from" placeholder="Departure From">
+                <input id="from" placeholder="Departure From" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #from [formControl]="searchControl">
               </div>
             </div>
             <div class="form-group row">
               <label for="to" class="col-sm-4  col-md-4 col-12 col-form-label">Departure To</label>
               <div class="col-sm-8 col-md-8 col-12">
-                <input type="text" class="form-control" id="to" placeholder="Departure To">
+                <input id="to" placeholder="Departure To" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #to [formControl]="searchControl">
               </div>
             </div>
             <div class="form-group row">
@@ -35,7 +32,7 @@
                 <div class="col-sm-8 col-md-8 col-12">
                     <select class="form-control form-control-md" id="date">
                         <option>0</option>
-                      </select>
+                    </select>
                 </div>
               </div>
               <div class="form-group row">

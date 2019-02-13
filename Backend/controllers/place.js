@@ -1,9 +1,9 @@
-const Place=require('../models/place');
+const placeModel=require('../models/place');
 const _ = require('lodash');
 const erroHandler=require("../library/errorhandlers")
 let generatePlace = async function(req, res) {
     
-    let reqFields = ['name','location']
+    let reqFields = ['name','navPointType','location']
     //erro handle with Joi
     let joiResult=erroHandler.joiConfigPlace(req.body);
     //if error handler return errors
@@ -19,7 +19,7 @@ let generatePlace = async function(req, res) {
     // try catch to catch error creating a car
     
     try {
-        crtPlace = await new Place(placeData)
+        crtPlace = await new placeModel(placeData)
     } catch (error) {
         return res.status(400).send({
             message: "cannot create place",

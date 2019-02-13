@@ -4,12 +4,12 @@ const mongoose = require('mongoose')
 const Trip = mongoose.Schema({
     from: {
         type: mongoose.Schema.ObjectId,
-        ref: 'trip',
+        ref: 'place',
         required: true
     },
     to: {
         type: mongoose.Schema.ObjectId,
-        ref: 'trip',
+        ref: 'place',
         required: true
     },
     cost: {
@@ -24,13 +24,22 @@ const Trip = mongoose.Schema({
         type: Date, 
         default: Date.now 
     },
+    seatsAvailable:{
+        type:Number,
+        required:true
+        
+    },
+    luggage:{
+        type:String,
+        required:true
+    },
     driver: {
         type: mongoose.Schema.ObjectId,
-        ref: 'driver'
+        ref: 'user'
     },
     passengers: [{
         type: mongoose.Schema.ObjectId,
-        ref: 'passengers'
+        ref: 'user'
     }],
     rating: {
         type: Number,
