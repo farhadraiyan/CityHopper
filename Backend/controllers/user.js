@@ -36,7 +36,7 @@ exports.register = (req, res) => {
                 newUser.userType = req.body.userType;
             
                console.log(newUser);
-               User.create(newUser, (err) => {
+               newUser.save(newUser, (err) => {
                 if(err){
                     res.json({
                         msg: err + " -> Add user failed"
