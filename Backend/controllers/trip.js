@@ -1,6 +1,7 @@
 const TRIP = require('../models/trip')
 const _ = require('lodash');
 const erroHandler=require("../library/errorhandlers")
+const User=require("../models/user")
 // let findAllTrip = async function (req, res) {
 //     TRIP.find().then((success) => {
 //         res.send(success)
@@ -11,7 +12,7 @@ const erroHandler=require("../library/errorhandlers")
 
 let createTrip = async function (req, res) {
     //from to has type issue need to fix
-    let reqField=["from", "to","cost","departureTime","arivalTime","driver",
+    let reqField=["from", "to","cost","departureTime","luggage","seatsAvailable","arivalTime","driver",
 "passengers","rating","car"]
     //erro handle with Joi
     let joiResult=erroHandler.joiConfigTrip(req.body);
@@ -27,7 +28,9 @@ let createTrip = async function (req, res) {
     let createTrip;
     try{
         createTrip= await new TRIP(tripData)
-        console.log(createTrip)
+        //this is how get access to the user
+        const user=await User.findById(createTrip.driver)
+        console.log(user)
     }catch(error)
     {
         return res.status(400).send({
