@@ -14,6 +14,9 @@ require('./models/user');
 require('./config/passport');
 const config=require("./config/dbconfig")
 //database setup
+// <<<<<<< HEAD
+// mongoose.connect(config.dbUrlMlab,{ useNewUrlParser: true })
+// =======
 config.connectMlabDb()
     .then(()=>console.log("connected to database"))
     .catch((err)=>console.error("cannot connect to database",err))
@@ -22,9 +25,6 @@ var usersRoutes = require('./routes/users');
 var carRoutes = require('./routes/car');
 let placeRoutes=require('./routes/place');
 let tripRoutes=require("./routes/trip");
-var app = express();
-// use cross-origin domain
-app.use(cors())
 
 app.use(logger('dev'));
 app.use(express.json());

@@ -16,6 +16,12 @@ import { PosttripComponent } from './body/trip/posttrip/posttrip.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
+import { SettingsRootComponent } from './body/user/settings/settings-root/settings-root.component';
+import { SettingsPersonalDetailsComponent } from './body/user/settings/settings-personal-details/settings-personal-details.component';
+import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicles/settings-vehicles.component';
+import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
+import { LoginComponent } from './body/user/login/login.component';
+import { PasswordvalidationDirective } from './directives/passwordvalidation.directive';
 
 // const appRoutes: Routes = [
 //   {
@@ -42,7 +48,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     RegisterComponent,
     TripComponent,
-    PosttripComponent
+    PosttripComponent,
+    SettingsRootComponent,
+    SettingsPersonalDetailsComponent,
+    SettingsVehiclesComponent,
+    SettingsPaymentComponent,
+    LoginComponent,
+    PasswordvalidationDirective
+
   ],
   exports: [ RouterModule ],
 
@@ -57,7 +70,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AgmCoreModule.forRoot({
       apiKey:"AIzaSyByS3ej9cs4aNa9YsnHtvkPudbpRFafs7U",
       libraries:["places"]
-    })
+    }),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

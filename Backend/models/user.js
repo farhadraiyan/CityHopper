@@ -40,22 +40,22 @@ const userSchema = mongoose.Schema({
     city:{
         type: String,
         required:true
-    }
-    // phoneNumber:{
-    //     type: String,
-    //     required:true
-    // },
-    // termsCondition:{
-    //     type: Boolean,
-    //     required:true
-    // },
-    // userType:{
-    //     type: String
-    // },
-    // cars:[{
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: 'car'
-    // }]
+    },
+    phoneNumber:{
+        type: Number,
+        required:true
+    },
+    termsCondition:{
+        type: Boolean,
+        required:true
+    },
+    userType:{
+        type: String
+    },
+    cars:[{
+        type: mongoose.Schema.ObjectId,
+        ref: 'car'
+    }]
 
 });
 

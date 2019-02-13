@@ -6,6 +6,13 @@ import { BodyComponent } from './body/body.component';
 import { HomeComponent } from './body/home/home.component';
 import { RegisterComponent } from './body/user/register/register.component';
 import { PosttripComponent } from './body/trip/posttrip/posttrip.component';
+import { LoginComponent } from './body/user/login/login.component';
+import { SettingsRootComponent } from './body/user/settings/settings-root/settings-root.component';
+import { SettingsPersonalDetailsComponent } from './body/user/settings/settings-personal-details/settings-personal-details.component';
+import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicles/settings-vehicles.component';
+import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -24,6 +31,25 @@ const routes: Routes = [
     path: 'posttrip',
     component: PosttripComponent
   },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'settings',
+    component: SettingsRootComponent,
+    children: [{
+      path: 'personaldetails',
+      component: SettingsPersonalDetailsComponent
+    },{
+      path: 'payment',
+      component: SettingsPaymentComponent
+    },{
+      path: 'vehicles',
+      component: SettingsVehiclesComponent
+    }]
+  }
+
  // { path: '**', component: HomeComponent }
 ];
 

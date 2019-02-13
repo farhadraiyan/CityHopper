@@ -14,30 +14,16 @@ exports.findAll = (req, res) => {
 }
 
 exports.register = (req, res) => {
-
     User.findOne({email: req.body.email}).then(
         (result) =>{
             if(result){
                 res.json({
-                    message: 'User Exists in Database'
+                    message: 'User already exists'
                 })
             }else{
                 // Creates an object From userSchema
-                var newUser = new User(
-                    //{
-                    // firstName: req.body.firstName,
-                    // lastName: req.body.lastName,
-                    // email: req.body.email,
-                    // hash: req.body.hash,
-                    // country: req.body.country,
-                    // province: req.body.province,
-                    // city: req.body.city,
-                    // phoneNumber: req.body.phoneNumber,
-                    // termsCondition: req.body.termsCondition, 
-                    // userType: req.body.userType
-               // }
-                );   
-                //console.log(req.body);
+                var newUser = new User();   
+                console.log(req.body)
                 newUser.firstName = req.body.firstname;
                 newUser.lastName = req.body.lastname;
                 newUser.email = req.body.email;
@@ -45,9 +31,9 @@ exports.register = (req, res) => {
                 newUser.country = req.body.country;
                 newUser.province = req.body.province;
                 newUser.city = req.body.city;
-                // newUser.phoneNumber = req.body.phoneNumber;
-                // newUser.termsCondition = req.body.termsCondition;
-                // newUser.userType = req.body.userType;
+                newUser.phoneNumber = req.body.number;
+                newUser.termsCondition = req.body.terms;
+                newUser.userType = req.body.userType;
             
                console.log(newUser);
                User.create(newUser, (err) => {
