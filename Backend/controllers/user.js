@@ -13,7 +13,7 @@ exports.findAll = (req, res) => {
     })
 }
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
     User.findOne({email: req.body.email}).then(
         (result) =>{
             if(result){
@@ -23,7 +23,8 @@ exports.register = (req, res) => {
             }else{
                 // Creates an object From userSchema
                 var newUser = new User();   
-                console.log(req.body)
+                // console.log(req.body)
+                // const {firstname, lastname, email, hash, country, province, city, phoneNumber, termsCondition, userType} = req.body;
                 newUser.firstName = req.body.firstname;
                 newUser.lastName = req.body.lastname;
                 newUser.email = req.body.email;
@@ -36,13 +37,16 @@ exports.register = (req, res) => {
                 newUser.userType = req.body.userType;
             
                console.log(newUser);
-               User.create(newUser, (err) => {
+               User.create(newUser, async (err) => {
                 if(err){
                     res.json({
                         msg: err + " -> Add user failed"
                     })
                 }else{
                     let data = _.pick(newUser, [ '_id', 'firstName', 'lastName', 'email', 'country', 'province', 'city', 'phoneNumber', 'userType'])
+                    var token;
+                    token = await newUser.generateJwt();
+                    data.token = token;
                     res.json({
                         msg: newUser.firstName + "-> User Added",
                         user: data
