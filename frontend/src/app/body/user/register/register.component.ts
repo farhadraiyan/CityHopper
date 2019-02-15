@@ -47,39 +47,5 @@ export class RegisterComponent implements OnInit {
     }
 
   }
-  // register(firstname:string, lastname:string, email:string,
-  //   password:string, cpassword:string, country:string,
-  //   province:string, city:string, phone:number, terms:boolean){
-  //     if(password !== cpassword){
-  //       this.errorMessage = "password and confirm password do not match"
-  //     }else{
-  //       this.errorMessage="";
-  //       let user = new User();
-  //       user.firstname = firstname;
-  //       user.lastname = lastname;
-  //       user.email = email;
-  //       user.password = password;
-  //       user.country = country;
-  //       user.province = province;
-  //       user.city = city;
-  //       user.phone = phone;
-  //       user.terms = terms;
-
-  //       this.addUsr.registerUser(user).subscribe(
-  //         (result) =>{
-  //           console.log(result);
-  //           window.alert("The User has been added");
-  //           // if(result){
-  //           //   this.errorMessage = JSON.parse(JSON.stringify(result)).message;
-  //           // }else{
-  //           //   // where user should be redirected
-  //           //   this.errorMessage = "User Added"
-  //           // }
-  //         },
-  //         err =>{
-  //           console.log(err)
-  //         }
-  //       );
-  //     }
-  //   }
+ 
 }
