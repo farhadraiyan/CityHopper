@@ -1,6 +1,6 @@
 var User = require('../models/user');
 const errorHandler = require('../library/userErrorHandler');
-
+const _ = require('lodash')
 
 
 exports.findAll = (req, res) => {
@@ -42,9 +42,10 @@ exports.register = (req, res) => {
                         msg: err + " -> Add user failed"
                     })
                 }else{
+                    let data = _.pick(newUser, [ '_id', 'firstName', 'lastName', 'email', 'country', 'province', 'city', 'phoneNumber', 'userType'])
                     res.json({
                         msg: newUser.firstName + "-> User Added",
-                        user: newUser
+                        user: data
                     })
                 }
             })
@@ -91,12 +92,9 @@ exports.deleteOne =  async function(req,res){
 }
 
 
-
-// edit One is the Personal details.
-
 exports.editOne = async function(req,res){
 
-    let result = errorHandler.userRequirements(req.body.firstName,req.body.lastName,req.body.country,req.body.province,req.body.city/*req.body.phoneNumber, req.body.dateOfBirth,req.body.description*/);
+    let result = errorHandler.userRequirements(req.body.firstName,req.body.lastName,req.body.country,req.body.province,req.body.city);
 
     try{
         await User.updateOne({_id:req.params.id},{
@@ -105,10 +103,6 @@ exports.editOne = async function(req,res){
             country:req.body.country,
             province: req.body.province,
             city: req.body.city
-            //phoneNumber:req.body.phoneNumber
-            //dateOfBirth: req.body.dateOfBirth
-            //description: req.body.description
-
         })
         res.status(200).send({
             message:result
