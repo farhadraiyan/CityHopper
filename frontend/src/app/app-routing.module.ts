@@ -29,7 +29,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'posttrip',
+    path: 'postTrip',
     component: PosttripComponent
   },
   {

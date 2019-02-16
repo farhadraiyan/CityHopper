@@ -1,9 +1,11 @@
 .borders{
   border-right: 2px solid grey;
   font-size: 20px;
+  cursor:pointer;
 }
 .bordersSide{
   font-size: 20px;
+  cursor:pointer;
 }
 .trips{
   color: #79C753;
