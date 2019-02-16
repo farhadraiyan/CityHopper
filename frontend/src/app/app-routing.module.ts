@@ -11,6 +11,7 @@ import { SettingsRootComponent } from './body/user/settings/settings-root/settin
 import { SettingsPersonalDetailsComponent } from './body/user/settings/settings-personal-details/settings-personal-details.component';
 import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicles/settings-vehicles.component';
 import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
+import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+   {
+    path: 'profilePage',
+    component: ProfilePageComponent
   },
   {
     path: 'settings',

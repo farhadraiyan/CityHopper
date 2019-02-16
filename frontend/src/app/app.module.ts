@@ -22,6 +22,8 @@ import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicle
 import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
 import { LoginComponent } from './body/user/login/login.component';
 import { PasswordvalidationDirective } from './directives/passwordvalidation.directive';
+import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // const appRoutes: Routes = [
 //   {
@@ -54,7 +56,8 @@ import { PasswordvalidationDirective } from './directives/passwordvalidation.dir
     SettingsVehiclesComponent,
     SettingsPaymentComponent,
     LoginComponent,
-    PasswordvalidationDirective
+    PasswordvalidationDirective,
+    ProfilePageComponent
 
   ],
   exports: [ RouterModule ],
@@ -71,7 +74,8 @@ import { PasswordvalidationDirective } from './directives/passwordvalidation.dir
       apiKey:"AIzaSyByS3ej9cs4aNa9YsnHtvkPudbpRFafs7U",
       libraries:["places"]
     }),
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
