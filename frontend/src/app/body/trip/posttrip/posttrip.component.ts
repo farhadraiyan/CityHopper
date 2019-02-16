@@ -40,7 +40,7 @@ export class PosttripComponent implements OnInit, DoCheck {
     this.setCurrentPosition();
     this.loadautocompleteFrom();
     this.loadautocompleteTo();
-    
+
 
   }
 
@@ -76,7 +76,7 @@ export class PosttripComponent implements OnInit, DoCheck {
               geoLocationFrom:
               {
                 coordinates:[4,4]
-          
+
               },
               city:place.address_components[2].long_name,
               state:place.address_components[5].long_name,
@@ -117,7 +117,7 @@ export class PosttripComponent implements OnInit, DoCheck {
               geoLocationFrom:
               {
                 coordinates:[4,4]
-          
+
               },
               city:place.address_components[2].long_name,
               state:place.address_components[5].long_name,
