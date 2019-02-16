@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../controllers/user');
-const jwt = require('express-jwt');
+// const jwt = require('express-jwt');
 const auth = require('./../middlewire/auth')
 
 // var auth = jwt({
