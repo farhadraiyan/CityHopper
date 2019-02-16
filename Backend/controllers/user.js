@@ -1,7 +1,7 @@
 var User = require('../models/user');
 const errorHandler = require('../library/userErrorHandler');
 const _ = require('lodash')
-
+var passport = require('passport');
 
 exports.findAll = (req, res) => {
     User.find().then(
@@ -60,6 +60,29 @@ exports.register = async (req, res) => {
         console.log(err)
     });
 }
+
+exports.login = (req, res) => {
+    passport.authenticate('local', (err, user, info) => {
+        var token;
+         // If Passport throws/catches an error
+        if(err) {
+            res.status(404).json(err)
+            return;
+        }
+
+        if(user){
+            //if user found 
+            token = user.generateJwt();
+            res.status(404);
+            res.json({
+                "token" : token
+            })
+        }else{
+            //if user not found 
+            res.status(401).json(info);
+        }
+    })(req, res)
+};
 
 exports.find = (req, res) => {
     User.findOne({
