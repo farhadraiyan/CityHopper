@@ -73,7 +73,7 @@ userSchema.methods.setPassword = function(password){
 // Varifying User Password
 userSchema.methods.validPassword = function(password){
     var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex'); 
-    print(this.hash === hash) // Should return true
+    console.log(this.hash === hash) // Should return true
     return this.hash === hash
 }
 

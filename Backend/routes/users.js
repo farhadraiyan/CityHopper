@@ -14,7 +14,7 @@ router.post('/register', user.register);
 router.get('/find/All', user.findAll);
 router.delete('/delete/:id',user.deleteOne);
 router.put('/edit/:id',user.editOne );
-router.post('/login',auth, user.login);
+router.post('/login', user.login);
 
 module.exports = router;
 

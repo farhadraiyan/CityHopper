@@ -72,8 +72,9 @@ exports.login = (req, res) => {
 
         if(user){
             //if user found 
+            console.log(user)
             token = user.generateJwt();
-            res.status(404);
+            res.status(200);
             res.json({
                 "token" : token
             })
