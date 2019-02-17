@@ -26,7 +26,7 @@ export class LoginService {
       headers : new HttpHeaders({'Content-Type' : 'application/json'})
     }
 
-    return this.http.post<any>(`http://localhost:3000/user/login/`, body, options);
+    return this.http.post<any>(`http://localhost:3000/user/login`, body, options);
   }
   errorHandler(error: HttpErrorResponse){
     // return (error.message || "Server Error");
