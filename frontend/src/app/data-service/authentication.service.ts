@@ -29,7 +29,7 @@ export interface TokenPayload {
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  
   private token: String;
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -47,8 +47,7 @@ export class AuthenticationService {
 
   public logout(): void {
     this.token = '';
-    localStorage.removeItem('mean-token');
-    this.getHeader(false);
+    window.localStorage.removeItem('mean-token');
     this.router.navigateByUrl('/');
   }
 
@@ -105,10 +104,6 @@ export class AuthenticationService {
   //   return this.request('post', 'login', user);
   // }
 
-
-  getHeader(login){
-    return login
-}
 
 
 }
