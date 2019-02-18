@@ -33,10 +33,12 @@
 
     <form class="form-inline my-2 my-lg-0 initialNav">
       <!-- This is the Navbar for users that did not login yet only! class= loginBtn -->
+      <div *ngIf="!login" >
       <button class="btn btn-outline-dark  " routerLink="/register"  type="submit">Register</button>
       <button class="btn btn-outline-dark bg-dark text-white ml-3  btn2" routerLink="/login"  type="submit">Login</button>
+      </div>
       <!-- This is the Navbar for logged users only! class=logoutBtn -->
-      <!--  <button class="btn btn-outline-light mt-2 " type="submit"><h4>Logout</h4></button>-->
+     <button *ngIf="login" (click)="logout()" class="btn btn-outline-dark  "   type="submit">Logout</button>
     </form>
   </div>
 </nav>

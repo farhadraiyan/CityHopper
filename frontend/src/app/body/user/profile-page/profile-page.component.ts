@@ -4,6 +4,7 @@ import {Headers, Http} from '@angular/http';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import {Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/app/data-service/authentication.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class ProfilePageComponent implements OnInit {
   headers:any;
   title:any="aushuia";
 
-  constructor(config: NgbRatingConfig,private router:Router,private _route: ActivatedRoute) {
+  constructor(config: NgbRatingConfig,private router:Router,private _route: ActivatedRoute, private authinticateService:AuthenticationService) {
     // customize default values of ratings used by this component tree
     config.max = 5;
     config.readonly = true;
@@ -28,10 +29,11 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    const head = new Headers();
-    this.headers =head.values()
 
-    this._route.queryParams.subscribe(params => {this.title = params['location'];})
+    this.title = this.authinticateService.getUserDetails();
+    console.log(this.title);
+    // this is for trips
+    this._route.queryParams.subscribe(params => {this.headers = params['location'];})
 
   }
 

@@ -19,7 +19,7 @@ export class LoginService {
     }
     const head = new Headers();
     head.append('Content-Type' , 'application/json');
-    
+
     // return this.http.post('http://localhost:3000/user/login/', body,{headers:head})
     // .map(res=>console.log(res))
     var options = {
@@ -32,4 +32,6 @@ export class LoginService {
     // return (error.message || "Server Error");
     return observableThrowError(error.message || "Server Error");
   }
+
+
 }
