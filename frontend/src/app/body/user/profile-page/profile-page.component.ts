@@ -18,7 +18,7 @@ import { AuthenticationService } from 'src/app/data-service/authentication.servi
 export class ProfilePageComponent implements OnInit {
 
   headers:any;
-  title:any="aushuia";
+  user:any;
 
   constructor(config: NgbRatingConfig,private router:Router,private _route: ActivatedRoute,private authinticateService:AuthenticationService) {
     // customize default values of ratings used by this component tree
@@ -29,8 +29,8 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = this.authinticateService.getUserDetails();
-    console.log(this.title);
+    this.user = this.authinticateService.getUserDetails();
+
     // this is for trips
     this._route.queryParams.subscribe(params => {this.headers = params['location'];})
 
