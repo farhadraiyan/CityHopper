@@ -10,11 +10,9 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   constructor(private authinticateService:AuthenticationService,private router:Router) { }
-  login:any;
-  user:any;
+
   ngOnInit() {
 
-    this.login =this.authinticateService.getUserDetails()
 
   }
   logout(){
