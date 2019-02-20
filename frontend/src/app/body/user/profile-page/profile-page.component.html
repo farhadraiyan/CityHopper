@@ -1,7 +1,13 @@
 <div class="container-fluid">
-<div class="row bg-info mr-3 m-3">
-  <div class="col-sm-3 p-3 ">
-     <img src="../../../assets/profile.jpg" class="rounded-circle mx-auto d-block " alt="driver" width="150" heigth="150" >
+  <div class="row bg-info mr-3 m-3">
+    <div class="col-sm-3 p-3 ">
+      <img src="../../../assets/profile.jpg" (click)="openFileUpload()" class="profile rounded-circle mx-auto d-block "
+        alt="driver" width="150" heigth="150">
+      <div style="display: none">
+        <form id="uploadform" enctype="multipart/form-data">
+          <input id="uploadInput" (change)="onFileChanged($event)" type="file" name="image">
+        </form>
+      </div>
     </div>
     <div class="col-sm-5 pt-5 text-left profileInfo">
       <h3 clas='m-2'> {{user['firstName']}} {{user['lastName']}}</h3>
@@ -10,50 +16,54 @@
 
     </div>
     <div class="col-sm p-4 pt-5 profileInfo">
-    <div class="text-warning">  <h1><ngb-rating [rate]="4"></ngb-rating></h1></div>
-    <i class="fas fa-road fa-2x"></i> 25 Trips shared
+      <div class="text-warning">
+        <h1>
+          <ngb-rating [rate]="4"></ngb-rating>
+        </h1>
+      </div>
+      <i class="fas fa-road fa-2x"></i> 25 Trips shared
     </div>
   </div>
 </div>
 
 <div class="container-fluid text-center ">
   <div class="row p-1 bg-light m-3">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 borders  ">
-              <i class="fas fa-bell mr-2 text-warning"></i>Request
-             </div>
-             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 borders">
-              <i class="fas fa-car mr-2 trips"></i>Trips
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1  borders">
-              <i class="fas fa-envelope mr-2 "></i>Messages
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-7  bordersSide" routerLink="/settings">
-              <i class="fas fa-cog mr-2"></i>Account settings
-              </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 borders  ">
+      <i class="fas fa-bell mr-2 text-warning"></i>Request
     </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 borders">
+      <i class="fas fa-car mr-2 trips"></i>Trips
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1  borders">
+      <i class="fas fa-envelope mr-2 "></i>Messages
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-7  bordersSide" routerLink="/settings">
+      <i class="fas fa-cog mr-2"></i>Account settings
+    </div>
+  </div>
 </div>
 
 
 <div class="container-fluid text-center">
- <div class="row">
-  <div class="col-lg col-md-6 col-sm-6 col-xs-6 p-5 cards">
-    <div class="card m-5">
-      <div class="card-body">
-        <h5 class="card-title">Find the perfect ride for you!</h5>
-        <p class="card-text">Ride with City Hopper is affordable,easy and fun!</p>
-        <button type="button"  class="btn btn-light  border border-secondary">Find a ride</button>
+  <div class="row">
+    <div class="col-lg col-md-6 col-sm-6 col-xs-6 p-5 cards">
+      <div class="card m-5">
+        <div class="card-body">
+          <h5 class="card-title">Find the perfect ride for you!</h5>
+          <p class="card-text">Ride with City Hopper is affordable,easy and fun!</p>
+          <button type="button" class="btn btn-light  border border-secondary">Find a ride</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-lg col-md-6 col-sm-6 col-xs-6 p-5 cards">
-    <div class="card m-5 ">
-      <div class="card-body">
+    <div class="col-lg col-md-6 col-sm-6 col-xs-6 p-5 cards">
+      <div class="card m-5 ">
+        <div class="card-body">
 
-        <h5 class="card-title">Share your trip and earn some money!</h5>
-        <p class="card-text">Make your road trip more fun,and earn a extra money.Post your trip now!</p>
-        <button type="button" routerLink="/postTrip" class="btn btn-secondary">Post a trip</button>
+          <h5 class="card-title">Share your trip and earn some money!</h5>
+          <p class="card-text">Make your road trip more fun,and earn a extra money.Post your trip now!</p>
+          <button type="button" routerLink="/postTrip" class="btn btn-secondary">Post a trip</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
