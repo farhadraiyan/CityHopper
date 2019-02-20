@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema({
     salt:{
         type: String
     },
+    confirmed: {
+        type: Boolean,
+        default: false
+    },
     country:{
         type: String,
         required:true
@@ -55,7 +59,13 @@ const userSchema = mongoose.Schema({
     cars:[{
         type: mongoose.Schema.ObjectId,
         ref: 'car'
-    }]
+    }],
+    ratings: {
+        tyep: Number
+    },
+    trips: {
+        type: Number
+    }
 
 });
 
