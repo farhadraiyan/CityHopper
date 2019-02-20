@@ -22,6 +22,11 @@ export class UserServiceService {
 
   }
 
+  activateAccount(token:String){
+    const head=new Headers();
+    head.append('Content-Type' , 'application/json')
+    return this.http.put('http://localhost:3000/user/confirmation/' + token, head).map(res=>{console.log(res)})
+  }
 
   errorHandler(error: HttpErrorResponse){
     // return (error.message || "Server Error");
