@@ -85,21 +85,20 @@ exports.login = (req, res) => {
     })(req, res)
 };
 
-exports.find = (req, res) => {
-    User.findOne({
-        email: req.params.email,
-        password: req.params.password
-    }).then(
-        (result) => {
-            if(!result) {
-                res.json({message: 'User does not Exists'})
-            }else{
-                res.json(result)
-            }
-        }
-    ).catch(err => {
-        console.log(err)
-    })
+exports.find = async function (req, res) {
+    try{
+        let newUser = await User.findOne({_id:req.params._id})
+        res.status(200).send({
+            message:"user finded",
+            user: newUser
+        })
+    }catch(error){
+        res.status(404).send({
+            message: "Not find",
+            error: error.message
+        })
+    }
+  
 }
 
 

@@ -29,7 +29,10 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.user = this.authinticateService.getUserDetails();
+
+    console.log(this.user);
     if(this.user == null){
       alert('Please Login first!')
       this.router.navigateByUrl('/login');
