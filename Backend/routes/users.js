@@ -9,7 +9,7 @@ const auth = require('./../middlewire/auth')
 // })
 
 /* GET users listing. */
-router.get('/find/:email&:password',user.find);
+router.get('/find/:_id',user.find);
 router.post('/register', user.register);
 router.get('/find/All', user.findAll);
 router.delete('/delete/:id',user.deleteOne);
