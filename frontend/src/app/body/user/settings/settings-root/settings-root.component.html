@@ -20,6 +20,10 @@
     <div class="col-12 col-sm-9">
       <div class="container-fluid">
         <router-outlet></router-outlet>
+
+        <div *ngIf="message" class="alert alert-primary m-5" role="alert">
+             User information sucessful updated!
+       </div>
       </div>
     </div>
   </div>

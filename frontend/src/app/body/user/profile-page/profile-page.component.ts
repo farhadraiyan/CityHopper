@@ -21,6 +21,7 @@ export class ProfilePageComponent implements OnInit {
   user: any;
   id: any;
 
+
   constructor(private userData: UserDataService, config: NgbRatingConfig, private router: Router, private _route: ActivatedRoute, private authinticateService: AuthenticationService, private http: Http) {
     // customize default values of ratings used by this component tree
     config.max = 5;
@@ -31,19 +32,19 @@ export class ProfilePageComponent implements OnInit {
 
   async ngOnInit() {
     this.id = this.authinticateService.getUserDetails();
-    console.log(this.user);
+
     if (this.id == null) {
       alert('Please Login first!')
       this.router.navigateByUrl('/login');
     } else {
       await this.userData.getUserData(this.id['_id']).toPromise().then((res) => {
         this.user = res['user']
-        console.log(this.user)
+
       }).catch((err) => {
 
       });
     }
-    console.log('USER', this.user)
+
     // this is for trips
     this._route.queryParams.subscribe(params => { this.headers = params['location']; })
 
@@ -54,9 +55,9 @@ export class ProfilePageComponent implements OnInit {
     uploadData.append('image', file, file.name);
     uploadData.append('userId', this.user._id)
     this.http.post('http://localhost:3000/user/upload/', uploadData).toPromise().then((res) => {
-      console.log('result', res)
+
     }).catch((err) => {
-      console.log('error', err)
+
     })
   }
   openFileUpload() {
