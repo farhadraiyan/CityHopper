@@ -8,11 +8,14 @@
     <div class="row">
       <div class="col-sm-3"></div>
       <div class="col-sm-6">
-        <div class="panel panel-heading">
+        <div *ngIf="message !='Sucessful'" class="panel panel-heading">
             <h2 class="panel-title">Please Login to continue</h2>
         </div>
+        <div *ngIf="message =='Sucessful'" class="panel panel-heading">
+            <h2 class="panel-title">Please Login with your brand new account!</h2>
+        </div>
         <br>
-      <div class="col-sm-12">
+      <div class="col-sm text-center">
         <div class="form-group">
             <!-- <input type="email" name="email" id="email" (change)="log(email)" [pattern]="emailPattern" class="form-control input-sm" placeholder="Email Address" #usr required> -->
             <input type="email" placeholder="email" #usr required>
@@ -22,7 +25,7 @@
             </div> -->
         </div>
       </div>
-      <div class="col-sm-12">
+      <div class="col-sm text-center">
           <div class="form-group">
               <!-- <input type="text" name="password" id="password" minlength="8" #password="ngModel" (change)="log(password)"[(ngModel)]="user.password" class="form-control input-sm" placeholder="Password" #pwd required> -->
               <input type="text" placeholder="password" #pwd required>

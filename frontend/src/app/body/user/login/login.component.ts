@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/data-service/login.service';
 import { AuthenticationService } from 'src/app/data-service/authentication.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +13,14 @@ import { User } from 'src/app/models/User';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService:LoginService, private authinticateService:AuthenticationService, private router: Router) { }
+  constructor(private loginService:LoginService, private authinticateService:AuthenticationService, private router: Router,private _route: ActivatedRoute) { }
 
-  public user: User;  
+  public user: User;
+  message:any;
   ngOnInit() {
     this.resetForm();
+    this._route.queryParams.subscribe(params => {this.message =params['authentication'];});
+
   }
 
   logUser(email: String, password: String){
@@ -32,6 +36,8 @@ export class LoginComponent implements OnInit {
         console.log(err + "-> Whats the issue")
       }
     )
+
+
   }
 
   resetForm(form?:NgForm){

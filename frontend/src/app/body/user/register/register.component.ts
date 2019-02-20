@@ -30,11 +30,12 @@ export class RegisterComponent implements OnInit {
         console.log(err)
       }
     )
+    this._router.navigate(['/login'],{queryParams: {'authentication': 'Sucessful'}});
   }
 
   resetForm(form?:NgForm){
     if(form != null){
-      form.reset(); 
+      form.reset();
     this.user.firstname = "";
     this.user.lastname = "";
     this.user.email = "";
@@ -47,5 +48,5 @@ export class RegisterComponent implements OnInit {
     }
 
   }
- 
+
 }
