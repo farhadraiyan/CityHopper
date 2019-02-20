@@ -13,7 +13,7 @@ export class UserDataService {
 
   constructor(private http:HttpClient) { }
 
-  getOne(userId): Observable<any> {
+  getUserData(userId): Observable<any> {
     let header = new HttpHeaders();
     header.append('Content-Type','application/json');
     return this.http.get(`http://localhost:3000/user/find/${userId}`).pipe(map(get =>{
@@ -22,4 +22,9 @@ export class UserDataService {
     }));
 
   }
+
+  editUser(newData,userId):Observable<any>{
+    return this.http.put(`http://localhost:3000/user/edit/${userId}`,newData);
+  }
+
 }

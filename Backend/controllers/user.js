@@ -89,7 +89,6 @@ exports.find = async function (req, res) {
     try{
         let newUser = await User.findOne({_id:req.params._id})
         res.status(200).send({
-            message:"user finded",
             user: newUser
         })
     }catch(error){
@@ -121,12 +120,12 @@ exports.deleteOne =  async function(req,res){
 
 exports.editOne = async function(req,res){
 
-    let result = errorHandler.userRequirements(req.body.firstName,req.body.lastName,req.body.country,req.body.province,req.body.city,req.body.dateOfBirth );
+    let result = errorHandler.userRequirements(req.body.firstName,req.body.lastName,req.body.country,req.body.province,req.body.city );
 
     try{
         await User.updateOne({_id:req.params.id},{
-            firstName: req.body.firstname,
-            lastName: req.body.lastname,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             country:req.body.country,
             province: req.body.province,
             city: req.body.city,
@@ -135,7 +134,7 @@ exports.editOne = async function(req,res){
             dateOfBirth: req.body.dateOfBirth
         })
         res.status(200).send({
-            message:result
+            message:req.body.phoneNumber
         })
     }catch(error){
         res.status(404).send({

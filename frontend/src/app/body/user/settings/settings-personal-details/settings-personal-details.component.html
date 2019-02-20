@@ -3,43 +3,43 @@
   <br>
   <div class="row">
     <div class="col-12 col-sm-7">
-        <form>
+        <form (ngSubmit)="onSubmit(firstName, lastName, phoneNumber, dateOfBirth, description)" #updateForm="ngForm">
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">First Name</label>
-                <input type="text" class="form-control" placeholder="First Name">
+                <input type="text" class="form-control" placeholder="First Name" ngModel="{{user['firstName']}}" name="firstName" #firstName="ngModel">
               </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Last Name</label>
-                  <input type="text" class="form-control" placeholder="Last Name">
+                  <input type="text" class="form-control" placeholder="Last Name" ngModel="{{user['lastName']}}" name="lastName" #lastName="ngModel">
                 </div>
               </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Phone Number</label>
-                      <input type="text" class="form-control" placeholder="Phone Number">
+                      <input type="text" class="form-control" placeholder="Phone Number" ngModel="{{user['phoneNumber']}}" name="phoneNumber" #phoneNumber="ngModel">
                     </div>
                   </div>
-            <p class="mb-1" >Date Of Birth</p>
+            <p class="mb-1" >Date Of Birth (DD/MM/YYYY)</p>
             <div class="form-row">
-              <div class="form-group col-md-2 col-3">
-                <input type="text" class="form-control" placeholder="DD" >
+              <div class="form-group col-md-6 col-3">
+                <input type="text" class="form-control" ngModel="{{user['dateOfBirth']}}" name="dateOfBirth" #dateOfBirth="ngModel">
               </div>
-              <div class="form-group col-md-2 col-3">
-                  <input type="text" class="form-control" placeholder="MM">
-              </div>
-              <div class="form-group col-md-3 col-6">
-                <input type="text" class="form-control" placeholder="YYYY">
-              </div>
+
             </div>
             <div class="form-row">
                 <div class="form-group col-md-7">
                     <label for="exampleFormControlTextarea1">Description</label>
-                    <textarea class="form-control rounded" id="exampleFormControlTextarea1" rows="7"></textarea>
+                    <textarea class="form-control rounded" id="exampleFormControlTextarea1" rows="7" ngModel="{{user['description']}}" name="description" #description="ngModel"></textarea>
                 </div>
             </div>
+
+            <button type="Submit" class="btn btn-secondary">Update</button>
+
+
+
           </form>
           <br>
     </div>
