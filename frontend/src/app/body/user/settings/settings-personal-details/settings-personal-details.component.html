@@ -3,7 +3,7 @@
   <br>
   <div class="row">
     <div class="col-12 col-sm-7">
-        <form (ngSubmit)="onSubmit(firstName, lastName, phoneNumber, dateOfBirth, description)" #updateForm="ngForm">
+        <form (ngSubmit)="onSubmit(firstName, lastName, phoneNumber, dateOfBirth, description,city,province,country)" #updateForm="ngForm">
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">First Name</label>
@@ -20,6 +20,24 @@
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Phone Number</label>
                       <input type="text" class="form-control" placeholder="Phone Number" ngModel="{{user['phoneNumber']}}" name="phoneNumber" #phoneNumber="ngModel">
+                    </div>
+                  </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">City</label>
+                      <input type="text" class="form-control" placeholder="city" ngModel="{{user['city']}}" name="city" #city="ngModel">
+                    </div>
+                  </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Province</label>
+                      <input type="text" class="form-control" placeholder="province" ngModel="{{user['province']}}" name="province" #province="ngModel">
+                    </div>
+                  </div>
+                   <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Country</label>
+                      <input type="text" class="form-control" placeholder="country" ngModel="{{user['country']}}" name="country" #country="ngModel">
                     </div>
                   </div>
             <p class="mb-1" >Date Of Birth (DD/MM/YYYY)</p>
