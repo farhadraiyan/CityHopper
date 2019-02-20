@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema({
     salt: {
         type: String
     },
+    confirmed: {
+        type: Boolean,
+        default: false
+    },
     country: {
         type: String,
         required: true
@@ -59,6 +63,12 @@ const userSchema = mongoose.Schema({
     profilePicture: {
         type: mongoose.Schema.ObjectId,
         ref: 'image',
+    },
+    ratings: {
+        tyep: Number
+    },
+    trips: {
+        type: Number
     }
 
 });
