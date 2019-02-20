@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
 
   public user: User;
   message:any;
+  loginError:any =false;
+
   ngOnInit() {
     this.resetForm();
     this._route.queryParams.subscribe(params => {this.message =params['authentication'];});
@@ -26,14 +28,13 @@ export class LoginComponent implements OnInit {
   logUser(email: String, password: String){
     this.loginService.login(email, password).subscribe(
       (result) => {
-        console.log(result)
         if(result){
           this.authinticateService.saveToken(result.token);
           this.router.navigateByUrl('/profilePage')
         }
       },
       (err) => {
-        console.log(err + "-> Whats the issue")
+        this.loginError =true;
       }
     )
 

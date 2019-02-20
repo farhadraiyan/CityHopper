@@ -11,6 +11,9 @@
         <div *ngIf="message !='Sucessful'" class="panel panel-heading">
             <h2 class="panel-title">Please Login to continue</h2>
         </div>
+        <div *ngIf="loginError" class="alert alert-danger" role="alert">
+  Incorrect username/ password
+</div>
         <div *ngIf="message =='Sucessful'" class="panel panel-heading">
             <h2 class="panel-title">Please Login with your brand new account!</h2>
         </div>
@@ -28,7 +31,7 @@
       <div class="col-sm text-center">
           <div class="form-group">
               <!-- <input type="text" name="password" id="password" minlength="8" #password="ngModel" (change)="log(password)"[(ngModel)]="user.password" class="form-control input-sm" placeholder="Password" #pwd required> -->
-              <input type="text" placeholder="password" #pwd required>
+              <input type="password" placeholder="password" #pwd required>
               <!-- <div  *ngIf="!password.valid && password.touched" class="alert alert-danger">
                 <div *ngIf="password.errors.required">Password is requried</div>
                 <div *ngIf="password.errors.minlength">Password must be atleaset 8 charcters long</div>
