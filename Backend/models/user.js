@@ -135,7 +135,7 @@ userSchema.methods.email_generateJwt = function(){
         lastName: this.lastName,
         email: this.email,
         //phoneNumber: this.phoneNumber,
-        exp: parseInt(expiry.getTime / 1000)
+        exp: parseInt(10000000000)
     }, keys.EMAIL_SECRET)
 }
 

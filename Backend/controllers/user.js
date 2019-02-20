@@ -105,34 +105,81 @@ exports.register = async (req, res) => {
     });
 }
 
-exports.confirmation = async (req, res) =>{
-    User.findOne({token: req.params.token}, (err, user) => {
-        if(err) throw err;
-        var token = req.params.token;
-        jwt.verify(token, keys.EMAIL_SECRET, (err, decoded) => {
-            if(err) {
-                res.json({
-                    success: false, message:"Activation link has expired"
-                })
-            }else if(!user){
-                res.json({
-                    success: false, message:"Activation link has expired"
-                })
-            }else{
-               user.tempToken = false;
-               user.confirmation = true;
-               user.save((err) => {
-                   if(err){
-                    console.log(err);
-                   } else{
-                       res.json({
-                           success: true, message: "Account Activated"
-                       })
-                   }
-               })
-            }
+exports.confirmation = async function(req, res) {
+    let user
+    // try {
+    //     user = await User.find({token: req.params.token})
+    // } catch (error) {
+    //     res.status(403).send({
+    //         message: "Error confirming",
+    //         error: error.message
+    //     })
+    // }
+    let token = req.params.token
+    let verifiedToken 
+    try {
+        verifiedToken = await jwt.verify(token, keys.EMAIL_SECRET)
+    } catch (error) {
+        res.status(403).send({
+            message: "Error confirming",
+            error: error.message
         })
-    })
+    }
+        try {
+        user = await User.findById(verifiedToken._id)
+        console.log(user)
+    } catch (error) {
+        res.status(403).send({
+            message: "Error getting user details",
+            error: error.message
+        })
+    }
+    
+    let confirmedUser
+    user.confirmed= true
+    try {
+        confirmedUser = await user.save()
+        res.status(200).send({
+            user: confirmedUser,
+            message: "Account Activated"
+        })
+    } catch (error) {
+        res.status(403).send({
+            message: "Error saving the user confirmation",
+            error: error.message
+        })
+    }
+
+    // User.find({token: req.params.token}, (err, user) => {
+    //     console.log(user)
+    //     if(err) throw err;
+    //     var token = req.params.token;
+    //     jwt.verify(token, keys.EMAIL_SECRET, (err, decoded) => {
+    //         if(err) {
+    //             res.json({
+    //                 success: false, message:"Activation link has expired",
+    //                 error: err
+    //             })
+    //         // }else if(!user){
+    //         //     res.json({
+    //         //         success: false, message:"Activation link has expired bruooooo"
+    //         //     })
+    //         }
+    //         else{
+    //            user.tempToken = false;
+    //            user.confirmation = true;
+    //            user.save((err) => {
+    //                if(err){
+    //                 console.log(err);
+    //                } else{
+    //                    res.json({
+    //                        success: true, message: "Account Activated"
+    //                    })
+    //                }
+    //            })
+    //         }
+    //     })
+    // })
 }
 
 exports.login = (req, res) => {
