@@ -29,8 +29,8 @@ export class ProfilePageComponent implements OnInit {
 
 
   }
-
-  async ngOnInit() {
+  ngOnInit() { }
+  async ngAfterContentInit() {
     this.id = this.authinticateService.getUserDetails();
 
     if (this.id == null) {
@@ -44,21 +44,20 @@ export class ProfilePageComponent implements OnInit {
 
       });
     }
-
     // this is for trips
     this._route.queryParams.subscribe(params => { this.headers = params['location']; })
 
   }
-  onFileChanged(event) {
+  async onFileChanged(event) {
     const file = event.target.files[0]
     const uploadData = new FormData();
     uploadData.append('image', file, file.name);
     uploadData.append('userId', this.user._id)
-    this.http.post('http://localhost:3000/user/upload/', uploadData).toPromise().then((res) => {
-
+    await this.http.post('http://localhost:3000/user/upload/', uploadData).toPromise().then((res) => {
     }).catch((err) => {
 
     })
+    await this.fetchUserDetails()
   }
   openFileUpload() {
     console.log('TEST')
@@ -66,6 +65,12 @@ export class ProfilePageComponent implements OnInit {
     input.click()
   }
 
+  async fetchUserDetails() {
+    await this.userData.getUserData(this.id['_id']).toPromise().then((res) => {
+      this.user = res['user']
+      console.log(this.user)
+    }).catch((err) => {
 
-
+    });
+  }
 }

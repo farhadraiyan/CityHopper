@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row bg-info mr-3 m-3">
     <div class="col-sm-3 p-3 ">
-      <img src="../../../assets/profile.jpg" (click)="openFileUpload()" class="profile rounded-circle mx-auto d-block "
+      <img [src]="user.imageUrl" (click)="openFileUpload()" class="profile rounded-circle mx-auto d-block "
         alt="driver" width="150" heigth="150">
       <div style="display: none">
         <form id="uploadform" enctype="multipart/form-data">

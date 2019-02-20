@@ -71,17 +71,20 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'image',
     },
+    imageUrl: {
+        type: String
+    },
     ratings: {
         tyep: Number
     },
     trips: {
         type: Number
     },
-    dateOfBirth:{
+    dateOfBirth: {
         type: String
     },
-    description:{
-        type:String
+    description: {
+        type: String
     }
 
 });

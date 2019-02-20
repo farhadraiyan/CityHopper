@@ -280,12 +280,12 @@ exports.uploadProfilePicture = async function (req, res) {
             error: error.message
         })
     }
-    user.profilePicture = savedImage._id
+    user.imageUrl = `http://localhost:3000/user/profile/picture/${savedImage._id}`
     let savedUser
     try {
         savedUser = await user.save()
         return res.status(200).send({
-            imageId: savedImage._id,
+            user: savedUser,
             imageurl: `http://localhost:3000/user/profile/picture/${savedImage._id}`
         })
 
