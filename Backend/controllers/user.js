@@ -121,7 +121,7 @@ exports.deleteOne =  async function(req,res){
 
 exports.editOne = async function(req,res){
 
-    let result = errorHandler.userRequirements(req.body.firstName,req.body.lastName,req.body.country,req.body.province,req.body.city);
+    let result = errorHandler.userRequirements(req.body.firstName,req.body.lastName,req.body.country,req.body.province,req.body.city,req.body.dateOfBirth );
 
     try{
         await User.updateOne({_id:req.params.id},{
@@ -129,7 +129,10 @@ exports.editOne = async function(req,res){
             lastName: req.body.lastname,
             country:req.body.country,
             province: req.body.province,
-            city: req.body.city
+            city: req.body.city,
+            phoneNumber: req.body.phoneNumber,
+            description: req.body.description,
+            dateOfBirth: req.body.dateOfBirth
         })
         res.status(200).send({
             message:result

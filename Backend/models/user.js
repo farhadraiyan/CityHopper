@@ -31,7 +31,7 @@ const userSchema = mongoose.Schema({
     },
     confirmed: {
         type: Boolean,
-        required,
+        required: true,
         default: false
     },
     country: {
@@ -71,8 +71,11 @@ const userSchema = mongoose.Schema({
     trips: {
         type: Number
     },
-    dateOfBirt:{
+    dateOfBirth:{
         type: String
+    },
+    description:{
+        type:String
     }
 
 });
