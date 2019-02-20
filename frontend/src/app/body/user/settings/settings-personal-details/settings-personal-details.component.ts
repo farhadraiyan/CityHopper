@@ -12,7 +12,7 @@ export class SettingsPersonalDetailsComponent implements OnInit {
   constructor(private userData:UserDataService,private authinticateService:AuthenticationService) { }
 
   id:any;
-  user:any= "";
+  user:any;
 
   async ngOnInit() {
     this.id = this.authinticateService.getUserDetails();

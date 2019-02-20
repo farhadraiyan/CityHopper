@@ -5,7 +5,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import {Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/data-service/authentication.service';
-
+import { UserDataService } from '../../../data-service/user-data.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -19,8 +19,9 @@ export class ProfilePageComponent implements OnInit {
 
   headers:any;
   user:any;
+  id:any;
 
-  constructor(config: NgbRatingConfig,private router:Router,private _route: ActivatedRoute,private authinticateService:AuthenticationService) {
+  constructor(private userData:UserDataService,config: NgbRatingConfig,private router:Router,private _route: ActivatedRoute,private authinticateService:AuthenticationService) {
     // customize default values of ratings used by this component tree
     config.max = 5;
     config.readonly = true;
@@ -28,14 +29,21 @@ export class ProfilePageComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.user = this.authinticateService.getUserDetails();
+    this.id = this.authinticateService.getUserDetails();
 
     console.log(this.user);
-    if(this.user == null){
+    if(this.id == null){
       alert('Please Login first!')
       this.router.navigateByUrl('/login');
+    }else{
+      await this.userData.getUserData(this.id['_id']).toPromise().then((res) => {
+        this.user = res['user']
+        console.log(this.user)
+      }).catch((err) => {
+
+      });
     }
 
     // this is for trips
