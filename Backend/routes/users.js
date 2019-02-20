@@ -15,6 +15,7 @@ router.get('/find/All', user.findAll);
 router.delete('/delete/:id',user.deleteOne);
 router.put('/edit/:id',user.editOne );
 router.post('/login', user.login);
+router.get('/confirmation/:token', user.confirmation);
 
 module.exports = router;
 

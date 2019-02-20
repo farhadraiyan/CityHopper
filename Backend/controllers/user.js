@@ -2,6 +2,9 @@ var User = require('../models/user');
 const errorHandler = require('../library/userErrorHandler');
 const _ = require('lodash')
 var passport = require('passport');
+const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+const keys = require('./../config/config')
 
 exports.findAll = (req, res) => {
     User.find().then(
@@ -12,6 +15,15 @@ exports.findAll = (req, res) => {
         console.log(err)
     })
 }
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: "cityhopper0@gmail.com",
+      pass: "ChoppHopp123",
+    },
+  });
+
+
 
 exports.register = async (req, res) => {
     User.findOne({email: req.body.email}).then(
@@ -35,7 +47,10 @@ exports.register = async (req, res) => {
                 newUser.phoneNumber = req.body.number;
                 newUser.termsCondition = req.body.terms;
                 newUser.userType = req.body.userType;
-            
+
+                newUser.tempToken = newUser.email_generateJwt()
+                
+                const url = `http://localhost:3000/user/confirmation/${newUser.tempToken}`;
                console.log(newUser);
                User.create(newUser, async (err) => {
                 if(err){
@@ -51,6 +66,15 @@ exports.register = async (req, res) => {
                         msg: newUser.firstName + "-> User Added",
                         user: data
                     })
+
+                    await transporter.sendMail({
+                        to: newUser.email,
+                        subject: "Confirmition Email",
+                        html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
+                    })
+                    console.log('message Send???')
+
+                    
                 }
             })
         }
@@ -61,15 +85,46 @@ exports.register = async (req, res) => {
     });
 }
 
+exports.confirmation = async (req, res) =>{
+    User.findOne({token: req.params.token}, (err, user) => {
+        if(err) throw err;
+        var token = req.params.token;
+        jwt.verify(token, keys.EMAIL_SECRET, (err, decoded) => {
+            if(err) {
+                res.json({
+                    success: false, message:"Activation link has expired"
+                })
+            }else if(!user){
+                res.json({
+                    success: false, message:"Activation link has expired"
+                })
+            }else{
+               user.tempToken = false;
+               user.confirmation = true;
+               user.save((err) => {
+                   if(err){
+                    console.log(err);
+                   } else{
+                       res.json({
+                           success: true, message: "Account Activated"
+                       })
+                   }
+               })
+            }
+        })
+    })
+}
+
 exports.login = (req, res) => {
     passport.authenticate('local', (err, user, info) => {
         var token;
          // If Passport throws/catches an error
         if(err) {
+            console.log("What UPP!!")
             res.status(404).json(err)
             return;
         }
-
+        //let useri = new User();
         if(user){
             //if user found 
             console.log(user)
@@ -80,6 +135,7 @@ exports.login = (req, res) => {
             })
         }else{
             //if user not found 
+            console.log("The Account is unauthorized to access")
             res.status(401).json(info);
         }
     })(req, res)

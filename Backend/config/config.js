@@ -3,4 +3,6 @@ module.exports = {
     YyJwCG1CfdQMSB3FTinAYrLzESTZoQtAeJNQ1vsdAQIRAMEs+3LdvZ1hTyDkqbDL
     IJcCEQCG8XcI60UY04/HmpFgysZxAhA8vacm/CBGHzXhUuUkiQprAhAyVuGQ8jNU
     j5eTXpXdBcgBAhEAkyAvghYXi6oGMOUbNz9bXQ==`
+    ,
+    EMAIL_SECRET: `asdf1093KMnzxcvnkljvasdu09123nlasdasdf`
 }

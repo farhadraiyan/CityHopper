@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
+const keys = require('./../config/config')
 const privateKey = fs.readFileSync("../Backend/keys/privateKey.key", 'utf-8');
 
 
@@ -32,6 +33,10 @@ const userSchema = mongoose.Schema({
     confirmed: {
         type: Boolean,
         default: false
+    },
+    tempToken:{
+        type: String,
+        required:true
     },
     country:{
         type: String,
@@ -105,6 +110,19 @@ userSchema.methods.generateJwt = function(){
     }, privateKey)
 }
 
+userSchema.methods.email_generateJwt = function(){
+    var expiry = new Date()
+    expiry.setDate(expiry.getDate() + 7);
+
+    return jwt.sign({
+        _id: this._id,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        //phoneNumber: this.phoneNumber,
+        exp: parseInt(expiry.getTime / 1000)
+    }, keys.EMAIL_SECRET)
+}
 
 
 module.exports = mongoose.model('user', userSchema);

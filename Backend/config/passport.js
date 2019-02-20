@@ -23,7 +23,12 @@ passport.use(new LocalStrategy({
                 message: "Password is wrong"
             });
         } 
-        return done(null, user);
 
+        if(!user.confirmed){
+            return done(null, false, {
+                message: "Email is not varified"
+            })
+        }
+        return done(null, user);
     });
 }));
