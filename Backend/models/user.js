@@ -8,71 +8,75 @@ const privateKey = fs.readFileSync("../Backend/keys/privateKey.key", 'utf-8');
 
 // ***** USER Model Schema *****
 const userSchema = mongoose.Schema({
-    
+
     firstName: {
         type: String,
-        required:true
+        required: true
     },
-    lastName:{
+    lastName: {
         type: String,
-        required:true
-    },    
-    email:{
-        type: String,
-        unique: true,    
-        required:true
+        required: true
     },
-    hash:{
+    email: {
         type: String,
-        required:true
+        unique: true,
+        required: true
     },
-    salt:{
+    hash: {
+        type: String,
+        required: true
+    },
+    salt: {
         type: String
     },
-    country:{
+    country: {
         type: String,
-        required:true
+        required: true
     },
-    province:{
+    province: {
         type: String,
-        require:true
+        require: true
     },
-    city:{
+    city: {
         type: String,
-        required:true
+        required: true
     },
-    phoneNumber:{
+    phoneNumber: {
         type: Number,
-        required:true
+        required: true
     },
-    termsCondition:{
+    termsCondition: {
         type: Boolean,
-        required:true
+        required: true
     },
-    userType:{
+    userType: {
         type: String
     },
-    cars:[{
+    cars: [{
         type: mongoose.Schema.ObjectId,
         ref: 'car'
-    }]
+    }],
+    profilePicture: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'image',
+    }
 
 });
 
 // Setting Salt and hash for user password
-userSchema.methods.setPassword = function(password){
+userSchema.methods.setPassword = function (password) {
     this.salt = crypto.randomBytes(16).toString('hex');
     console.log(this.salt);
     // var buffer = new Buffer(this.salt, 'binary')
     // console.log(buffer);
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex'); 
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
     console.log(this.hash);
     return this.hash
 };
 
 // Varifying User Password
-userSchema.methods.validPassword = function(password){
-    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex'); 
+userSchema.methods.validPassword = function (password) {
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
     console.log(this.hash === hash) // Should return true
     return this.hash === hash
 }
@@ -81,7 +85,7 @@ userSchema.methods.validPassword = function(password){
 
 // this function send a JS Object with the intended data as a token and a secret algorithm,
 // the exp data will be set 7 days in advanced before the token expires. 
-userSchema.methods.generateJwt = function(){
+userSchema.methods.generateJwt = function () {
     var expiry = new Date()
     expiry.setDate(expiry.getDate() + 7);
 
