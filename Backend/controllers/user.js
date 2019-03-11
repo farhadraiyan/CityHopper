@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
     auth: {
       user: "cityhopper0@gmail.com",
       pass: "ChoppHopp123",
-    },
+    }
   });
 
 
@@ -76,7 +76,7 @@ exports.register = async (req, res) => {
                         subject: "Confirmition Email",
                         html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
                     })
-                    console.log('message Send???')
+                    console.log('message Send!')
 
                     
                 }
