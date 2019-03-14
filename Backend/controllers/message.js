@@ -5,7 +5,7 @@ const _ = require('lodash')
 let findAll = async function (req, res) {
   try {
     let all = await Message.find({})
-    if (all.length < 0 || )
+    if (all.length < 0 || !all)
       res.status(200).send(all)
   } catch (error) {
     res.status(400).send({
