@@ -37,5 +37,6 @@ app.use('/user', usersRoutes);
 app.use('/car', carRoutes);
 app.use('/place', placeRoutes);
 app.use('/trip', tripRoutes)
+app.use('/message', messageRoutes)
 
 module.exports = app;
