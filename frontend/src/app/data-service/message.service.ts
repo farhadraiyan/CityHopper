@@ -13,7 +13,6 @@ export class MessageService {
 
   getMessageId(msgId): Observable<any>{
     let header = new HttpHeaders();
-    let messId = new Message()
     
     header.append('Content-Type','application/json');
     return this.http.get(`http://localhost:3000/find/${msgId}`).pipe(map(get =>{
@@ -22,6 +21,15 @@ export class MessageService {
     }));
 
   }
+
+  // getAllMessages(){
+  //   let header = new HttpHeaders();
+  //   header.append('Content-Type', 'application/json');
+  //   return this.http.get<Message[]>('http://localhost:3000/find/All').pipe(map(res=>{
+  //     res => res.json();
+  //     return res;
+  //   }))
+  // }
 
   // getMessageBySendersId(sendId): Observable<any>{
   //   let header = new HttpHeaders();
