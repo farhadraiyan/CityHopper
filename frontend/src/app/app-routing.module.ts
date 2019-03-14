@@ -12,6 +12,7 @@ import { SettingsPersonalDetailsComponent } from './body/user/settings/settings-
 import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicles/settings-vehicles.component';
 import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
+import {MessageComponent} from './body/user/message/message/message.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,10 @@ const routes: Routes = [
    {
     path: 'profilePage',
     component: ProfilePageComponent
+  },
+  {
+    path: 'message',
+    component: MessageComponent
   },
   {
     path: 'settings',

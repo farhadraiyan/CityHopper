@@ -21,6 +21,7 @@ let findAll = async function (req, res) {
 let findMessageById = async function (req, res) {
   let errors = {}
   let reqFields = ['messageId']
+  console.log(req.params)
   // add fields to error if errors getting user information
   reqFields.forEach(function (field) {
     if (!req.params[field] || req.params[field] === '') {
