@@ -35,9 +35,9 @@ const userSchema = mongoose.Schema({
         required: true,
         default: false
     },
-    tempToken:{
+    tempToken: {
         type: String,
-        required:true
+        required: true
     },
     country: {
 
@@ -86,7 +86,6 @@ const userSchema = mongoose.Schema({
     description: {
         type: String
     }
-
 });
 
 // Setting Salt and hash for user password
@@ -125,7 +124,7 @@ userSchema.methods.generateJwt = function () {
     }, privateKey)
 }
 
-userSchema.methods.email_generateJwt = function(){
+userSchema.methods.email_generateJwt = function () {
     var expiry = new Date()
     expiry.setDate(expiry.getDate() + 7);
 
