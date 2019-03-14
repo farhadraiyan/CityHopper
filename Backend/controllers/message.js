@@ -3,16 +3,19 @@ const Message = require('../models/message')
 const _ = require('lodash')
 
 let findAll = async function (req, res) {
+  let all
   try {
-    let all = await Message.find({})
-    if (all.length < 0 || !all)
-      res.status(200).send(all)
+    all = await Message.find({})
   } catch (error) {
     res.status(400).send({
       message: 'Error getting messages..',
       error: error.message
     })
   }
+  res.status(200).send({
+    message: 'Success',
+    data: all
+  })
 }
 
 let findMessageById = async function (req, res) {
