@@ -84,6 +84,5 @@ Trip.methods.addTripRequest = async function (tripReqID) {
   }
   return updatedTrip
 }
-
 module.exports = mongoose.model('TripRequest', TripRequestSchema)
 module.exports = mongoose.model('Trip', Trip);

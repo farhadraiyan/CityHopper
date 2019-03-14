@@ -165,9 +165,47 @@ let getTripRequestsForTrip = async function (req, res) {
   })
 }
 
+let getTripRequestForRider = async function (req, res) {
+  let errors = {}
+  let reqFields = ['riderId']
+  // add fields to error if errors getting user information
+  reqFields.forEach(function (field) {
+    if (!req.params[field] || req.params[field] === '') {
+      errors[field] = `${field.replace(/_/g, ' ')} is required`
+    }
+  })
+  if (Object.keys(errors).length) {
+    return res.status(400).send({
+      msg: 'error getting trip request',
+      errors: errors,
+    })
+  }
+
+  let rider = req.params.riderId
+  let allRequestsForRider
+  try {
+    allRequestsForRider = await TripRequest.find({ 'riderId': rider })
+    if (!allRequestsForRider || allRequestsForRider.length < 1) {
+      return res.status(404).send({
+        msg: 'error getting trip request. Trips not found.'
+      })
+    }
+  } catch (error) {
+    return res.status(400).send({
+      msg: 'error getting trip request',
+      errors: error.message
+    })
+  }
+  return res.status(200).send({
+    message: 'Success',
+    data: allRequestsForRider
+  })
+}
+
 module.exports = {
   // findAllTrip,
   createTrip,
   createTripRequest,
-  getTripRequestsForTrip
+  getTripRequestsForTrip,
+  getTripRequestForRider
 }
