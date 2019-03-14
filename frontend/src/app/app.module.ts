@@ -24,6 +24,7 @@ import { LoginComponent } from './body/user/login/login.component';
 import { PasswordvalidationDirective } from './directives/passwordvalidation.directive';
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MessageComponent } from './body/user/message/message/message.component';
 
 // const appRoutes: Routes = [
 //   {
@@ -57,7 +58,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SettingsPaymentComponent,
     LoginComponent,
     PasswordvalidationDirective,
-    ProfilePageComponent
+    ProfilePageComponent,
+    MessageComponent
 
   ],
   exports: [ RouterModule ],

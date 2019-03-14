@@ -17,8 +17,8 @@ export class LoginService {
       email: email,
       password:password
     }
-    const head = new Headers();
-    head.append('Content-Type' , 'application/json');
+    // const head = new Headers();
+    // head.append('Content-Type' , 'application/json');
     
     // return this.http.post('http://localhost:3000/user/login/', body,{headers:head})
     // .map(res=>console.log(res))
