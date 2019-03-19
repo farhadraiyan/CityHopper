@@ -6,7 +6,7 @@ const car = require('../controllers/car');
 router.get('/find', car.findCarByCarId);
 router.get('/find/All',car.findAll);
 router.get('/find/user', car.findCarByUserId);
-router.post('/register', car.createCar);
+router.post('/register/:_id', car.createCar);
 router.patch('/update', car.updateCar)
 router.delete('/delete',car.deleteCar);
 

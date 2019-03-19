@@ -69,7 +69,6 @@ export class ProfilePageComponent implements OnInit {
   async fetchUserDetails() {
     await this.userData.getUserData(this.id['_id']).toPromise().then((res) => {
       this.user = res['user']
-      console.log(this.user)
     }).catch((err) => {
 
     });

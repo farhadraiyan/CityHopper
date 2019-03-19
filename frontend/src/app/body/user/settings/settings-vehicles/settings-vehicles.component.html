@@ -1,8 +1,7 @@
 <div class="container-fluid mb-5">
-  <br>
   <h3>Your Vehicles</h3><br>
   <div class="row">
-    <div class="col-12 col-sm-3">
+    <div class="col-sm-6 col-md-4">
         <div class="card">
             <img src="http://lorempixel.com/200/100/" class="card-img-top" alt="...">
             <div class="card-body">
@@ -15,59 +14,69 @@
           </div>
     </div>
   </div>
-  <br><br>
-  <h4>Create a vehicle</h4>
+  
+  <hr>
+  <br>
+  <h4>Add a vehicle</h4>
+  <div></div>
   <!-- <button class="rounded btn-secondary pl-5 pr-5 pt-2 pb-2">Create Vehicle</button> -->
-  <div>
+  <form class="form-group" #carReg="ngForm">
       <div class="row">
-          <div class="col-md-6">
+          <div class="col-sm-12 col-md-8">
               <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="inputEmail4">Make</label>
-                    <input type="text" class="form-control rounded" id="inputEmail4" placeholder="Make">
+                    <input type="text" class="form-control rounded" id="inputEmail4" name="make" [(ngModel)]="car.make" #make=ngModel placeholder="Make">
                   </div>
                   <div class="form-group col-md-6">
                       <label for="inputEmail4">Model</label>
-                      <input type="text" class="form-control rounded" id="inputEmail4" placeholder="Model">
+                      <input type="text" class="form-control rounded" id="inputEmail4" name="model" [(ngModel)]="car.model" #model=ngModel placeholder="Model">
                   </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Year</label>
-                      <input type="text" class="form-control rounded" id="inputEmail4" placeholder="Year">
+                      <input type="text" class="form-control rounded" id="inputEmail4" name="year" [(ngModel)]="car.year" #year=ngModel placeholder="Year">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Color</label>
-                        <input type="text" class="form-control rounded" id="inputEmail4" placeholder="Color">
+                        <input type="text" class="form-control rounded" id="inputEmail4" name="color" [(ngModel)]="car.color" #color=ngModel placeholder="Color">
                     </div>
               </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-sm-8 col-md-4">
               <!-- <img src="http://lorempixel.com/200/100/" class=" img-responsive mt-5" alt="..."> -->
               <div class="veh-image img-responsive mt-4">
                 Choose a file
               </div>
           </div>
+          
       </div>
       <div class="row">
-        <div class="col-12">
+        <div class="col-sm-12 col-md-12">
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-6">
                   <label for="inputEmail4">Type</label>
-                  <input type="text" class="form-control rounded" id="inputEmail4" placeholder="Type">
+                  <input type="text" class="form-control rounded" id="inputEmail4" name="type" [(ngModel)]="car.type" #type=ngModel placeholder="Type">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-6">
                     <label for="inputEmail4">License Plate</label>
-                    <input type="text" class="form-control rounded" id="inputEmail4" placeholder="License Plate">
+                    <input type="text" class="form-control rounded" id="inputEmail4" name="licencePlateNum" [(ngModel)]="car.licencePlateNum" #licencePlateNum=ngModel placeholder="License Plate">
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="inputEmail4">Model</label>
-                    <input type="text" class="form-control rounded" id="inputEmail4" placeholder="Luggage Capacity">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Seat Capacity</label>
+                    <input type="text" class="form-control rounded" id="inputEmail4" name=seatCapacity [(ngModel)]="car.seatCapacity" #seatCapacity=ngModel placeholder="Seat Capacity">
                 </div>
-              </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Luggage Capacity</label>
+                    <input type="text" class="form-control rounded" id="inputEmail4" name=luggageCapacity [(ngModel)]="car.luggageCapacity" #luggageCapacity=ngModel placeholder="Luggage Capacity">
+                </div>
+            </div>
         </div>
       </div>
       <br>
-      <button class="prim-btn rounded" >Submit</button>
-  </div>
-</div>
+      <button class="prim-btn rounded" (click)="addCar()" >Submit</button>
+  
+</form>

@@ -23,7 +23,7 @@ export class SettingsPersonalDetailsComponent implements OnInit {
       this.user = res['user']
 
     }).catch((err) => {
-
+      console.log(err)
     });
   }
 }

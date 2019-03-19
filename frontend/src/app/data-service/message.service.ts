@@ -22,14 +22,14 @@ export class MessageService {
 
   }
 
-  // getAllMessages(){
-  //   let header = new HttpHeaders();
-  //   header.append('Content-Type', 'application/json');
-  //   return this.http.get<Message[]>('http://localhost:3000/find/All').pipe(map(res=>{
-  //     res => res.json();
-  //     return res;
-  //   }))
-  // }
+  getAllMessages(){
+    let header = new HttpHeaders();
+    header.append('Content-Type', 'application/json');
+    return this.http.get<Message[]>('http://localhost:3000/find/All').pipe(map(res=>{
+      res => res.json();
+      return res;
+    }))
+  }
 
   // getMessageBySendersId(sendId): Observable<any>{
   //   let header = new HttpHeaders();
