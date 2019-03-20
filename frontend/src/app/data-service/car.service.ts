@@ -12,15 +12,15 @@ import {Car} from '../models/Car';
 })
 export class CarService {
 
-  constructor(private http:Http) { }
+  constructor(private http:HttpClient) { }
 
   addCar(newCar:Car){
-    const head=new Headers();
+    const head=new HttpHeaders();
     head.append('Content-type', 'application/json');
-    return this.http.post(`http://localhost:3000/car/register/`, newCar, {headers:head})
-    .map(res => {
+    return this.http.post(`http://localhost:3000/car/register/`, newCar)
+    .pipe(map(res => {
       console.log(res)
-    })
+    }))
     
   }
 
@@ -51,12 +51,13 @@ export class CarService {
   }
 
   getCarByUserId(userId):Observable<any>{
-    let headers = new Headers();
+    let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3000/car/find/${userId}`)
-    .map(res => {
-      console.log(res)
-    })
+    return this.http.get(`http://localhost:3000/car/find/user/${userId}`)
+    .pipe(map(res => {
+      res => res.json();
+      return res;
+    }))
   }
 
   getCarById(carId):Observable<any>{

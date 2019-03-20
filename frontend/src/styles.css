@@ -3,3 +3,7 @@
 .margin-all{
     margin: 25px 5px 25px 50px;
 }
+
+.minheight80{
+    min-height: 80vh;
+}

@@ -25,6 +25,7 @@ import { PasswordvalidationDirective } from './directives/passwordvalidation.dir
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MessageComponent } from './body/user/message/message/message.component';
+import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
 
 // const appRoutes: Routes = [
 //   {
@@ -59,7 +60,8 @@ import { MessageComponent } from './body/user/message/message/message.component'
     LoginComponent,
     PasswordvalidationDirective,
     ProfilePageComponent,
-    MessageComponent
+    MessageComponent,
+    SettingsVehicleRoutingComponent
 
   ],
   exports: [ RouterModule ],

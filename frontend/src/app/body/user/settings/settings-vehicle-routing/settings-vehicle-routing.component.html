@@ -1,0 +1,28 @@
+
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Make</th>
+            <th scope="col">Model</th>
+            <th scope="col">Year</th>
+            <th scope="col">color</th>
+            <th scope="col">Car Type</th>
+            <th scope="col">Plate Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{this.carData['make']}}</td>
+            <td>{{carData['model']}}</td>
+            <td>{{carData['year']}}</td>
+            <td>{{carData['color']}}</td>
+            <td>{{carData['type']}}</td>
+            <td>{{carData['licencePlateNum']}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<a routerLink="/settings/add-A-Vehicles">Add a new vehicle</a>
+<!-- <router-outlet></router-outlet> -->

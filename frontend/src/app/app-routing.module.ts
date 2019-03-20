@@ -13,6 +13,7 @@ import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicle
 import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
 import {MessageComponent} from './body/user/message/message/message.component';
+import {SettingsVehicleRoutingComponent} from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
 
 
 const routes: Routes = [
@@ -55,7 +56,13 @@ const routes: Routes = [
       path: 'payment',
       component: SettingsPaymentComponent
     },{
-      path: 'vehicles',
+      path: 'vehicles-routing',
+      component: SettingsVehicleRoutingComponent,
+      // children:[{
+      // }]
+    },
+    {
+      path: 'add-A-Vehicles',
       component: SettingsVehiclesComponent
     }]
   }
