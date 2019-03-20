@@ -45,9 +45,11 @@
               </div>
           </div>
           <div class="col-sm-8 col-md-4">
-              <!-- <img src="http://lorempixel.com/200/100/" class=" img-responsive mt-5" alt="..."> -->
-              <div class="veh-image img-responsive mt-4">
-                Choose a file
+              <div class="veh-image img-responsive mt-4" (click)="chooseImages()">
+                  <label for="avatar">Add a picture of your car</label>
+                  <div style="display: none">
+                    <input type="file" id="uploadImg" name="image" accept="image/png, image/jpeg">
+                  </div>
               </div>
           </div>
           

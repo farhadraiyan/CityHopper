@@ -14,10 +14,10 @@ export class CarService {
 
   constructor(private http:Http) { }
 
-  addCar(newCar:Car, userId){
+  addCar(newCar:Car){
     const head=new Headers();
     head.append('Content-type', 'application/json');
-    return this.http.post(`http://localhost:3000/car/register/${userId}`, newCar, {headers:head})
+    return this.http.post(`http://localhost:3000/car/register/`, newCar, {headers:head})
     .map(res => {
       console.log(res)
     })

@@ -21,17 +21,18 @@ export class SettingsVehiclesComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
-    this.getUserId();
   }
 
-  async getUserId(){
-    this.userData = this.authService.getUserDetails(); 
-    this.id = this.userData['_id']
-    console.log(this.id)  
-  }
+  // async getUserId(){
+  //   this.userData = this.authService.getUserDetails(); 
+  //   this.id = this.userData['_id']
+  //   console.log(this.id)  
+  // }
 
   addCar(){
-    this.carData.addCar(this.car,this.id).subscribe(
+    let data = this.car;
+    data.userId = this.authService.getUserDetails()['_id']
+    this.carData.addCar(this.car).subscribe(
       (res) =>{
         console.log(res)
       },
@@ -39,6 +40,11 @@ export class SettingsVehiclesComponent implements OnInit {
         console.log(err)
       }
     )
+  }
+
+  chooseImages(){
+    var input = document.getElementById("uploadImg");
+    input.click()
   }
 
   resetForm(form?:NgForm){
