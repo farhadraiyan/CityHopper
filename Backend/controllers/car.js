@@ -188,7 +188,7 @@ let deleteCar = async function (req, res) {
     let reqFields = ['carId']
     // add fields to error if errors getting user information
     reqFields.forEach(function (field) {
-        if (!req.body[field] || req.body[field] === '') {
+        if (!req.params[field] || req.params[field] === '') {
             errors[field] = `${field.replace(/_/g, ' ')} is required`
         }
     })
@@ -198,7 +198,7 @@ let deleteCar = async function (req, res) {
             errors: errors,
         })
     }
-    let data = _.pick(req.body, reqFields)
+    let data = req.params
     let deleteCar
 
     try {

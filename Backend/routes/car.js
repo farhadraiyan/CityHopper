@@ -8,6 +8,6 @@ router.get('/find/All', car.findAll);
 router.get('/find/user/:userId', car.findCarByUserId);
 router.post('/register/', car.createCar);
 router.patch('/update', car.updateCar)
-router.delete('/delete', car.deleteCar);
+router.delete('/delete/:carId', car.deleteCar);
 
 module.exports = router;
