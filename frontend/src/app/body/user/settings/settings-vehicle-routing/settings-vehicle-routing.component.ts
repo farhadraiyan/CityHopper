@@ -14,7 +14,7 @@ export class SettingsVehicleRoutingComponent implements OnInit {
   constructor(private activRoute: ActivatedRoute, private auth: AuthenticationService, private carService: CarService) { }
 
   id: any;
-  public carData = {};
+  public carData = [];
   ngOnInit() {
     this.getCarData();
   }
@@ -24,11 +24,18 @@ export class SettingsVehicleRoutingComponent implements OnInit {
     console.log(this.id)
     await this.carService.getCarByUserId(this.id).subscribe(
       res => {
-        for(let i in res['vehicle']){
-          this.carData = res['vehicle'][i]
-          console.log(this.carData['make'])
-        }
+          this.carData = res['vehicle']
       }
     )
+  }
+
+  deleteCar(carId){
+    if(confirm("Are You sure you want to delete this vehicle?"))
+    this.carService.deleteCar(carId).subscribe(
+      () => {
+        this.getCarData();
+      }
+    )
+    return this.carData;
   }
 }

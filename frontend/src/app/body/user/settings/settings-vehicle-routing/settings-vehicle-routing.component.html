@@ -12,17 +12,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{{this.carData['make']}}</td>
-            <td>{{carData['model']}}</td>
-            <td>{{carData['year']}}</td>
-            <td>{{carData['color']}}</td>
-            <td>{{carData['type']}}</td>
-            <td>{{carData['licencePlateNum']}}</td>
+          <tr *ngFor="let car of carData">
+            <td>{{car['make']}}</td>
+            <td>{{car['model']}}</td>
+            <td>{{car['year']}}</td>
+            <td>{{car['color']}}</td>
+            <td>{{car['type']}}</td>
+            <td>{{car['licencePlateNum']}}</td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="deleteCar(car['_id'])"><i class="far fa-trash-alt"></i></button></td>
+            <td><button type="button" class="btn btn-outline-info"><i class="fas fa-edit"></i></button></td>
           </tr>
         </tbody>
       </table>
 </div>
 
 <a routerLink="/settings/add-A-Vehicles">Add a new vehicle</a>
-<!-- <router-outlet></router-outlet> -->
