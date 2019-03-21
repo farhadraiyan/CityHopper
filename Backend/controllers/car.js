@@ -53,7 +53,7 @@ let findCarByUserId = async function (req, res) {
     let reqFields = ['userId']
     // add fields to error if errors getting user information
     reqFields.forEach(function (field) {
-        if (!req.body[field] || req.body[field] === '') {
+        if (!req.params[field] || req.params[field] === '') {
             errors[field] = `${field.replace(/_/g, ' ')} is required`
         }
     })
@@ -64,11 +64,11 @@ let findCarByUserId = async function (req, res) {
             errors: errors,
         })
     }
-    let data = _.pick(req.body, ['userId'])
+    let data = req.params.userId
 
     let userCars
     try {
-        userCars = await Car.find({ userId: data.userId })
+        userCars = await Car.find({ userId: data })
         if (!userCars) {
             res.status(400).send({
                 message: "Error getting user car"
