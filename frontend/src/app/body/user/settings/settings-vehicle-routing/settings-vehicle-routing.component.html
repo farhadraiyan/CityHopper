@@ -20,7 +20,7 @@
             <td>{{car['type']}}</td>
             <td>{{car['licencePlateNum']}}</td>
             <td><button type="button" class="btn btn-outline-danger" (click)="deleteCar(car['_id'])"><i class="far fa-trash-alt"></i></button></td>
-            <td><button type="button" class="btn btn-outline-info"><i class="fas fa-edit"></i></button></td>
+            <td><button type="button" class="btn btn-outline-info" routerLink="/settings/update-A-Vehicles/{{car['_id']}}"><i class="fas fa-edit"></i></button></td>
           </tr>
         </tbody>
       </table>

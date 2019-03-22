@@ -8,4 +8,5 @@ export class Car{
     seatCapacity: Number;
     licencePlateNum: String;
     luggageCapacity: Number;
+    luggageSize: String;
 }

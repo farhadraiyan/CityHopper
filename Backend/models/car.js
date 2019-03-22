@@ -36,6 +36,10 @@ const carSchema = mongoose.Schema({
     luggageCapacity: {
         type: Number,
         required: true
+    },
+    luggageSize:{
+        type: String,
+        required: true
     }
 })
 

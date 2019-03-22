@@ -28,7 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MessageComponent } from './body/user/message/message/message.component';
 import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
 import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component';
-
+import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-vehicle-updates/settings-vehicle-updates.component';
 
 // const appRoutes: Routes = [
 //   {
@@ -65,8 +65,8 @@ import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component'
     ProfilePageComponent,
     MessageComponent,
     SettingsVehicleRoutingComponent,
-    ViewTripsComponent
-
+    ViewTripsComponent,
+    SettingsVehicleUpdatesComponent
 
   ],
   exports: [ RouterModule ],
