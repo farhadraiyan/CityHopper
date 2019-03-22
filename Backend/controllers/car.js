@@ -19,7 +19,7 @@ let findCarByCarId = async function (req, res) {
     let reqFields = ['carId']
     // add fields to error if errors getting user information
     reqFields.forEach(function (field) {
-        if (!req.body[field] || req.body[field] === '') {
+        if (!req.params[field] || req.params[field] === '') {
             errors[field] = `${field.replace(/_/g, ' ')} is required`
         }
     })
@@ -30,16 +30,20 @@ let findCarByCarId = async function (req, res) {
         })
     }
 
-    let data = _.pick(req.body, ['userId'])
+    let data = req.params.carId
 
     let foundcar
     try {
-        foundcar = await Car.findById(data.carId)
+        foundcar = await Car.findById(data)
         if (!foundcar) {
             return res.status(400).send({
                 msg: 'error finding car'
             })
         }
+        return res.status(200).send({
+            msg: 'Vehicle Found',
+            vehicle: foundcar
+        })
     } catch (error) {
         return res.status(400).send({
             msg: 'error finding car',
@@ -89,7 +93,7 @@ let findCarByUserId = async function (req, res) {
 let createCar = async function (req, res) {
     let errors = {}
     let reqFields = ['userId', 'make', 'model', 'year', 'color', 'type',
-        'seatCapacity', 'licencePlateNum', 'luggageCapacity']
+        'seatCapacity', 'licencePlateNum', 'luggageCapacity', 'luggageSize']
     // add fields to error if errors getting user information
     reqFields.forEach(function (field) {
         if (!req.body[field] || req.body[field] === '') {
@@ -142,8 +146,8 @@ let createCar = async function (req, res) {
 
 let updateCar = async function (req, res) {
     let errors = {}
-    let reqFields = ['carId', 'make', 'model', 'year', 'color', 'type',
-        'seatCapacity', 'licencePlateNum', 'luggageCapacity']
+    let reqFields = ['make', 'model', 'year', 'color', 'type',
+        'seatCapacity', 'licencePlateNum', 'luggageCapacity', 'luggageSize']
     // add fields to error if errors getting user information
     reqFields.forEach(function (field) {
         if (!req.body[field] || req.body[field] === '') {
@@ -158,11 +162,11 @@ let updateCar = async function (req, res) {
             errors: errors,
         })
     }
-
+    let carId = req.params.carId;
     let data = _.pick(req.body, reqFields)
 
     try {
-        let updatedCar = await Car.findByIdAndUpdate(data.carId, { $set: data }, { new: true })
+        let updatedCar = await Car.findByIdAndUpdate(carId, { $set: data }, { new: true })
 
         if (!updatedCar) {
             return res.status(400).send({

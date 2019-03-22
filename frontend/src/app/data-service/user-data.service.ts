@@ -24,7 +24,10 @@ export class UserDataService {
   }
 
   editUser(newData,userId):Observable<any>{
-    return this.http.put(`http://localhost:3000/user/edit/${userId}`,newData);
+    return this.http.put(`http://localhost:3000/user/edit/${userId}`,newData).pipe(map(res =>{
+      res => res.json()
+      return res;
+    }));
   }
 
 }

@@ -17,7 +17,7 @@ export class CarService {
   addCar(newCar:Car){
     const head=new HttpHeaders();
     head.append('Content-type', 'application/json');
-    return this.http.post(`http://localhost:3000/car/register/`, newCar)
+    return this.http.post(`http://localhost:3000/car/register`, newCar)
     .pipe(map(res => {
       console.log(res)
     }))
@@ -61,12 +61,13 @@ export class CarService {
   }
 
   getCarById(carId):Observable<any>{
-    let headers = new Headers();
+    let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.get(`http://localhost:3000/car/find/${carId}`)
-    .map(res => {
-      console.log(res)
-    })
+    .pipe(map(res => {
+      res => res.json()
+      return res;
+    }))
   }
 
 

@@ -26,6 +26,7 @@ import { ProfilePageComponent } from './body/user/profile-page/profile-page.comp
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MessageComponent } from './body/user/message/message/message.component';
 import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
+import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-vehicle-updates/settings-vehicle-updates.component';
 
 // const appRoutes: Routes = [
 //   {
@@ -61,7 +62,8 @@ import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-v
     PasswordvalidationDirective,
     ProfilePageComponent,
     MessageComponent,
-    SettingsVehicleRoutingComponent
+    SettingsVehicleRoutingComponent,
+    SettingsVehicleUpdatesComponent
 
   ],
   exports: [ RouterModule ],

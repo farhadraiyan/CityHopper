@@ -14,6 +14,7 @@ import { SettingsPaymentComponent } from './body/user/settings/settings-payment/
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
 import {MessageComponent} from './body/user/message/message/message.component';
 import {SettingsVehicleRoutingComponent} from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
+import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-vehicle-updates/settings-vehicle-updates.component';
 
 
 const routes: Routes = [
@@ -64,7 +65,12 @@ const routes: Routes = [
     {
       path: 'add-A-Vehicles',
       component: SettingsVehiclesComponent
-    }]
+    },
+    {
+      path: 'update-A-Vehicles/:carId',
+      component: SettingsVehicleUpdatesComponent
+    }
+  ]
   }
 
  // { path: '**', component: HomeComponent }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../../../../data-service/user-data.service';
 import { AuthenticationService } from 'src/app/data-service/authentication.service';
 import {Router} from '@angular/router';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-settings-personal-details',
@@ -12,8 +13,9 @@ export class SettingsPersonalDetailsComponent implements OnInit {
 
   constructor(private userData:UserDataService,private authinticateService:AuthenticationService,private router:Router) { }
 
+  user= new User();
   id:any;
-  user:any;
+  // user:any;
 
 
   async ngOnInit() {
@@ -28,12 +30,16 @@ export class SettingsPersonalDetailsComponent implements OnInit {
   }
 }
 
+  
+  onSubmit(){
 
-  onSubmit(firstName, lastName, phoneNumber, dateOfBirth, description,city,province,country){
-
-    this.user={firstName:firstName.value,lastName:lastName.value,phoneNumber:phoneNumber.value,dateOfBirth:dateOfBirth.value,description:description.value,city:city.value,province:province.value,country:country.value}
-    this.userData.editUser(this.user,this.id['_id']).subscribe(data=>{
-      data = this.user;
+  //  this.user={firstName:firstName.value,lastName:lastName.value,phoneNumber:phoneNumber.value,dateOfBirth:dateOfBirth.value,description:description.value,city:city.value,province:province.value,country:country.value}
+    this.userData.editUser(this.user,this.id['_id']).subscribe(
+      data=>{
+      console.log(data)
+    },
+    err =>{
+      console.log(err)
     });
 
     this.router.navigate(['/settings'],{queryParams: {'authentication': 'successful'}});
@@ -41,5 +47,6 @@ export class SettingsPersonalDetailsComponent implements OnInit {
 
   }
 
+  //firstName, lastName, phoneNumber, dateOfBirth, description,city,province,country
 
 }

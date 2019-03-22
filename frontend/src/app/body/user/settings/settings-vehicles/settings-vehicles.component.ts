@@ -24,23 +24,19 @@ export class SettingsVehiclesComponent implements OnInit {
     this.resetForm();
   }
 
-  // async getUserId(){
-  //   this.userData = this.authService.getUserDetails(); 
-  //   this.id = this.userData['_id']
-  //   console.log(this.id)  
-  // }
 
   addCar(){
     let data = this.car;
     data.userId = this.authService.getUserDetails()['_id']
     this.carData.addCar(this.car).subscribe(
-      (res) =>{
-        console.log(res)
+      res =>{
+        this._router.navigate(['/settings/vehicles-routing']);
       },
       (err)=>{
         console.log(err)
       }
     )
+
   }
 
   chooseImages(){
@@ -59,6 +55,7 @@ export class SettingsVehiclesComponent implements OnInit {
       this.car.licencePlateNum = "";
       this.car.luggageCapacity = 0;
       this.car.seatCapacity=0;
+      this.car.luggageSize=""
     }
 
   }

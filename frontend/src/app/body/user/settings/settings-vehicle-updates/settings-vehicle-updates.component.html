@@ -1,0 +1,83 @@
+<h4>Update this vehicle</h4>
+
+<form class="form-group" #carUp="ngForm">
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputEmail4">Make</label>
+                  <input type="text" class="form-control rounded" id="inputEmail4" name="make" [(ngModel)]="carData.make" #make=ngModel placeholder="Make">
+                  <div [hidden]="make.valid || make.pristine" class="alert alert-danger">Car Make is required</div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Model</label>
+                    <input type="text" class="form-control rounded" id="inputEmail4" name="model" [(ngModel)]="carData.model" #model=ngModel placeholder="Model">
+                    <div [hidden]="model.valid || model.pristine" class="alert alert-danger">Car Model is required</div>
+                </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Year</label>
+                    <input type="number" class="form-control rounded" id="inputEmail4" name="year" [(ngModel)]="carData.year" #year=ngModel placeholder="Year">
+                    <div [hidden]="year.valid || year.pristine" class="alert alert-danger">Car Year is required</div>
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="inputEmail4">Color</label>
+                      <input type="text" class="form-control rounded" id="inputEmail4" name="color" [(ngModel)]="carData.color" #color=ngModel placeholder="Color">
+                      <div [hidden]="color.valid || color.pristine" class="alert alert-danger">Car Color is required</div>
+                  </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-4">
+            <div class="veh-image img-responsive mt-4" (click)="chooseImages()">
+                <label for="avatar">Add a picture of your car</label>
+                <div style="display: none">
+                  <input type="file" id="uploadImg" name="image" accept="image/png, image/jpeg">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Type</label>
+                <input type="text" class="form-control rounded" id="inputEmail4" name="type" [(ngModel)]="carData.type" #type=ngModel placeholder="Type">
+                <div [hidden]="type.valid || type.pristine" class="alert alert-danger">Car Type is required</div>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="inputEmail4">License Plate</label>
+                  <input type="text" class="form-control rounded" id="inputEmail4" name="licencePlateNum" [(ngModel)]="carData.licencePlateNum" #licencePlateNum=ngModel placeholder="License Plate">
+                  <div [hidden]="licencePlateNum.valid || licencePlateNum.pristine" class="alert alert-danger">Car Plate Number is required</div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="inputEmail4">Seat Capacity</label>
+                  <input type="number" class="form-control rounded" id="inputEmail4" name=seatCapacity [(ngModel)]="carData.seatCapacity" #seatCapacity=ngModel placeholder="Seat Capacity">
+                  <div [hidden]="seatCapacity.valid || seatCapacity.pristine" class="alert alert-danger">Seat Capacity is required</div>
+              </div>
+              <div class="form-group col-md-3">
+                  <label for="inputEmail4">Luggage Capacity</label>
+                  <input type="number" class="form-control rounded" id="inputEmail4" name=luggageCapacity [(ngModel)]="carData.luggageCapacity" #luggageCapacity=ngModel placeholder="Luggage Capacity">
+                  <div [hidden]="luggageCapacity.valid || luggageCapacity.pristine" class="alert alert-danger">Luggage Capacity is required</div>
+              </div>
+              <div class="form-group col-md-3">
+                  <label for="inputEmail4">Luggage Size</label>
+                  <select class="form-control" [(ngModel)]="carData.luggageSize" #luggageSize=ngModel name="luggageSize" required>
+                      <option></option>
+                      <option value="No Luggage">No Luggage</option>
+                      <option value="small">small</option>
+                      <option value="medium">medium</option>
+                      <option value="large">large</option>
+                    </select>
+                    <div [hidden]="luggageSize.valid" class="alert alert-danger">Luggage Size is required</div>
+                </div>
+          </div>
+      </div>
+    </div>
+    <br>
+    <button class="btn btn-info rounded" [disabled]="!carUp.valid" (click)="updateCar()" >Update Car</button>
+
+</form>
