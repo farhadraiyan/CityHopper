@@ -22,13 +22,17 @@ const TripRequestSchema = mongoose.Schema({
   }
 })
 const Trip = mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
   from: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.Mixed,
     ref: 'place',
     required: true
   },
   to: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.Mixed,
     ref: 'place',
     required: true
   },

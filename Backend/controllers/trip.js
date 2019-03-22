@@ -6,8 +6,7 @@ const User = require("../models/user")
 
 let createTrip = async function (req, res) {
   //from to has type issue need to fix
-  let reqField = ["from", "to", "cost", "departureTime", "luggage", "seatsAvailable", "arivalTime", "driver",
-    "passengers", "rating", "car"]
+  let reqField = ["name","from", "to", "cost", "departureTime", "luggage", "seatsAvailable", "driver", "rating", "car"]
   //erro handle with Joi
   let joiResult = erroHandler.joiConfigTrip(req.body);
   //if error handler return errors
@@ -202,10 +201,23 @@ let getTripRequestForRider = async function (req, res) {
   })
 }
 
+let getTrips = async function(req,res){
+  try{
+      let getTrips = await TRIP.find()
+      res.status(200).send(getTrips)
+  }catch(error){
+      res.status(400).send({
+          message:"no data",
+          error:error.message
+      })
+  }
+}
+
 module.exports = {
   // findAllTrip,
   createTrip,
   createTripRequest,
   getTripRequestsForTrip,
-  getTripRequestForRider
+  getTripRequestForRider,
+  getTrips
 }

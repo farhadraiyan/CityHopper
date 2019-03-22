@@ -14,12 +14,17 @@ import { SettingsPaymentComponent } from './body/user/settings/settings-payment/
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
 import {MessageComponent} from './body/user/message/message/message.component';
 import {SettingsVehicleRoutingComponent} from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
+import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'viewTrips',
+    component: ViewTripsComponent
   },
   {
     path: '',

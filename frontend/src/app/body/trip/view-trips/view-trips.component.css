@@ -1,0 +1,22 @@
+
+
+button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #335680;
+}
+input{
+  font-family:'Font Awesome 5 Free';
+  font-weight: 700;
+  font-size: 20px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  border:none;
+  background-color:#EBEBFF
+}

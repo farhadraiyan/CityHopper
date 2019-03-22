@@ -8,45 +8,60 @@
 
       <div class="row">
         <div class="col-md-6 col-12 mb-3">
-          <form>
+          <form (ngSubmit)="onSubmit(date,seats,luggage,price)"  #addForm="ngForm">
             <div class="form-group row">
               <label for="from" class="col-sm-4 col-md-4 col-12 col-form-label">Departure From</label>
               <div class="col-sm-8 col-md-8 col-12">
-                <input id="from" placeholder="Departure From" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #from [formControl]="searchControl">
+                <input  name="from" id="from" placeholder="Departure From" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #from [formControl]="searchControl">
               </div>
             </div>
             <div class="form-group row">
-              <label for="to" class="col-sm-4  col-md-4 col-12 col-form-label">Departure To</label>
+              <label for="to" class="col-sm-4  col-md-4 col-12 col-form-label">Destination</label>
               <div class="col-sm-8 col-md-8 col-12">
-                <input id="to" placeholder="Departure To" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #to [formControl]="searchControl">
+                <input id="to" placeholder="Destination" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #to [formControl]="searchControl">
               </div>
             </div>
             <div class="form-group row">
               <label for="date" class="col-sm-4  col-md-4 col-12 col-form-label">Departure Date</label>
               <div class="col-sm-8 col-md-8 col-12">
-                <input type="text" class="form-control" id="date" placeholder="Departure Date">
+                  <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                         ngModel #date name="date" ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-primary calendar" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt text-white"></i></button>
+                  </div>
+                </div>
+
+                <ngb-timepicker [(ngModel)]="time" [meridian]="meridian" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
               </div>
             </div>
             <div class="form-group row">
                 <label for="seats" class="col-sm-4  col-md-4 col-12 col-form-label">Seats Available</label>
                 <div class="col-sm-8 col-md-8 col-12">
-                    <select class="form-control form-control-md" id="date">
-                        <option>0</option>
+                    <select ngModel #seats name="seats" class="form-control form-control-md" id="date">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
                     </select>
                 </div>
               </div>
               <div class="form-group row">
                   <label for="baggage" class="col-sm-4  col-md-4 col-12 col-form-label">Luggage</label>
                   <div class="col-sm-8 col-md-8 col-12">
-                      <select class="form-control form-control-md" id="baggage">
+                      <select ngModel #luggage name="luggage" class="form-control form-control-md" id="baggage">
                           <option>Small</option>
+                          <option>Medium</option>
+                          <option>Large</option>
                         </select>
                   </div>
                 </div>
                 <div class="form-group row">
                     <label for="amount" class="col-sm-4  col-md-4 col-12 col-form-label">Amount/Passenger</label>
                     <div class="col-sm-8 col-md-8 col-12">
-                      <input type="text" class="form-control" id="amount" placeholder="Amount">
+                      <input ngModel #price name="price"  type="text" class="form-control" id="amount" placeholder="Amount">
                     </div>
                   </div>
                   <div class="form-group">

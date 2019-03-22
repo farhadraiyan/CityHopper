@@ -14,6 +14,7 @@ import { AgmCoreModule } from '@agm/core';
 import { TripComponent } from './body/trip/trip.component';
 import { PosttripComponent } from './body/trip/posttrip/posttrip.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgmDirectionModule } from 'agm-direction';
 
 
 import { SettingsRootComponent } from './body/user/settings/settings-root/settings-root.component';
@@ -26,6 +27,8 @@ import { ProfilePageComponent } from './body/user/profile-page/profile-page.comp
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MessageComponent } from './body/user/message/message/message.component';
 import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
+import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component';
+
 
 // const appRoutes: Routes = [
 //   {
@@ -61,7 +64,9 @@ import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-v
     PasswordvalidationDirective,
     ProfilePageComponent,
     MessageComponent,
-    SettingsVehicleRoutingComponent
+    SettingsVehicleRoutingComponent,
+    ViewTripsComponent
+
 
   ],
   exports: [ RouterModule ],
@@ -78,6 +83,7 @@ import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-v
       apiKey:"AIzaSyByS3ej9cs4aNa9YsnHtvkPudbpRFafs7U",
       libraries:["places"]
     }),
+    AgmDirectionModule,
     FormsModule,
     NgbModule
   ],
