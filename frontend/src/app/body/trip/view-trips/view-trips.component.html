@@ -1,19 +1,61 @@
   <div class="row m-4">
-    <div class="col-sm-12 col-lg-6  text-center"><h3>Find your ride</h3></div>
+    <div class="col-sm-12 col-lg-6  text-center"><h3>Find your perfect trip</h3></div>
     <div class="col"></div>
   </div>
-  
+
 <div class="m-4 text-center">
       <div class="text-center ">
         <form (ngSubmit)="onSubmit()">
 
-          <input type="text" class="rounded"  placeholder='&#xf3c5; From' autocorrect="off" autocapitalize="off" spellcheck="off"  #from [formControl]="searchControl">
+                <input [(ngModel)]="filterargs" name="filter" class="form-control form-control-lg form-control-borderless" type="search"
+                                placeholder="Search Customers" placeholder='&#xf3c5; From'>
 
-          <i *ngIf="!mobile" class="fas fa-chevron-circle-right m-3 fa-2x"></i>
+              <i *ngIf="!mobile" class="fas fa-chevron-circle-right m-3 fa-2x"></i>
           <i *ngIf="mobile" class="fas fa-chevron-circle-down m-3 fa-2x"></i>
 
           <input type="text" class="rounded"  placeholder="&#xf5a0; To" autocorrect="off" autocapitalize="off" spellcheck="off"  #to [formControl]="searchControl" >
+           <button class="btn btn-outline-primary calendar" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt text-white"></i></button>
           <h5><button type="submit" class="rounded m-3 p-2 ">Let's go!</button></h5>
         </form>
       </div>
 </div>
+
+
+
+<div *ngFor="let data of trips | filter : filterargs" class="border rounded m-5 p-2">
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm col-md-2 col-lg-2  text-center border-right pt-2">
+          {{data.from.name}} <br>
+          <i class="fas fa-arrow-down"></i><br>
+          {{data.to.name}}
+      </div>
+      <div class="col-sm col-md-3 col-lg-5 text-center border-right pt-4">
+       <div class="row">
+          <div class="col">
+            Departure: <br>
+            {{data.departureTime}}
+          </div>
+          <div class="col ">
+            Arrival: <br>
+            {{data.arivalTime}}
+          </div>
+      </div>
+    </div>
+       <div class="col-sm col-md-2 col-lg-2  text-center ">
+            <img src="../../../../assets/driver.png" class="profile rounded-circle mx-auto d-block " alt="driver" width="100" heigth="100">
+        </div>
+        <div class="col-sm col-md-2 col-lg-2  border-right text-center pt-4">
+            Igor Mori <br>
+            <ngb-rating [rate]="4"></ngb-rating>
+        </div>
+           <div class="col-sm col-md-2 col-lg-1 text-center pt-4 ">
+            $CAD <br>{{data.cost}}
+        </div>
+
+
+
+  </div>
+</div>
+
+

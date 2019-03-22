@@ -86,7 +86,7 @@ export class PosttripComponent implements OnInit, DoCheck {
     var newDate = date.value +" "+ this.time['hour']+ ":" + this.time['minute'] +":00";
     var cost = +price.value
     this.trip = {name:this.tripName, from:this.myplace, to:this.myDestination, cost:cost, departureTime:newDate,
-       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user['_id'], car:this.user['car'],rating:this.user['rating']   }
+       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user, car:this.user['car'],rating:this.user['rating']  }
       console.log(this.trip)
 
       this.addTripService.addTrip(this.trip).subscribe(data=>{
