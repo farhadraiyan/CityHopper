@@ -14,6 +14,7 @@ import { AgmCoreModule } from '@agm/core';
 import { TripComponent } from './body/trip/trip.component';
 import { PosttripComponent } from './body/trip/posttrip/posttrip.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgmDirectionModule } from 'agm-direction';
 
 
 import { SettingsRootComponent } from './body/user/settings/settings-root/settings-root.component';
@@ -25,6 +26,8 @@ import { PasswordvalidationDirective } from './directives/passwordvalidation.dir
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MessageComponent } from './body/user/message/message/message.component';
+import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component';
+
 
 // const appRoutes: Routes = [
 //   {
@@ -59,7 +62,9 @@ import { MessageComponent } from './body/user/message/message/message.component'
     LoginComponent,
     PasswordvalidationDirective,
     ProfilePageComponent,
-    MessageComponent
+    MessageComponent,
+    ViewTripsComponent
+
 
   ],
   exports: [ RouterModule ],
@@ -76,6 +81,7 @@ import { MessageComponent } from './body/user/message/message/message.component'
       apiKey:"AIzaSyByS3ej9cs4aNa9YsnHtvkPudbpRFafs7U",
       libraries:["places"]
     }),
+    AgmDirectionModule,
     FormsModule,
     NgbModule
   ],

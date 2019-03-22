@@ -1,0 +1,19 @@
+  <div class="row m-4">
+    <div class="col-sm-12 col-lg-6  text-center"><h3>Find your ride</h3></div>
+    <div class="col"></div>
+  </div>
+  
+<div class="m-4 text-center">
+      <div class="text-center ">
+        <form (ngSubmit)="onSubmit()">
+
+          <input type="text" class="rounded"  placeholder='&#xf3c5; From' autocorrect="off" autocapitalize="off" spellcheck="off"  #from [formControl]="searchControl">
+
+          <i *ngIf="!mobile" class="fas fa-chevron-circle-right m-3 fa-2x"></i>
+          <i *ngIf="mobile" class="fas fa-chevron-circle-down m-3 fa-2x"></i>
+
+          <input type="text" class="rounded"  placeholder="&#xf5a0; To" autocorrect="off" autocapitalize="off" spellcheck="off"  #to [formControl]="searchControl" >
+          <h5><button type="submit" class="rounded m-3 p-2 ">Let's go!</button></h5>
+        </form>
+      </div>
+</div>
