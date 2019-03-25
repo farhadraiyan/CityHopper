@@ -29,6 +29,7 @@ import { MessageComponent } from './body/user/message/message/message.component'
 import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
 import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component';
 import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-vehicle-updates/settings-vehicle-updates.component';
+import { SettingsSecurityComponent } from './body/user/settings/settings-security/settings-security.component';
 
 // const appRoutes: Routes = [
 //   {
@@ -66,7 +67,8 @@ import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-v
     MessageComponent,
     SettingsVehicleRoutingComponent,
     ViewTripsComponent,
-    SettingsVehicleUpdatesComponent
+    SettingsVehicleUpdatesComponent,
+    SettingsSecurityComponent
 
   ],
   exports: [ RouterModule ],

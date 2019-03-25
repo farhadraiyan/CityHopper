@@ -15,8 +15,10 @@ router.get('/find/:_id', user.find);
 router.post('/register', user.register);
 router.get('/find/All', user.findAll);
 router.delete('/delete/:id', user.deleteOne);
-router.put('/edit/:id', user.editOne);
+router.put('/edit', user.editOne);
 router.post('/login', user.login);
+
+router.put('/editemail', user.updateEmail)
 
 router.get('/confirmation/:token', user.confirmation);
 router.post('/upload', upload.single('image'), user.uploadProfilePicture);

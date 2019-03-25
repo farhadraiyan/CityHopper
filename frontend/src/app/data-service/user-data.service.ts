@@ -30,4 +30,14 @@ export class UserDataService {
     }));
   }
 
+  updateEmail(email):Observable<any>{
+    return this.http.put(`http://localhost:3000/user/editemail`, email).pipe(
+      map(res => {
+        res => res.json();
+        return res;
+      })
+    )
+
+  }
+
 }

@@ -38,8 +38,6 @@ exports.register = async (req, res) => {
             } else {
                 // Creates an object From userSchema
                 var newUser = new User();
-                // console.log(req.body)
-                // const {firstname, lastname, email, hash, country, province, city, phoneNumber, termsCondition, userType} = req.body;
                 newUser.firstName = req.body.firstname;
                 newUser.lastName = req.body.lastname;
                 newUser.email = req.body.email;
@@ -73,7 +71,7 @@ exports.register = async (req, res) => {
 
                     await transporter.sendMail({
                         to: newUser.email,
-                        subject: "Confirmition Email",
+                        subject: "Confirmation Email",
                         html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
                     })
                     console.log('message Send!')
@@ -81,24 +79,6 @@ exports.register = async (req, res) => {
                     
                 }
             })
-
-                // console.log(newUser);
-                // User.create(newUser, async (err) => {
-                //     if (err) {
-                //         res.json({
-                //             msg: err + " -> Add user failed"
-                //         })
-                //     } else {
-                //         let data = _.pick(newUser, ['_id', 'firstName', 'lastName', 'email', 'country', 'province', 'city', 'phoneNumber', 'userType'])
-                //         var token;
-                //         token = await newUser.generateJwt();
-                //         data.token = token;
-                //         res.json({
-                //             msg: newUser.firstName + "-> User Added",
-                //             user: data
-                //         })
-                //     }
-                // })
         }
     }).catch(err => {
         console.log(err)
@@ -107,16 +87,8 @@ exports.register = async (req, res) => {
 
 exports.confirmation = async function(req, res) {
     let user
-    // try {
-    //     user = await User.find({token: req.params.token})
-    // } catch (error) {
-    //     res.status(403).send({
-    //         message: "Error confirming",
-    //         error: error.message
-    //     })
-    // }
     let token = req.params.token
-    let verifiedToken 
+    let verifiedToken     
     try {
         verifiedToken = await jwt.verify(token, keys.EMAIL_SECRET)
     } catch (error) {
@@ -136,7 +108,8 @@ exports.confirmation = async function(req, res) {
     }
     
     let confirmedUser
-    user.confirmed= true
+   
+    user.confirmed = true
     try {
         confirmedUser = await user.save()
         res.status(200).send({
@@ -149,37 +122,6 @@ exports.confirmation = async function(req, res) {
             error: error.message
         })
     }
-
-    // User.find({token: req.params.token}, (err, user) => {
-    //     console.log(user)
-    //     if(err) throw err;
-    //     var token = req.params.token;
-    //     jwt.verify(token, keys.EMAIL_SECRET, (err, decoded) => {
-    //         if(err) {
-    //             res.json({
-    //                 success: false, message:"Activation link has expired",
-    //                 error: err
-    //             })
-    //         // }else if(!user){
-    //         //     res.json({
-    //         //         success: false, message:"Activation link has expired bruooooo"
-    //         //     })
-    //         }
-    //         else{
-    //            user.tempToken = false;
-    //            user.confirmation = true;
-    //            user.save((err) => {
-    //                if(err){
-    //                 console.log(err);
-    //                } else{
-    //                    res.json({
-    //                        success: true, message: "Account Activated"
-    //                    })
-    //                }
-    //            })
-    //         }
-    //     })
-    // })
 }
 
 exports.login = (req, res) => {
@@ -265,6 +207,47 @@ exports.editOne = async function (req, res) {
         })
     }
 }
+
+exports.updateEmail = async function(req, res){
+    try{
+    var nUser = new User();
+    nUser.email = req.body.email;
+    nUser.confirmed = true;
+    // nUser.tempToken = nUser.email_generateJwt();
+    var user = {
+        email: nUser.email,
+        confirmed: nUser.confirmed,
+        // tempToken: nUser.tempToken
+    }
+   // const url = `http://localhost:3000/user/confirmation/${nUser.tempToken}`;
+    try{ 
+    await User.updateOne({_id:req.body.userId},user)
+        
+        res.status(200).send({
+            message: user.email + "Add",
+            user: user.confirmed
+        })
+        // await transporter.sendMail({
+        //     to: user.email,
+        //     subject: "Confirmation Email",
+        //     html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
+        // })
+        // console.log('message Send!')
+    } catch(error){
+        res.json({
+            message: error
+        })
+    } 
+    } catch(err){
+        res.status(404).send({
+            message: "Error updating email",
+            err: err
+        })
+    }
+
+}
+
+
 
 exports.uploadProfilePicture = async function (req, res) {
     let errors = {};

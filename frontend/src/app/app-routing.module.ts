@@ -12,10 +12,11 @@ import { SettingsPersonalDetailsComponent } from './body/user/settings/settings-
 import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicles/settings-vehicles.component';
 import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
-import {MessageComponent} from './body/user/message/message/message.component';
-import {SettingsVehicleRoutingComponent} from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
+import { MessageComponent } from './body/user/message/message/message.component';
+import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
 import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component';
 import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-vehicle-updates/settings-vehicle-updates.component';
+import { SettingsSecurityComponent } from './body/user/settings/settings-security/settings-security.component';
 
 
 const routes: Routes = [
@@ -64,8 +65,6 @@ const routes: Routes = [
     },{
       path: 'vehicles-routing',
       component: SettingsVehicleRoutingComponent,
-      // children:[{
-      // }]
     },
     {
       path: 'add-A-Vehicles',
@@ -74,8 +73,11 @@ const routes: Routes = [
     {
       path: 'update-A-Vehicles/:carId',
       component: SettingsVehicleUpdatesComponent
-    }
-  ]
+    },
+    {
+      path: 'email-settings',
+      component: SettingsSecurityComponent
+    }]
   }
 
  // { path: '**', component: HomeComponent }

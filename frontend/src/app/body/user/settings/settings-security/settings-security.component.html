@@ -1,0 +1,14 @@
+<h4>Email Settings</h4>
+<br>
+<form class="form-group" #updEmail="ngForm">
+  <div class="row">
+  <div class="col-sm-12 col-md-8">
+    <label for="inputEmail4">change/update email</label>
+    <input type="email" class="form-control rounded" [(ngModel)]="user.email" #email="ngModel" name="email" placeholder="email" />
+  </div>
+  <div class="col-md-4"></div>
+  <div class="col-sm-4 col-md-4 mt-4">
+  <button class="btn btn-info" (click)="updateEmail()">Update Email</button>
+  </div>
+</div>
+</form>

@@ -119,7 +119,6 @@ userSchema.methods.generateJwt = function () {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
-        //phoneNumber: this.phoneNumber,
         exp: parseInt(expiry.getTime / 1000)
     }, privateKey)
 }
@@ -133,21 +132,9 @@ userSchema.methods.email_generateJwt = function () {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
-        //phoneNumber: this.phoneNumber,
         exp: parseInt(10000000000)
     }, keys.EMAIL_SECRET)
 }
 
 
 module.exports = mongoose.model('user', userSchema);
-
-
-// function setPassword(password){
-//     this.salt = crypto.randomBytes(16).toString('hex');
-// //     console.log(this.salt);
-// //     // var buffer = new Buffer(this.salt, 'binary')
-// //     // console.log(buffer);
-//      this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
-//      console.log(this.hash)
-// }
-// setPassword("HelloWorld")

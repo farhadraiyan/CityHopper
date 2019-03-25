@@ -7,3 +7,7 @@
 .minheight80{
     min-height: 80vh;
 }
+
+.padding-right10{
+    padding-left: 25px;
+}
