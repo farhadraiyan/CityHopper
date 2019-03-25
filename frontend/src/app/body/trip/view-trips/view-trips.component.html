@@ -5,26 +5,21 @@
 
 <div class="m-4 text-center">
       <div class="text-center ">
-        <form (ngSubmit)="onSubmit()">
-
-                <input [(ngModel)]="filterargs" name="filter" class="form-control form-control-lg form-control-borderless" type="search"
-                                placeholder="Search Customers" placeholder='&#xf3c5; From'>
-
-              <i *ngIf="!mobile" class="fas fa-chevron-circle-right m-3 fa-2x"></i>
-          <i *ngIf="mobile" class="fas fa-chevron-circle-down m-3 fa-2x"></i>
-
-          <input type="text" class="rounded"  placeholder="&#xf5a0; To" autocorrect="off" autocapitalize="off" spellcheck="off"  #to [formControl]="searchControl" >
-           <button class="btn btn-outline-primary calendar" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt text-white"></i></button>
+        <form (ngSubmit)="onSubmit(from,to)" #searchForm="ngForm">
+          <input type="text" class="rounded"  placeholder='&#xf3c5; From' autocorrect="off" autocapitalize="off" spellcheck="off" ngModel #from="ngModel" name="from"  >
+          <i *ngIf="!mobile" class="fas fa-chevron-circle-right m-3 fa-2x"></i>
+          <i *ngIf="mobile"class="fas fa-chevron-circle-down m-3 fa-2x"></i>
+          <input type="text" class="rounded"  placeholder="&#xf5a0; To" autocorrect="off" autocapitalize="off" spellcheck="off" ngModel #to="ngModel" name="to">     
           <h5><button type="submit" class="rounded m-3 p-2 ">Let's go!</button></h5>
         </form>
+        
       </div>
 </div>
 
-
-
+<ng-container *ngIf="!searchValidation">
 <div *ngFor="let data of trips | filter : filterargs" class="border rounded m-5 p-2">
 <div class="container-fluid">
-  <div class="row">
+  <div class="row" (click)="viewTrip(data._id)">
       <div class="col-sm col-md-2 col-lg-2  text-center border-right pt-2">
           {{data.from.name}} <br>
           <i class="fas fa-arrow-down"></i><br>
@@ -43,19 +38,53 @@
       </div>
     </div>
        <div class="col-sm col-md-2 col-lg-2  text-center ">
-            <img src="../../../../assets/driver.png" class="profile rounded-circle mx-auto d-block " alt="driver" width="100" heigth="100">
+            <img src="{{data.driver.imageUrl}}" class="profile rounded-circle mx-auto d-block " alt="driver" width="100" height="100">
         </div>
         <div class="col-sm col-md-2 col-lg-2  border-right text-center pt-4">
-            Igor Mori <br>
-            <ngb-rating [rate]="4"></ngb-rating>
+            {{data.driver.firstName}} {{data.driver.lastName}} <br>
+            <ngb-rating [rate]=rating></ngb-rating>
         </div>
            <div class="col-sm col-md-2 col-lg-1 text-center pt-4 ">
             $CAD <br>{{data.cost}}
         </div>
-
-
-
   </div>
 </div>
+</div>
+</ng-container> 
 
+<ng-container *ngIf="searchValidation">
+<div *ngFor="let data of search | filter : filterargs" class="border rounded m-5 p-2">
+<div class="container-fluid">
+  <div class="row" (click)="viewTrip(data._id)">
+      <div class="col-sm col-md-2 col-lg-2  text-center border-right pt-2">
+          {{data.from.name}} <br>
+          <i class="fas fa-arrow-down"></i><br>
+          {{data.to.name}}
+      </div>
+      <div class="col-sm col-md-3 col-lg-5 text-center border-right pt-4">
+       <div class="row">
+          <div class="col">
+            Departure: <br>
+            {{data.departureTime}}
+          </div>
+          <div class="col ">
+            Arrival: <br>
+            {{data.arivalTime}}
+          </div>
+      </div>
+    </div>
+       <div class="col-sm col-md-2 col-lg-2  text-center ">
+            <img src="{{data.driver.imageUrl}}" class="profile rounded-circle mx-auto d-block " alt="driver" width="100" height="100">
+        </div>
+        <div class="col-sm col-md-2 col-lg-2  border-right text-center pt-4">
+            {{data.driver.firstName}} {{data.driver.lastName}} <br>
+            <ngb-rating [rate]=rating></ngb-rating>
+        </div>
+           <div class="col-sm col-md-2 col-lg-1 text-center pt-4 ">
+            $CAD <br>{{data.cost}}
+        </div>
+  </div>
+</div>
+</div>
+</ng-container> 
 

@@ -22,7 +22,9 @@ let createTrip = async function (req, res) {
     createTrip = await new TRIP(tripData)
     //this is how get access to the user
     const user = await User.findById(createTrip.driver)
-    console.log(user)
+     
+      createTrip.driver = user
+     
   } catch (error) {
     return res.status(400).send({
       message: "cannot create trip",
@@ -32,7 +34,9 @@ let createTrip = async function (req, res) {
   }
   let savedTrip;
   try {
+    
     savedTrip = await createTrip.save();
+    
     if (!savedTrip) {
       return res.status(404).send({
         msg: 'cannot save trip'

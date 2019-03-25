@@ -35,7 +35,6 @@ let joiConfigTrip=function(reqBody)
     // ["from", "to","cost","departureTime","arivalTime","driver",
     // "passengers","rating","car"]
     const joiSchema=Joi.object().keys({
-        name:Joi.string().required(),
         imageUrl:Joi.string(),
         from:Joi.required(),
         to:Joi.required(),
