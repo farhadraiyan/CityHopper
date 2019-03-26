@@ -135,7 +135,6 @@ exports.login = (req, res) => {
 
         if (user) {
             //if user found 
-            console.log(user)
             token = user.generateJwt();
             res.status(200);
             res.json({
@@ -161,7 +160,6 @@ exports.find = async function (req, res) {
             error: error.message
         })
     }
-
 }
 
 
@@ -213,13 +211,13 @@ exports.updateEmail = async function(req, res){
     var nUser = new User();
     nUser.email = req.body.email;
     nUser.confirmed = true;
-    // nUser.tempToken = nUser.email_generateJwt();
+   // nUser.tempToken = nUser.email_generateJwt();
     var user = {
         email: nUser.email,
         confirmed: nUser.confirmed,
-        // tempToken: nUser.tempToken
+      //  tempToken: nUser.tempToken
     }
-   // const url = `http://localhost:3000/user/confirmation/${nUser.tempToken}`;
+    const url = `http://localhost:3000/user/confirmation/${nUser.tempToken}`;
     try{ 
     await User.updateOne({_id:req.body.userId},user)
         
@@ -245,6 +243,21 @@ exports.updateEmail = async function(req, res){
         })
     }
 
+}
+
+exports.getCurrPass = async function(req, res){
+    var user = new User()
+    //user.hash = user.validPassword(req.body.password, req.params.salt)
+    User.findById({_id: req.body.userId}).then(
+        res => {
+            user.salt = res.salt;
+            user.hash = user.validPassword(req.body.password, user.salt);
+            
+            console.log(user.hash);
+
+            
+        }
+    )
 }
 
 

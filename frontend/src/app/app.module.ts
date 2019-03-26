@@ -30,6 +30,7 @@ import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-v
 import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component';
 import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-vehicle-updates/settings-vehicle-updates.component';
 import { SettingsSecurityComponent } from './body/user/settings/settings-security/settings-security.component';
+import { SettingsChangePasswordComponent } from './body/user/settings/settings-change-password/settings-change-password.component';
 
 // const appRoutes: Routes = [
 //   {
@@ -68,7 +69,8 @@ import { SettingsSecurityComponent } from './body/user/settings/settings-securit
     SettingsVehicleRoutingComponent,
     ViewTripsComponent,
     SettingsVehicleUpdatesComponent,
-    SettingsSecurityComponent
+    SettingsSecurityComponent,
+    SettingsChangePasswordComponent
 
   ],
   exports: [ RouterModule ],

@@ -18,7 +18,8 @@ router.delete('/delete/:id', user.deleteOne);
 router.put('/edit', user.editOne);
 router.post('/login', user.login);
 
-router.put('/editemail', user.updateEmail)
+router.put('/editemail', user.updateEmail);
+router.get('/updatepass', user.getCurrPass);
 
 router.get('/confirmation/:token', user.confirmation);
 router.post('/upload', upload.single('image'), user.uploadProfilePicture);

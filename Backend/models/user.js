@@ -91,20 +91,20 @@ const userSchema = mongoose.Schema({
 // Setting Salt and hash for user password
 userSchema.methods.setPassword = function (password) {
     this.salt = crypto.randomBytes(16).toString('hex');
-    console.log(this.salt);
     // var buffer = new Buffer(this.salt, 'binary')
     // console.log(buffer);
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
-    console.log(this.hash);
     return this.hash
 };
 
 // Varifying User Password
-userSchema.methods.validPassword = function (password) {
-    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
-    console.log(this.hash === hash) // Should return true
+userSchema.methods.validPassword = function (password, sal) {
+    sal = this.salt
+    var hash = crypto.pbkdf2Sync(password, sal, 1000, 64, 'sha512').toString('hex');
+    console.log(hash)
+   // console.log(this.hash === hash) // Should return true
     return this.hash === hash
-}
+};
 
 //------Generate authentication token
 
