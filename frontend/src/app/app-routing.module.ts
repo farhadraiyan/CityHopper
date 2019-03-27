@@ -14,6 +14,7 @@ import { SettingsPaymentComponent } from './body/user/settings/settings-payment/
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
 import {MessageComponent} from './body/user/message/message/message.component';
 import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component';
+import { ViewSpecificTripComponent } from './body/trip/view-specific-trip/view-specific-trip.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,9 @@ const routes: Routes = [
   {
     path: 'viewTrips',
     component: ViewTripsComponent
+  },{
+    path: 'viewSpecificTrip',
+    component: ViewSpecificTripComponent
   },
   {
     path: '',

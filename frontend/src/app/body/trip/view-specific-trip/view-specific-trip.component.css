@@ -1,0 +1,10 @@
+.bg-img-3:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 65%;
+  left: 0;
+  right: 0;
+  z-index: -2;
+  background-color: lightblue;
+}

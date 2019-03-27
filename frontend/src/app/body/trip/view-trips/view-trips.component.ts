@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild, DoCheck} from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild, DoCheck, ɵbypassSanitizationTrustStyle} from '@angular/core';
 import { TripService } from '../../../data-service/trip.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl } from '@angular/forms';
@@ -22,6 +22,14 @@ export class ViewTripsComponent implements OnInit {
     config.max = 5
     config.readonly = true;
     }
+    title: string = 'Google map';
+    searchControl: FormControl;
+    myplace: String;
+    myDestination:String;
+    @ViewChild("from")
+    fromSearch: ElementRef;
+    @ViewChild("to")
+    toSearch: ElementRef;
 
     trips:any
     mobile: Boolean;
@@ -29,6 +37,7 @@ export class ViewTripsComponent implements OnInit {
     time:any;
     search:any = [];
     searchValidation:Boolean;
+    message:any;
 
 
 
@@ -36,13 +45,12 @@ export class ViewTripsComponent implements OnInit {
     await this.addTripService.getAllTrips().toPromise().then((res) =>{
       this.trips = res
       for (let i in this.trips){
-        this.time = this.convertTime(this.trips[i].departureTime)
+        this.time = this.convertTime(this.trips[i].departureTime,false)
         this.trips[i].departureTime =  this.time
       }
     }).catch((err) => {
      console.log(err)
    });
-
   }
   ngOnInit() {
     if (window.screen.width < 800) {
@@ -52,14 +60,16 @@ export class ViewTripsComponent implements OnInit {
       this.mobile = false;
     }
     this.rating= 3
-
+    this.loadautocompleteFrom();
+    this.loadautocompleteTo();
   }
+
 
   viewTrip(id){
-    console.log(id)
+    this.router.navigate(['/viewSpecificTrip'],{queryParams: {'id': id}});
   }
 
-  convertTime(isoTime) {
+  convertTime(isoTime,validation) {
 
     var timeStr = isoTime;
     var date = new Date(timeStr);
@@ -81,21 +91,75 @@ export class ViewTripsComponent implements OnInit {
       hours -= 12;
       ampm = 'pm';
     }
-    var dateStr = months[month-1]+" "+day+", "+year+" - "+hours+":"+minutes+ ampm;
+    if(validation ==  true){
+      day =day+1
+      var dateStr = months[month-1]+" "+ day +", "+ year;
+    }else{
+      var dateStr = months[month-1]+" "+day+", "+year+" - "+hours+":"+minutes+ ampm;
+    }
     return dateStr
   }
 
-  onSubmit(from,to){
-
+  onSubmit(from,to,date){
+    var validation = false;
+    var dates = this.convertTime(date.value,true)
     for (let i in this.trips){
-      if(this.trips[i].from.name == from.value && this.trips[i].to.name == to.value  ){
+      var newD = this.trips[i].departureTime.substring(0, 14);
+      if(this.trips[i].from.name == this.myplace && this.trips[i].to.name == this.myDestination || newD == dates){
+        if(!this.search.includes(this.trips[i])){
           this.search.push(this.trips[i])
-          console.log(this.trips[i].from.name)
-          console.log(this.search)
           this.searchValidation = true;
+          validation = true;
+        };
+        validation = true;
       }
+    }
+    if(validation == false){
+      this.message =  "trip not founded!"
     }
   }
 
+
+
+  private loadautocompleteFrom() {
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.fromSearch.nativeElement, {
+        types:  ['(cities)']
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          this.myplace=place.address_components[0].long_name
+        });
+      });
+    });
+  }
+  private loadautocompleteTo() {
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.toSearch.nativeElement, {
+        types:['(cities)']
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          this.myDestination = place.address_components[0].long_name
+        });
+      });
+    });
+  }
 
 }

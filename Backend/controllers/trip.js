@@ -217,11 +217,23 @@ let getTrips = async function(req,res){
   }
 }
 
+let getOneTrip = async function(req,res){
+  try{
+      let getTrip = await TRIP.findOne({_id: req.params.id})
+      res.status(200).send(getTrip)
+  }catch(error){
+      res.status(400).send({
+          message:"no data",
+          error:error.message
+      })
+  }
+}
+
 module.exports = {
   // findAllTrip,
   createTrip,
   createTripRequest,
   getTripRequestsForTrip,
   getTripRequestForRider,
-  getTrips
+  getTrips,getOneTrip
 }
