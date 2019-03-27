@@ -1,9 +1,12 @@
-
+#d{
+  width: 0px !important;
+  padding: 0px;
+}
 
 button {
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 12px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -20,3 +23,11 @@ input{
   border:none;
   background-color:#EBEBFF
 }
+
+#date{
+  padding: 20px 32px;
+  width:20px !important
+}
+
+
+

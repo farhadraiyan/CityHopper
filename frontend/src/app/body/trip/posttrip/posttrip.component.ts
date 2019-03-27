@@ -29,6 +29,7 @@ export class PosttripComponent implements OnInit, DoCheck {
   user:any
   tripName:any
 
+  //date and time picker
   time = {hour: 13, minute: 30};
   meridian = true;
   toggleMeridian() {
@@ -75,7 +76,7 @@ export class PosttripComponent implements OnInit, DoCheck {
     this.searchControl = new FormControl();
 
     //set current position
-    this.setCurrentPosition();
+    this.addTripService.setCurrentPosition(this.latitude,this.longitude,this.zoom);
     this.loadautocompleteFrom();
     this.loadautocompleteTo();
 
@@ -85,8 +86,8 @@ export class PosttripComponent implements OnInit, DoCheck {
   onSubmit(date,seats,luggage,price){
     var newDate = date.value +" "+ this.time['hour']+ ":" + this.time['minute'] +":00";
     var cost = +price.value
-    this.trip = {name:this.tripName, from:this.myplace, to:this.myDestination, cost:cost, departureTime:newDate,
-       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user['_id'], car:this.user['car'],rating:this.user['rating']   }
+    this.trip = {from:this.myplace, to:this.myDestination, cost:cost, departureTime:newDate,
+       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user._id, car:this.user['car'] }
       console.log(this.trip)
 
       this.addTripService.addTrip(this.trip).subscribe(data=>{
@@ -96,16 +97,6 @@ export class PosttripComponent implements OnInit, DoCheck {
 
     }
 
-
-  private setCurrentPosition() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 12;
-      });
-    }
-  }
   private loadautocompleteFrom() {
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -143,6 +134,7 @@ export class PosttripComponent implements OnInit, DoCheck {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
+
         });
       });
     });

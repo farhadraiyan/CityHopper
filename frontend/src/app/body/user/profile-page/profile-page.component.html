@@ -2,7 +2,7 @@
   <div class="row bg-info mr-3 m-3">
     <div class="col-sm-3 p-3 ">
       <img *ngIf="user.imageUrl" [src]="user.imageUrl" (click)="openFileUpload()"
-        class="profile rounded-circle mx-auto d-block " alt="driver" width="150" heigth="150">
+        class="profile rounded-circle mx-auto d-block " alt="driver" width="150" height="150">
       <img *ngIf="!user.imageUrl" src="../../../assets/profile.jpg" (click)="openFileUpload()"
         class="profile rounded-circle mx-auto d-block " alt="driver" width="150" heigth="150">
       <div style="display: none">

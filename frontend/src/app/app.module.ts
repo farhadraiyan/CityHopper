@@ -31,6 +31,9 @@ import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component'
 import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-vehicle-updates/settings-vehicle-updates.component';
 import { SettingsSecurityComponent } from './body/user/settings/settings-security/settings-security.component';
 import { SettingsChangePasswordComponent } from './body/user/settings/settings-change-password/settings-change-password.component';
+import { FilterPipe} from '../filter';
+import { ViewSpecificTripComponent } from './body/trip/view-specific-trip/view-specific-trip.component'
+
 
 // const appRoutes: Routes = [
 //   {
@@ -70,7 +73,11 @@ import { SettingsChangePasswordComponent } from './body/user/settings/settings-c
     ViewTripsComponent,
     SettingsVehicleUpdatesComponent,
     SettingsSecurityComponent,
-    SettingsChangePasswordComponent
+    SettingsChangePasswordComponent,
+    ViewTripsComponent,
+    FilterPipe,
+    ViewSpecificTripComponent
+
 
   ],
   exports: [ RouterModule ],

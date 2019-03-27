@@ -22,10 +22,6 @@ const TripRequestSchema = mongoose.Schema({
   }
 })
 const Trip = mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
   from: {
     type: mongoose.Schema.Types.Mixed,
     ref: 'place',
@@ -57,11 +53,11 @@ const Trip = mongoose.Schema({
     required: true
   },
   driver: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.Mixed,
     ref: 'user'
   },
   passengers: [{
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.Mixed,
     ref: 'user'
   }],
   rating: {
