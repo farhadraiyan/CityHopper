@@ -40,4 +40,12 @@ export class UserDataService {
 
   }
 
+  updatePassword(data):Observable<any>{
+    return this.http.put(`http://localhost:3000/user/updatepass`, data)
+    .pipe(map(res => {
+      res => res.json();
+      return res;
+    }))
+  }
+
 }

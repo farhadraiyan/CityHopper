@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { CarService } from 'src/app/data-service/car.service';
 import { Car } from 'src/app/models/Car';
-
+import { Headers, Http } from '@angular/http';
 @Component({
   selector: 'app-settings-vehicle-updates',
   templateUrl: './settings-vehicle-updates.component.html',
@@ -10,9 +10,9 @@ import { Car } from 'src/app/models/Car';
 })
 export class SettingsVehicleUpdatesComponent implements OnInit {
 
-  constructor(private carService: CarService ,private _router: ActivatedRoute, private router: Router) { }
+  constructor(private carService: CarService ,private _router: ActivatedRoute, private router: Router, private http: Http) { }
 
-  carData = new Car();
+  carData: any;
   private carId: String;
 
   ngOnInit() {
@@ -28,9 +28,26 @@ export class SettingsVehicleUpdatesComponent implements OnInit {
       }
     )
   }
+
+  async onFileChanged(event) {
+    console.log(event)
+    const file = event.target.files[0]
+    const uploadData = new FormData();
+    uploadData.append('image', file, file.name);
+    uploadData.append('carId',this.carData._id)
+    let self = this
+    await this.http.post('http://localhost:3000/car/uploadImage', uploadData).toPromise().then((res) => {
+      console.log(res['_body'])
+      let x = JSON.parse(res['_body'])
+      this.carData = x
+
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
   
   chooseImages(){
-    var input = document.getElementById("uploadImg");
+    var input = document.getElementById("image");
     input.click()
   }
 

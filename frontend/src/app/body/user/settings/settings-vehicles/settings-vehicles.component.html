@@ -31,7 +31,7 @@
               <div class="veh-image img-responsive mt-4" (click)="chooseImages()">
                   <label for="avatar">Add a picture of your car</label>
                   <div style="display: none">
-                    <input type="file" id="uploadImg" name="image" accept="image/png, image/jpeg">
+                    <input type="file" id="image" name="image" (change)="onFileChanged($event)" accept="image/png, image/jpeg">
                     <!-- <div [hidden]="image.valid || image.pristine" class="alert alert-danger">Car Image is required</div> -->
                   </div>
               </div>

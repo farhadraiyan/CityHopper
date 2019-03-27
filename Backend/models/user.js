@@ -89,18 +89,24 @@ const userSchema = mongoose.Schema({
 });
 
 // Setting Salt and hash for user password
-userSchema.methods.setPassword = function (password) {
+userSchema.methods.setPassword = async function (password) {
     this.salt = crypto.randomBytes(16).toString('hex');
     // var buffer = new Buffer(this.salt, 'binary')
     // console.log(buffer);
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
-    return this.hash
+    return this.save()
 };
 
+userSchema.methods.addPassword = function(password, slt){
+    slt = this.salt;
+    var hash = crypto.pbkdf2Sync(password, slt, 1000, 64, 'sha512').toString('hex');
+    console.log(hash)
+    return hash;
+}
+
 // Varifying User Password
-userSchema.methods.validPassword = function (password, sal) {
-    sal = this.salt
-    var hash = crypto.pbkdf2Sync(password, sal, 1000, 64, 'sha512').toString('hex');
+userSchema.methods.validPassword = function (password) {
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
     console.log(hash)
    // console.log(this.hash === hash) // Should return true
     return this.hash === hash

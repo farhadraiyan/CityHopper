@@ -19,7 +19,7 @@ router.put('/edit', user.editOne);
 router.post('/login', user.login);
 
 router.put('/editemail', user.updateEmail);
-router.get('/updatepass', user.getCurrPass);
+router.put('/updatepass', user.updatePassword);
 
 router.get('/confirmation/:token', user.confirmation);
 router.post('/upload', upload.single('image'), user.uploadProfilePicture);

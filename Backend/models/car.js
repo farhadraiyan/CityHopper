@@ -40,6 +40,10 @@ const carSchema = mongoose.Schema({
     luggageSize:{
         type: String,
         required: true
+    },
+    imageURL: {
+        type: String,
+        required: true
     }
 })
 

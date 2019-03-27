@@ -28,12 +28,10 @@
                   </div>
             </div>
         </div>
-        <div class="col-sm-8 col-md-4">
-            <div class="veh-image img-responsive mt-4" (click)="chooseImages()">
-                <label for="avatar">Add a picture of your car</label>
-                <div style="display: none">
-                  <input type="file" id="uploadImg" name="image" accept="image/png, image/jpeg">
-                </div>
+        <div class="col-sm-8 col-md-4" (click)="chooseImages()" >
+            <input (change)="onFileChanged($event)" style="visibility: hidden" type="file" name="image" id="image">
+            <div class="veh-image img-responsive mt-4">
+                <img [src]="carData.imageURL" height="200px" width="350px" alt="">
             </div>
         </div>
         

@@ -219,23 +219,23 @@ exports.updateEmail = async function(req, res){
     }
     const url = `http://localhost:3000/user/confirmation/${nUser.tempToken}`;
     try{ 
-    await User.updateOne({_id:req.body.userId},user)
-        
-        res.status(200).send({
-            message: user.email + "Add",
-            user: user.confirmed
-        })
-        // await transporter.sendMail({
-        //     to: user.email,
-        //     subject: "Confirmation Email",
-        //     html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
-        // })
-        // console.log('message Send!')
-    } catch(error){
-        res.json({
-            message: error
-        })
-    } 
+        await User.updateOne({_id:req.body.userId},user)
+            
+            res.status(200).send({
+                message: user.email + "Add",
+                user: user.confirmed
+            })
+            // await transporter.sendMail({
+            //     to: user.email,
+            //     subject: "Confirmation Email",
+            //     html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
+            // })
+            // console.log('message Send!')
+        } catch(error){
+            res.json({
+                message: error
+            })
+        } 
     } catch(err){
         res.status(404).send({
             message: "Error updating email",
@@ -245,22 +245,51 @@ exports.updateEmail = async function(req, res){
 
 }
 
-exports.getCurrPass = async function(req, res){
-    var user = new User()
-    //user.hash = user.validPassword(req.body.password, req.params.salt)
-    User.findById({_id: req.body.userId}).then(
-        res => {
-            user.salt = res.salt;
-            user.hash = user.validPassword(req.body.password, user.salt);
-            
-            console.log(user.hash);
-
-            
+exports.updatePassword = async function(req, res){
+    let user
+    try {
+        user = await User.findById(req.body.userId)
+        if (!user) {
+            return res.status(404).send({
+            message: 'User not found'
+            })
         }
-    )
+    } catch (error) {
+        res.status(400).send({
+            error: error.message
+        })
+    }
+
+    var reqhash = user.addPassword(req.body.password, user.salt);
+    if (user.hash !== reqhash) {
+        return res.status(403).send({
+            error: "Invalid Password"
+        })
+    }
+
+    let newPassword = req.body.newPassword
+    let savedUser
+    try {
+        savedUser = await user.setPassword(newPassword)
+        if (!savedUser) {
+            return res.status(400).send({
+                message: "Error occured"
+            })
+        }
+    } catch (error) {
+        return res.status(400).send({
+            message: "Error occured",
+            error: error.message
+        })
+    }
+
+    res.status(200).send({
+        message: "Password Updated SuccessFully",
+        user: savedUser
+    })
+    
+
 }
-
-
 
 exports.uploadProfilePicture = async function (req, res) {
     let errors = {};

@@ -4,6 +4,7 @@ import { NgForm, NgModel } from '@angular/forms';
 import { AuthenticationService } from 'src/app/data-service/authentication.service';
 import { Router } from '@angular/router';
 import { Car } from 'src/app/models/Car';
+import { Headers, Http } from '@angular/http';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Car } from 'src/app/models/Car';
 export class SettingsVehiclesComponent implements OnInit {
 
   constructor(private carData: CarService, private authService:AuthenticationService, 
-    private _router: Router) { }
+    private _router: Router,private http: Http) { }
 
   car = new Car();
   id: any;
@@ -23,24 +24,35 @@ export class SettingsVehiclesComponent implements OnInit {
   ngOnInit() {
     this.resetForm();
   }
+  
+  imageFormData: FormData;
 
+  async onFileChanged(event) {
+    console.log(event)
+    const file = event.target.files[0]
+    const uploadData = new FormData();
+    uploadData.append('image', file, file.name);
+    this.imageFormData = uploadData
+  }
 
-  addCar(){
+  async addCar(){
     let data = this.car;
+    let formData = this.imageFormData
+    console.log(formData)
     data.userId = this.authService.getUserDetails()['_id']
-    this.carData.addCar(this.car).subscribe(
-      res =>{
-        this._router.navigate(['/settings/vehicles-routing']);
-      },
-      (err)=>{
-        console.log(err)
-      }
-    )
+    for (let key in data) {
+      formData.append(key, data[key])
+    }
+    await this.http.post('http://localhost:3000/car/register', formData).toPromise().then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err)
+    })
 
   }
 
   chooseImages(){
-    var input = document.getElementById("uploadImg");
+    var input = document.getElementById("image");
     input.click()
   }
 

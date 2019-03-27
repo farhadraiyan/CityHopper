@@ -1,5 +1,7 @@
 var User = require('../models/user');
 const Car = require('../models/car')
+var Image = require('../models/image')
+const fs = require('fs')
 const _ = require('lodash')
 
 let findAll = async function (req, res) {
@@ -91,6 +93,7 @@ let findCarByUserId = async function (req, res) {
 }
 
 let createCar = async function (req, res) {
+    console.log(req.file, req.body)
     let errors = {}
     let reqFields = ['userId', 'make', 'model', 'year', 'color', 'type',
         'seatCapacity', 'licencePlateNum', 'luggageCapacity', 'luggageSize']
@@ -107,7 +110,45 @@ let createCar = async function (req, res) {
             errors: errors,
         })
     }
+    let image
+    try {
+        image = await new Image({
+            type: req.file.mimetype,
+            data: fs.readFileSync(req.file.path),
+            userId: req.body.userId
+        })
+        if (!image) {
+            return res.status(400).send({
+                error: "Error updloading car image"
+            })
+        }
+    } catch (error) {
+        return res.status(400).send({
+            message: "error creating new image",
+            error: error.message
+        })
+    }
+    let savedImage
+    try {
+        savedImage = await image.save()
+        if (!savedImage) {
+            return res.status(400).send({
+                message: "error saving new image",
+                error: "try again later please"
+            })
+        }
+        fs.unlink(req.file.path, err => {
+            if (err) throw err;
+        })
+    } catch (error) {
+        return res.status(400).send({
+            message: "error saving new image",
+            error: error.message
+        })
+    }
+    let imageURL = `http://localhost:3000/user/profile/picture/${savedImage._id}`
     let data = _.pick(req.body, reqFields)
+    data.imageURL = imageURL
     let createdCar
     // try catch to catch error creating a car
     try {
@@ -142,6 +183,86 @@ let createCar = async function (req, res) {
         })
     }
 
+}
+
+let uploadImage = async function(req,res) {
+    let errors = {};
+    let reqFields = ['carId'];
+    reqFields.forEach(function (field) {
+        if (!req.body[field] || req.body[field] === '') {
+            errors[field] = `${field} is required`;
+        };
+    });
+
+    if (Object.keys(errors).length > 1) {
+        return res.status(400).send({
+            message: "Error upload image",
+            error: errors
+        })
+    }
+
+    let carId = req.body.carId
+    let car
+    try {
+        car = await Car.findById(carId)
+        if (!car) {
+            return res.status(400).send({
+                message: "error uploading image, try again later"
+            })
+        }
+    } catch (error) {
+        return res.status(400).send({
+            message: "error uploading image",
+            error: error.message
+        })
+    }
+    try {
+        image = await new Image({
+            type: req.file.mimetype,
+            data: fs.readFileSync(req.file.path),
+            userId: car.userId
+        })
+    } catch (error) {
+        return res.status(400).send({
+            message: "error creating new image",
+            error: error.message
+        })
+    }
+    let savedImage
+    try {
+        savedImage = await image.save()
+        if (!savedImage) {
+            return res.status(400).send({
+                message: "error saving new image",
+                error: "try again later please"
+            })
+        }
+        fs.unlink(req.file.path, err => {
+            if (err) throw err;
+        })
+    } catch (error) {
+        return res.status(400).send({
+            message: "error saving new image",
+            error: error.message
+        })
+    }
+    car.imageURL = `http://localhost:3000/user/profile/picture/${savedImage._id}`
+    let savedCar
+    try {
+        savedCar = await car.save()
+        if (!savedCar) {
+            return res.status(400).send({
+                error: "ERORORO"
+            })
+        }
+
+    } catch (error) {
+        return res.status(400).send({
+            message: "Image is saved but error assigning it to user",
+            error: error.message
+        })
+    }
+    return res.status(200).send(savedCar)
 }
 
 let updateCar = async function (req, res) {
@@ -233,5 +354,6 @@ module.exports = {
     findCarByUserId,
     createCar,
     updateCar,
-    deleteCar
+    deleteCar,
+    uploadImage
 }
