@@ -14,9 +14,9 @@
           <i *ngIf="mobile"class="fas fa-chevron-circle-down m-3 fa-2x"></i>
             <input type="text" class="rounded"  placeholder="&#xf5a0; To" autocorrect="off" autocapitalize="off" spellcheck="off"  name="to"  #to [formControl]="searchControl">
             <input id="d" type="text" class="rounded" ngModel #date name="date"  #date="ngModel" ngbDatepicker #d="ngbDatepicker" >
-             
+
             <button class="rounded m-1 p-2 " (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt text-white"></i></button>
-           
+
           <h5><button type="submit" class="rounded m-3 p-2 ">Let's go!</button></h5>
         </form>
       </div>
@@ -53,7 +53,7 @@
   </div>
 </div>
 </div>
-</ng-container> 
+</ng-container>
 
 <ng-container *ngIf="searchValidation">
 <div *ngFor="let data of search | filter : filterargs" class="rounded m-5 p-2 bg-light">
@@ -77,7 +77,7 @@
         </div>
         <div class="col-sm col-md-2 col-lg-2  border-right text-center pt-4">
             {{data.driver.firstName}} {{data.driver.lastName}} <br>
-            <ngb-rating [rate]=rating></ngb-rating>
+            <ngb-rating [rate]=ratings></ngb-rating>
         </div>
            <div class="col-sm col-md-2 col-lg-2 text-center pt-4 ">
             $CAD{{data.cost}}
@@ -86,5 +86,5 @@
   </div>
 </div>
 </div>
-</ng-container> 
+</ng-container>
 

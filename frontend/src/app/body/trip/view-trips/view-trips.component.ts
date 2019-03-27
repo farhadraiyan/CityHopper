@@ -44,9 +44,11 @@ export class ViewTripsComponent implements OnInit {
   async ngAfterContentInit() {
     await this.addTripService.getAllTrips().toPromise().then((res) =>{
       this.trips = res
+      
       for (let i in this.trips){
         this.time = this.convertTime(this.trips[i].departureTime,false)
         this.trips[i].departureTime =  this.time
+        console.log(this.trips)
       }
     }).catch((err) => {
      console.log(err)
@@ -63,6 +65,7 @@ export class ViewTripsComponent implements OnInit {
     this.loadautocompleteFrom();
     this.loadautocompleteTo();
   }
+
 
 
   viewTrip(id){
