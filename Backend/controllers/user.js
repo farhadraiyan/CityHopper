@@ -248,42 +248,6 @@ exports.editOne = async function (req, res) {
 }
 
 exports.updateEmail = async function (req, res) {
-  // try {
-  //   var nUser = new User();
-  //   nUser.email = req.body.email;
-  //   nUser.confirmed = false;
-  //   nUser.tempToken = await nUser.email_generateJwt();
-  //   var user = {
-  //     email: nUser.email,
-  //     confirmed: nUser.confirmed,
-  //     tempToken: nUser.tempToken
-  //   }
-  //   const url = `http://localhost:3000/user/confirmation/${user.tempToken}`;
-  //   try {
-  //     await User.updateOne({ _id: req.body.userId }, user)
-
-  //     await transporter.sendMail({
-  //         to: user.email,
-  //         subject: "Confirmation Email",
-  //         html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
-  //     })
-  //     console.log('message Send!')
-  //     res.status(200).send({
-  //       message: user.email + "Add",
-  //       user: user.confirmed
-  //     })
-  //   } catch (error) {
-  //     res.json({
-  //       message: error
-  //     })
-  //   }
-  // } catch (err) {
-  //   res.status(404).send({
-  //     message: "Error updating email",
-  //     err: err
-  //   })
-  // }
-
   let user
   try {
     user = await User.findById(req.body.userId)
