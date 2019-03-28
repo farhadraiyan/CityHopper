@@ -19,6 +19,12 @@ import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-v
 import { SettingsSecurityComponent } from './body/user/settings/settings-security/settings-security.component';
 import { SettingsChangePasswordComponent } from './body/user/settings/settings-change-password/settings-change-password.component';
 import { ViewSpecificTripComponent } from './body/trip/view-specific-trip/view-specific-trip.component';
+import { TripParentComponent } from './body/trip/trip-parent/trip-parent.component';
+import { TripRequestComponent } from './body/trip/trip-parent/trip-request/trip-request.component';
+import { TripArchiveComponent } from './body/trip/trip-parent/trip-archive/trip-archive.component';
+import { TripUpcomingComponent } from './body/trip/trip-parent/trip-upcoming/trip-upcoming.component';
+
+
 
 
 const routes: Routes = [
@@ -29,7 +35,7 @@ const routes: Routes = [
   {
     path: 'viewTrips',
     component: ViewTripsComponent
-  },{
+  }, {
     path: 'viewSpecificTrip',
     component: ViewSpecificTripComponent
   },
@@ -50,7 +56,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-   {
+  {
     path: 'profilePage',
     component: ProfilePageComponent
   },
@@ -64,10 +70,10 @@ const routes: Routes = [
     children: [{
       path: 'personaldetails',
       component: SettingsPersonalDetailsComponent
-    },{
+    }, {
       path: 'payment',
       component: SettingsPaymentComponent
-    },{
+    }, {
       path: 'vehicles-routing',
       component: SettingsVehicleRoutingComponent,
     },
@@ -87,9 +93,23 @@ const routes: Routes = [
       path: 'password-settings',
       component: SettingsChangePasswordComponent
     }]
+  },
+  {
+    path: 'trips',
+    component: TripParentComponent,
+    children: [{
+      path: 'archive',
+      component: TripArchiveComponent
+    }, {
+      path: 'requests',
+      component: TripRequestComponent
+    }, {
+      path: 'upcoming',
+      component: TripUpcomingComponent,
+    }]
   }
 
- // { path: '**', component: HomeComponent }
+  // { path: '**', component: HomeComponent }
 ];
 
 @NgModule({
