@@ -72,19 +72,19 @@ exports.register = async function (req, res) {
   }
   let jwt
   try {
-    jwt = await user.email_generateJwt()
+    jwt = await user.generateJwt()
     if (!jwt) {
       return res.status(400).send({
-        Error: "Error generating Email JWT"
+        Error: "Error generating JWT"
       })
     }
   } catch (error) {
     return res.status(400).send({
-      Error: "Error generating Email JWT",
+      Error: "Error generating JWT",
       message: error.message
     })
   }
-  user.tempToken = jwt
+  user.tempToken = await user.email_generateJwt()
   let savedUser
   try {
     savedUser = await user.setPassword(req.body.password)
@@ -124,63 +124,6 @@ exports.register = async function (req, res) {
   })
 }
 
-
-// exports.register = async (req, res) => {
-//   User.findOne({ email: req.body.email }).then(
-//     (result) => {
-//       if (result) {
-//         res.json({
-//           message: 'User already exists'
-//         })
-//       } else {
-//         // Creates an object From userSchema
-//         var newUser = new User();
-//         newUser.firstName = req.body.firstname;
-//         newUser.lastName = req.body.lastname;
-//         newUser.email = req.body.email;
-//         newUser.hash = newUser.setPassword(req.body.password);
-//         newUser.country = req.body.country;
-//         newUser.province = req.body.province;
-//         newUser.city = req.body.city;
-//         newUser.phoneNumber = req.body.number;
-//         newUser.termsCondition = req.body.terms;
-//         newUser.userType = req.body.userType;
-
-
-//         newUser.tempToken = newUser.email_generateJwt()
-
-//         const url = `http://localhost:3000/user/confirmation/${newUser.tempToken}`;
-//         console.log(newUser);
-//         User.create(newUser, async (err) => {
-//           if (err) {
-//             res.json({
-//               msg: err + " -> Add user failed"
-//             })
-//           } else {
-//             let data = _.pick(newUser, ['_id', 'firstName', 'lastName', 'email', 'country', 'province', 'city', 'phoneNumber', 'userType'])
-//             var token;
-//             token = await newUser.generateJwt();
-//             data.token = token;
-//             res.json({
-//               msg: newUser.firstName + "-> User Added",
-//               user: data
-//             })
-
-//             await transporter.sendMail({
-//               to: newUser.email,
-//               subject: "Confirmation Email",
-//               html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
-//             })
-//             console.log('message Send!')
-
-
-//           }
-//         })
-//       }
-//     }).catch(err => {
-//       console.log(err)
-//     });
-// }
 
 exports.confirmation = async function (req, res) {
   let user
@@ -305,39 +248,78 @@ exports.editOne = async function (req, res) {
 }
 
 exports.updateEmail = async function (req, res) {
-  try {
-    var nUser = new User();
-    nUser.email = req.body.email;
-    nUser.confirmed = true;
-    // nUser.tempToken = nUser.email_generateJwt();
-    var user = {
-      email: nUser.email,
-      confirmed: nUser.confirmed,
-      //  tempToken: nUser.tempToken
-    }
-    const url = `http://localhost:3000/user/confirmation/${nUser.tempToken}`;
-    try {
-      await User.updateOne({ _id: req.body.userId }, user)
+  // try {
+  //   var nUser = new User();
+  //   nUser.email = req.body.email;
+  //   nUser.confirmed = false;
+  //   nUser.tempToken = await nUser.email_generateJwt();
+  //   var user = {
+  //     email: nUser.email,
+  //     confirmed: nUser.confirmed,
+  //     tempToken: nUser.tempToken
+  //   }
+  //   const url = `http://localhost:3000/user/confirmation/${user.tempToken}`;
+  //   try {
+  //     await User.updateOne({ _id: req.body.userId }, user)
 
-      res.status(200).send({
-        message: user.email + "Add",
-        user: user.confirmed
-      })
-      // await transporter.sendMail({
-      //     to: user.email,
-      //     subject: "Confirmation Email",
-      //     html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
-      // })
-      // console.log('message Send!')
-    } catch (error) {
-      res.json({
-        message: error
+  //     await transporter.sendMail({
+  //         to: user.email,
+  //         subject: "Confirmation Email",
+  //         html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
+  //     })
+  //     console.log('message Send!')
+  //     res.status(200).send({
+  //       message: user.email + "Add",
+  //       user: user.confirmed
+  //     })
+  //   } catch (error) {
+  //     res.json({
+  //       message: error
+  //     })
+  //   }
+  // } catch (err) {
+  //   res.status(404).send({
+  //     message: "Error updating email",
+  //     err: err
+  //   })
+  // }
+
+  let user
+  try {
+    user = await User.findById(req.body.userId)
+    if(!user){
+      return req.status(400).send({
+        messaage: "user not found"
       })
     }
-  } catch (err) {
-    res.status(404).send({
-      message: "Error updating email",
-      err: err
+    user.email = req.body.email
+    user.confirmed = false
+    user.tempToken = await user.email_generateJwt();
+    const url = `http://localhost:3000/user/confirmation/${user.tempToken}`;
+
+    let savedUser;
+    try {
+      savedUser = await user.save()
+      if(!savedUser){
+        res.status(400).send({
+          messaage: "Error updaing email"
+        })
+      }
+      await transporter.sendMail({
+        to: user.email,
+        subject: "Confirmation Email",
+        html: `Please Check this email and confirm your email: <a href="${url}">${url}</a>`
+      })
+      res.status(200).send({
+        messaage: "email updated successfully"
+      })
+    } catch (error) {
+      
+    }
+  } catch (error) {
+    return req.status(400).send({
+      messaage: "error updating email, user couldn't be found",
+      error: error.messaage
     })
   }
 
