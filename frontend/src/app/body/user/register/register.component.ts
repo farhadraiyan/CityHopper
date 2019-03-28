@@ -36,15 +36,15 @@ export class RegisterComponent implements OnInit {
   resetForm(form?:NgForm){
     if(form != null){
       form.reset();
-    this.user.firstname = "";
-    this.user.lastname = "";
+    this.user.firstName = "";
+    this.user.lastName = "";
     this.user.email = "";
     this.user.password = "";
     this.user.country = "";
     this.user.province = "";
     this.user.city = "";
-    this.user.phone = 0;
-    this.user.terms= false;
+    this.user.phoneNumber = 0;
+    this.user.termsConditions= false;
     }
 
   }

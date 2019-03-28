@@ -56,7 +56,7 @@ const userSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    termsCondition: {
+    termsConditions: {
         type: Boolean,
         required: true
     },
@@ -97,7 +97,7 @@ userSchema.methods.setPassword = async function (password) {
     return this.save()
 };
 
-userSchema.methods.addPassword = function(password, slt){
+userSchema.methods.addPassword = function (password, slt) {
     slt = this.salt;
     var hash = crypto.pbkdf2Sync(password, slt, 1000, 64, 'sha512').toString('hex');
     console.log(hash)
@@ -108,7 +108,7 @@ userSchema.methods.addPassword = function(password, slt){
 userSchema.methods.validPassword = function (password) {
     var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
     console.log(hash)
-   // console.log(this.hash === hash) // Should return true
+    // console.log(this.hash === hash) // Should return true
     return this.hash === hash
 };
 
@@ -129,11 +129,11 @@ userSchema.methods.generateJwt = function () {
     }, privateKey)
 }
 
-userSchema.methods.email_generateJwt = function () {
+userSchema.methods.email_generateJwt = async function () {
     var expiry = new Date()
     expiry.setDate(expiry.getDate() + 7);
 
-    return jwt.sign({
+    return await jwt.sign({
         _id: this._id,
         firstName: this.firstName,
         lastName: this.lastName,

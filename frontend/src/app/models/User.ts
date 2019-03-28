@@ -1,12 +1,12 @@
 export class User {
     userId?: String;
-    firstname: String;
-    lastname: String;
+    firstName: String;
+    lastName: String;
     email: String;
     password: String;
+    phoneNumber: Number;
     country: String;
     province: String;
     city: String;
-    phone: Number;
-    terms: Boolean;
+    termsConditions: Boolean;
 }
