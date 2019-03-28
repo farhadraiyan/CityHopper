@@ -32,7 +32,10 @@ import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-v
 import { SettingsSecurityComponent } from './body/user/settings/settings-security/settings-security.component';
 import { SettingsChangePasswordComponent } from './body/user/settings/settings-change-password/settings-change-password.component';
 import { FilterPipe} from '../filter';
-import { ViewSpecificTripComponent } from './body/trip/view-specific-trip/view-specific-trip.component'
+import { ViewSpecificTripComponent } from './body/trip/view-specific-trip/view-specific-trip.component';
+import { TripArchiveComponent } from './body/trip/trip-parent/trip-archive/trip-archive.component';
+import { TripRequestComponent } from './body/trip/trip-parent/trip-request/trip-request.component';
+import { TripUpcomingComponent } from './body/trip/trip-parent/trip-upcoming/trip-upcoming.component'
 
 
 // const appRoutes: Routes = [
@@ -76,7 +79,10 @@ import { ViewSpecificTripComponent } from './body/trip/view-specific-trip/view-s
     SettingsChangePasswordComponent,
     ViewTripsComponent,
     FilterPipe,
-    ViewSpecificTripComponent
+    ViewSpecificTripComponent,
+    TripArchiveComponent,
+    TripRequestComponent,
+    TripUpcomingComponent
 
 
   ],

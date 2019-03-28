@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TripDriverTripsComponent } from './trip-driver-trips.component';
+import { TripUpcomingComponent } from './trip-upcoming.component';
 
-describe('TripDriverTripsComponent', () => {
-  let component: TripDriverTripsComponent;
-  let fixture: ComponentFixture<TripDriverTripsComponent>;
+describe('TripUpcomingComponent', () => {
+  let component: TripUpcomingComponent;
+  let fixture: ComponentFixture<TripUpcomingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TripDriverTripsComponent ]
+      declarations: [ TripUpcomingComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TripDriverTripsComponent);
+    fixture = TestBed.createComponent(TripUpcomingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
