@@ -18,6 +18,8 @@ exports.findAll = (req, res) => {
     console.log(err)
   })
 }
+
+
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
