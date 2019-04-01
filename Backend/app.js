@@ -4,7 +4,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport = require('passport')
 const mongoose = require('mongoose')
-const cors = require('cors')
+const cors = require('cors');
+
 var app = express();
 //the cor has to be use before the route
 app.use(cors());
@@ -22,7 +23,8 @@ var usersRoutes = require('./routes/users');
 var carRoutes = require('./routes/car');
 let placeRoutes = require('./routes/place');
 let tripRoutes = require("./routes/trip");
-let messageRoutes = require('./routes/message')
+let messageRoutes = require('./routes/message');
+let paymentRoutes = require('./routes/payment');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -36,7 +38,9 @@ app.use(passport.initialize());
 app.use('/user', usersRoutes);
 app.use('/car', carRoutes);
 app.use('/place', placeRoutes);
-app.use('/trip', tripRoutes)
-app.use('/message', messageRoutes)
+app.use('/trip', tripRoutes);
+app.use('/message', messageRoutes);
+app.use('/payment', paymentRoutes);
+
 
 module.exports = app;
