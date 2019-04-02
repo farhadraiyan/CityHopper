@@ -65,7 +65,7 @@ const Trip = mongoose.Schema({
     require: true
   },
   car: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.Mixed,
     ref: 'car'
   },
   tripRequests: [{

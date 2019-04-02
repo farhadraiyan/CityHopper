@@ -65,11 +65,11 @@
                     </div>
                   </div>
                 <div class="form-group row">
-                  <label for="car" class="col-sm-4  col-md-4 col-12 col-form-label">car</label>
+                  <label for="vehicle" class="col-sm-4  col-md-4 col-12 col-form-label">vehicle</label>
                   <div class="col-sm-8 col-md-8 col-12">
-                      <select ngModel #car name="car" class="form-control form-control-md" id="baggage">
-                         <option *ngIf="!car">{{user.cars.make}} {{user.cars.model}}</option>
-                         <option *ngIf="car">Please add your car</option>
+                      <select *ngFor="let userCar of car" ngModel #vehicle name="vehicle" class="form-control form-control-md" id="baggage">
+                         <option *ngIf="car">{{userCar.make}} {{userCar.model}}</option>
+                         <option *ngIf="!car">Please add your car</option>
                         </select>
                   </div>
                 </div>

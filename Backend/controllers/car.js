@@ -66,7 +66,7 @@ let findCarByUserId = async function (req, res) {
     // if stuff inside errors, send to user -> errors
     if (Object.keys(errors).length) {
         return res.status(400).send({
-            msg: 'error finding car',
+            msg: 'error finding car ',
             errors: errors,
         })
     }
