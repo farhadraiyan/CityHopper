@@ -1,0 +1,18 @@
+.parent {
+  display: flex;
+  flex-flow: row;
+}
+
+.grand-parent {
+  margin-left: 10%;
+}
+
+.block {
+  min-width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid rgb(196, 196, 196);
+}
