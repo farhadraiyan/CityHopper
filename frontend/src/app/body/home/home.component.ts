@@ -11,11 +11,9 @@ declare var google: any
 })
 export class HomeComponent implements OnInit {
   title: string = 'Google map';
-  latitude: number;
-  longitude: number;
   searchControl: FormControl;
-  zoom: number;
   myplace: object;
+  myDestination:object;
   @ViewChild("from")
   fromSearch: ElementRef;
   @ViewChild("to")
@@ -51,7 +49,7 @@ export class HomeComponent implements OnInit {
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.fromSearch.nativeElement, {
-        types: ["address"]
+        types:  ['(cities)']
       });
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
@@ -63,27 +61,23 @@ export class HomeComponent implements OnInit {
             return;
           }
           this.myplace={
-            name:"myLocation",
+            name:place.address_components[0].long_name,
             location:
             {
-              street:place.address_components[0].long_name+" "+place.address_components[1].long_name,
               geoLocationFrom:
               {
-                coordinates:[4,4]
+                coordinates:[place.geometry.location.lat(),place.geometry.location.lng()]
 
               },
-              city:place.address_components[2].long_name,
-              state:place.address_components[5].long_name,
-              country:place.address_components[7].long_name,
-              postalCode:place.address_components[6].long_name,
+              street:place.address_components[0].long_name+" "+place.address_components[1].long_name,
+              city:place.address_components[0].long_name,
+              state:place.address_components[2].long_name,
+              country:place.address_components[3].long_name,
+
             }
           }
           console.log(this.myplace)
-          console.log(place)
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+
         });
       });
     });
@@ -92,7 +86,7 @@ export class HomeComponent implements OnInit {
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.toSearch.nativeElement, {
-        types: ["address"]
+        types:['(cities)']
       });
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
@@ -103,35 +97,29 @@ export class HomeComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-          this.myplace={
-            name:"myLocation",
+          this.myDestination={
+            name:place.address_components[0].long_name,
             location:
             {
-              street:place.address_components[0].long_name+" "+place.address_components[1].long_name,
               geoLocationFrom:
               {
-                coordinates:[4,4]
+                coordinates:[place.geometry.location.lat(),place.geometry.location.lng()]
 
               },
-              city:place.address_components[2].long_name,
-              state:place.address_components[5].long_name,
-              country:place.address_components[7].long_name,
-              postalCode:place.address_components[6].long_name,
+              street:place.address_components[0].long_name+" "+place.address_components[1].long_name,
+              city:place.address_components[0].long_name,
+              state:place.address_components[2].long_name,
+              country:place.address_components[3].long_name,
             }
           }
-          console.log(this.myplace)
-          console.log(place)
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
         });
       });
     });
   }
-  onSubmit(){
 
-    this.router.navigate(['/profilePage'],{queryParams: {'location': [this.myplace['location']['street'],this.myplace['location']['city'],this.myplace['location']['state']]}});
+
+  onSubmit(){
+    this.router.navigate(['/viewTrips'],{queryParams: {'myPlace': this.myplace,"myDestination":this.myDestination}});
   }
 
 

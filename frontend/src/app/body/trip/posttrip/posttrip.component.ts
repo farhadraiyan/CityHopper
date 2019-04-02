@@ -28,6 +28,7 @@ export class PosttripComponent implements OnInit, DoCheck {
   trip:any
   user:any
   tripName:any
+  car:Boolean = false;
 
   //date and time picker
   time = {hour: 13, minute: 30};
@@ -51,6 +52,7 @@ export class PosttripComponent implements OnInit, DoCheck {
 
 
   async ngAfterContentInit() {
+
     this.user = this.authinticateService.getUserDetails();
     if (this.user == null) {
       alert('Please Login first!')

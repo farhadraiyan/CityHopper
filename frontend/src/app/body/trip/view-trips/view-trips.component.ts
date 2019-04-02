@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from "@agm/core";
 import {Router} from '@angular/router';
 import { config } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-trips',
@@ -18,7 +19,8 @@ export class ViewTripsComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private router:Router,
-    config: NgbRatingConfig) {
+    config: NgbRatingConfig,
+    private _route: ActivatedRoute) {
     config.max = 5
     config.readonly = true;
     }
@@ -41,19 +43,21 @@ export class ViewTripsComponent implements OnInit {
 
 
 
+
   async ngAfterContentInit() {
     await this.addTripService.getAllTrips().toPromise().then((res) =>{
       this.trips = res
-      
+
       for (let i in this.trips){
         this.time = this.convertTime(this.trips[i].departureTime,false)
         this.trips[i].departureTime =  this.time
-        console.log(this.trips)
       }
     }).catch((err) => {
      console.log(err)
    });
+
   }
+
   ngOnInit() {
     if (window.screen.width < 800) {
       this.mobile = true;
@@ -61,9 +65,22 @@ export class ViewTripsComponent implements OnInit {
     else{
       this.mobile = false;
     }
+    this._route.queryParams.subscribe(params => {
+      this.myplace = params['myPlace'],
+      this.myDestination =  params['myDestination']
+      if(this.myplace){
+        this.homeSearch(this.myplace,this.myDestination)
+      }
+     })
+
     this.rating= 3
     this.loadautocompleteFrom();
     this.loadautocompleteTo();
+  }
+
+  homeSearch(from,to){
+    this.homeSearch = from['name']
+
   }
 
 

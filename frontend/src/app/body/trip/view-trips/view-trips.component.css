@@ -28,6 +28,9 @@ input{
   padding: 20px 32px;
   width:20px !important
 }
+#trips{
+   cursor: pointer;
+}
 
 
 

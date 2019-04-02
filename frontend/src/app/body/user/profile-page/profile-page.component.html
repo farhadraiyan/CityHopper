@@ -30,10 +30,10 @@
 
 <div class="container-fluid text-center ">
   <div class="row p-1 bg-light m-3">
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 borders  ">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 borders  "routerLink="/trips/requests">
       <i class="fas fa-bell mr-2 text-warning"></i>Request
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 borders">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 borders" routerLink="/trips/archive" >
       <i class="fas fa-car mr-2 trips"></i>Trips
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1  borders">
@@ -53,7 +53,7 @@
         <div class="card-body">
           <h5 class="card-title">Find the perfect ride for you!</h5>
           <p class="card-text">Ride with City Hopper is affordable,easy and fun!</p>
-          <button type="button" class="btn btn-light  border border-secondary">Find a ride</button>
+          <button routerLink="/viewTrips" type="button" class="btn btn-light  border border-secondary">Find a ride</button>
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@
 
           <h5 class="card-title">Share your trip and earn some money!</h5>
           <p class="card-text">Make your road trip more fun,and earn a extra money.Post your trip now!</p>
-          <button type="button" routerLink="/postTrip" class="btn btn-secondary">Post a trip</button>
+          <button routerLink="/postTrip" type="button" routerLink="/postTrip" class="btn btn-secondary">Post a trip</button>
         </div>
       </div>
     </div>
