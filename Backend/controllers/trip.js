@@ -235,6 +235,41 @@ let getOneTrip = async function(req,res){
   }
 }
 
+let sendTripRequest = async function (req, res) {
+  let errors = {}
+  let reqFields = ['riderId', 'tripId' ,'seatsRequested', 'additionalDetails']
+  // add fields to error if errors getting user information
+  reqFields.forEach(function (field) {
+    if (!req.params[field] || req.params[field] === '') {
+      errors[field] = `${field.replace(/_/g, ' ')} is required`
+    }
+  })
+  if (Object.keys(errors).length) {
+    return res.status(400).send({
+      msg: 'error getting trip request',
+      errors: errors,
+    })
+  }
+  
+  let tripRequest
+  let tripRequestData = _.pick(req.body, reqFields)
+  try {
+    tripRequest = await new TripRequest(tripRequestData)
+    if (!tripRequest) {
+      return res.status(400).send({
+        message: "Error creating a trip request."
+      })
+    }
+  } catch (error) {
+    return res.status(400).send({
+      message: "Error creating a trip request.",
+      error: error.message
+    })
+  }
+
+  
+}
+
 module.exports = {
   // findAllTrip,
   createTrip,

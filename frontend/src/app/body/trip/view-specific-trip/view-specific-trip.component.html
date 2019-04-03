@@ -5,16 +5,17 @@
       <i class="fas fa-map-marker-alt m-2"></i> From: {{tripData.from.name}} <br>
       student at George Brown College
       <div class="mt-5">
-           <button class="rounded m-1 p-2 btn btn-danger border" type="button"><i class="fas fa-envelope mr-2"></i>  Send a message</button>
+        <button class="rounded m-1 p-2 btn btn-danger border" type="button"><i class="fas fa-envelope mr-2"></i> Send a
+          message</button>
       </div>
     </div>
     <div class="col-sm-4 pt-2 text-center profileInfo">
-      <img [src]="tripData.driver.imageUrl"
-        class="profile rounded-circle mx-auto d-block mt-4" alt="driver" width="150" height="150">
+      <img [src]="tripData.driver.imageUrl" class="profile rounded-circle mx-auto d-block mt-4" alt="driver" width="150"
+        height="150">
       <img *ngIf="!tripData.driver.imageUrl" src="../../../assets/profile.jpg"
         class="profile rounded-circle mx-auto d-block " alt="driver" width="150" heigth="150">
 
-        <h4 class="mt-2">CAD$ {{tripData.cost}}</h4>
+      <h4 class="mt-2">CAD$ {{tripData.cost}}</h4>
     </div>
     <div class="col-sm p-4 pt-2 profileInfo text-center">
       <div class="text-warning">
@@ -25,7 +26,8 @@
       <i class="fas fa-road fa-2x"></i> 2 Trips shared
 
       <div class="mt-5">
-           <button class="rounded m-1 p-2 btn btn-primary border " type="button"><i class="fas fa-bell mr-2"></i>Send a request</button>
+        <button class="rounded m-1 p-2 btn btn-primary border " type="button"><i class="fas fa-bell mr-2"></i>Send a
+          request</button>
       </div>
     </div>
   </div>
@@ -38,47 +40,47 @@
       <i class="fas fa-map-marker-alt m-2 fa-2x"></i> <b>From:</b> {{tripData.from.name}}
     </div>
     <div class="col-sm-6 col-md-4 col-md-4  ">
-     <i class="fas fa-map-marker-alt m-2 fa-2x"></i> <b>To:</b> {{tripData.to.name}}
+      <i class="fas fa-map-marker-alt m-2 fa-2x"></i> <b>To:</b> {{tripData.to.name}}
     </div>
     <div class="col-sm-6 col-md-4 col-md-4  ">
-    <i class="fas fa-calendar-alt m-2 fa-2x"></i> <b>Date:</b> {{tripData.departureTime}}
+      <i class="fas fa-calendar-alt m-2 fa-2x"></i> <b>Date:</b> {{tripData.departureTime}}
     </div>
   </div>
-   <div class="row m-5 p-2 border rounded text-center">
-      <div class="col-sm-6">
-      <i class="fas fa-calendar-alt m-2 fa-2x"></i> <b>Pick-up location:</b> {{tripData.from.name}}, {{tripData.from.location.state}}
-      </div>
-      <div class="col-sm-6">
+  <div class="row m-5 p-2 border rounded text-center">
+    <div class="col-sm-6">
+      <i class="fas fa-calendar-alt m-2 fa-2x"></i> <b>Pick-up location:</b> {{tripData.from.name}},
+      {{tripData.from.location.state}}
+    </div>
+    <div class="col-sm-6">
       <i class="far fa-clock m-2 fa-2x"></i> <b>Pick-up time:</b> {{time}}
-      </div>
     </div>
-     <div class="row m-5 p-2 border rounded text-center">
-        <div class="col-sm-6">
-           <i class="fas fa-map-marker-alt m-2 fa-2x"></i><b> Drop-off location:</b> {{tripData.to.name}}, {{tripData.to.location.state}}
-        </div>
-        <div class="col-sm-6">
-            <i class="fas fa-car-side fa-2x m-2"></i> <b>Seats Avaliable:</b> {{tripData.seatsAvailable}}
-        </div>
+  </div>
+  <div class="row m-5 p-2 border rounded text-center">
+    <div class="col-sm-6">
+      <i class="fas fa-map-marker-alt m-2 fa-2x"></i><b> Drop-off location:</b> {{tripData.to.name}},
+      {{tripData.to.location.state}}
     </div>
+    <div class="col-sm-6">
+      <i class="fas fa-car-side fa-2x m-2"></i> <b>Seats Avaliable:</b> {{tripData.seatsAvailable}}
+    </div>
+  </div>
 </div>
 
 <div class="container-fluid mb-2">
   <div class="row text-center">
-      <div class="col-sm-6 ">
-        {{tripData.car.make}}  {{tripData.car.model}}  {{tripData.car.year}}
-        <img [src]="tripData.car.imageURL"
-        class="profile rounded mx-auto d-block mt-4" alt="driver" width="300" height="250">
-      </div>
-      <div class="mapshow col-sm-6 mt-5 text-center">
-          <!-- this creates a google map on the page with the given lat/lng from -->
-          <!-- the component as the initial center of the map: -->
-          <agm-map id="map" [latitude]="latitude" [longitude]="longitude">
-            <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-          </agm-map>
+    <div class="col-sm-6 ">
+      {{tripData.car.make}} {{tripData.car.model}} {{tripData.car.year}}
+      <img [src]="tripData.car.imageURL" class="profile rounded mx-auto d-block mt-4" alt="driver" width="300"
+        height="250">
+    </div>
+    <div class="mapshow col-sm-6 mt-5 text-center">
+      <!-- this creates a google map on the page with the given lat/lng from -->
+      <!-- the component as the initial center of the map: -->
+      <agm-map id="map" [latitude]="latitude" [longitude]="longitude">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+      </agm-map>
 
 
-      </div>
+    </div>
   </div>
 </div>
-
-
