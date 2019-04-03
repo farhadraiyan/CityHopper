@@ -15,7 +15,7 @@ export class PasswordvalidationDirective implements Validator {
   validate(control: AbstractControl ): {[key:string]: any} | null{
     const controlToCompare = control.parent.get(this.appPasswordvalidation);
     if(controlToCompare && controlToCompare.value !== control.value){
-      return {'notEqual': true}
+      return {' notEqual': true}
     }else{
       return null
     }
