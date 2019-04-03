@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UserDataService } from '../../../data-service/user-data.service';
 import { TripService } from '../../../data-service/trip.service';
 import { CarService } from '../../../data-service/car.service';
+import { NgForm, NgModel} from '@angular/forms';
 
 // import { } from 'googlemaps';
 declare var google: any
@@ -26,10 +27,11 @@ export class PosttripComponent implements OnInit, DoCheck {
   fromSearch: ElementRef;
   @ViewChild("to")
   toSearch: ElementRef;
-  trip:any
+  trip = {}
   user:any
   tripName:any
   car:any
+  message:any
 
   //date and time picker
   time = {hour: 13, minute: 30};
@@ -95,14 +97,22 @@ export class PosttripComponent implements OnInit, DoCheck {
   }
 
   onSubmit(date,seats,luggage,price,vehicle){
-    console.log(vehicle.value)
     var newDate = date.value +" "+ this.time['hour']+ ":" + this.time['minute'] +":00";
     var cost = +price.value
+    var userCar
+    for (let value of this.car) {
+      var car = value.make +" "+ value.model
+      if(vehicle.value == car)
+      {
+        userCar = value;
+        console.log(userCar)
+      }
+    }
     this.trip = {from:this.myplace, to:this.myDestination, cost:cost, departureTime:newDate,
-       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user._id, car:this.user['car'] }
+       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user._id, car:userCar }
       this.addTripService.addTrip(this.trip).subscribe(data=>{
         data = this.trip;
-        window.alert("Trip Added!");
+        this.router.navigate(['/profilePage'])
       })
 
     }
