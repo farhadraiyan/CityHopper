@@ -67,7 +67,6 @@ export class PosttripComponent implements OnInit, DoCheck {
         if(this.user.cars){
         this.carService.getCarById(this.user['_id']).toPromise().then((res) => {
             this.car = res['vehicle']
-            console.log(this.car)
           }).catch((err) => {
           });
         }
@@ -83,7 +82,6 @@ export class PosttripComponent implements OnInit, DoCheck {
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
-    this.car = false;
 
     //create search FormControl
     this.searchControl = new FormControl();
@@ -99,21 +97,23 @@ export class PosttripComponent implements OnInit, DoCheck {
   onSubmit(date,seats,luggage,price,vehicle){
     var newDate = date.value +" "+ this.time['hour']+ ":" + this.time['minute'] +":00";
     var cost = +price.value
-    var userCar
+    var userCar = {}
     for (let value of this.car) {
       var car = value.make +" "+ value.model
       if(vehicle.value == car)
       {
         userCar = value;
-        console.log(userCar)
       }
     }
+    console.log(userCar['_id'])
     this.trip = {from:this.myplace, to:this.myDestination, cost:cost, departureTime:newDate,
-       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user._id, car:userCar }
+       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user._id, car:userCar['_id'] }
+       console.log(this.trip)
       this.addTripService.addTrip(this.trip).subscribe(data=>{
-        data = this.trip;
-        this.router.navigate(['/profilePage'])
+        console.log(data)
+        //this.router.navigate(['/profilePage'])
       })
+
 
     }
 
@@ -190,7 +190,6 @@ export class PosttripComponent implements OnInit, DoCheck {
             }
           }
           this.tripName = this.myplace['name'] +" "+this.myDestination['name']
-          console.log(this.tripName)
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();

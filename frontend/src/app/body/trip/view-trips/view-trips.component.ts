@@ -47,6 +47,7 @@ export class ViewTripsComponent implements OnInit {
   async ngAfterContentInit() {
     await this.addTripService.getAllTrips().toPromise().then((res) =>{
       this.trips = res
+      console.log(this.trips)
 
       for (let i in this.trips){
         this.time = this.convertTime(this.trips[i].departureTime,false)

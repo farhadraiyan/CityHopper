@@ -24,11 +24,10 @@ let createTrip = async function (req, res) {
     createTrip = await new TRIP(tripData)
     //this is how get access to the user and the car
     const user = await User.findById(createTrip.driver)
-    const car = await Car.findById(createTrip.car)
+    // const car = await Car.findById(createTrip.car)
      
-    createTrip.car = car
-     
-      createTrip.driver = user
+    // createTrip.car = car 
+    createTrip.driver = user
      
   } catch (error) {
     return res.status(400).send({

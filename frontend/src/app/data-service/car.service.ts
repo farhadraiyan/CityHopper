@@ -63,7 +63,7 @@ export class CarService {
   getCarById(carId):Observable<any>{
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(`http://localhost:3000/car/find/user/${carId}`)
+    return this.http.get(`http://localhost:3000/car/find/${carId}`)
     .pipe(map(res => {
       res => res.json()
       return res;

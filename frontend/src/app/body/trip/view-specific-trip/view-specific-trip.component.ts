@@ -49,8 +49,9 @@ export class ViewSpecificTripComponent implements OnInit {
   id: any;
   tripData: any
   time: any
+  car:any
 
-  ngOnInit() {
+  async ngOnInit() {
 
     //initialize map
     this.zoom = 4;
@@ -66,8 +67,12 @@ export class ViewSpecificTripComponent implements OnInit {
     this._route.queryParams.subscribe(params => { this.id = params.id; });
 
     // get trips on db by id
-    this.tripService.getOneTrip(this.id).subscribe(video => {
-      this.tripData = video;
+    this.tripService.getOneTrip(this.id).subscribe(data => {
+      this.tripData = data
+      console.log(this.tripData.driver.firstName)
+      this.carService.getCarById(this.tripData.car).subscribe(data=>{
+        this.car = data
+      })
       var date = this.convertTime(this.tripData['departureTime'], false)
       this.tripData['departureTime'] = date
       this.time = date.substring(16, 23);
