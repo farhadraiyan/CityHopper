@@ -6,6 +6,7 @@ import { MapsAPILoader } from "@agm/core";
 import {Router} from '@angular/router';
 import { config } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { CarService } from '../../../data-service/car.service'
 
 
 // import { } from 'googlemaps';
@@ -36,7 +37,8 @@ export class ViewSpecificTripComponent implements OnInit {
     private router:Router,
     config: NgbRatingConfig,
     private addTripService: TripService,
-    private _route: ActivatedRoute) {
+    private _route: ActivatedRoute,
+    private carService: CarService) {
 
 
 
@@ -47,6 +49,7 @@ export class ViewSpecificTripComponent implements OnInit {
     id:any;
     tripData:any
     time:any
+    car:any
 
   ngOnInit() {
 
@@ -64,9 +67,11 @@ export class ViewSpecificTripComponent implements OnInit {
     this._route.queryParams.subscribe(params => {this.id =params.id;});
 
     // get trips on db by id
-      this.tripService.getOneTrip(this.id).subscribe(video => {
-        this.tripData = video;
+      this.tripService.getOneTrip(this.id).subscribe(data => {
+        this.tripData = data;
         var date = this.convertTime(this.tripData['departureTime'],false)
+
+        console.log(this.tripData['car'])
         this.tripData['departureTime'] = date
         this.time =  date.substring(16,23);
       });
