@@ -39,7 +39,7 @@ exports.register = async function (req, res) {
 
   if (Object.keys(errors).length) {
     return res.status(400).send({
-      message: "Error registering image",
+      message: "Error registering user",
       error: errors
     })
   }
