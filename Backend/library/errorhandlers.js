@@ -46,7 +46,8 @@ let joiConfigTrip=function(reqBody)
         driver:Joi.required(),
         passengers:Joi.array(),
         rating:Joi.number().strict(),
-        car:Joi.required()
+        car:Joi.required(),
+        active:Joi.required()
     })
     let joiResult=Joi.validate(reqBody,joiSchema,{abortEarly:false})
     return joiResult

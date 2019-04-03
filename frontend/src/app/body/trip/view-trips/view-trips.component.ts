@@ -33,21 +33,25 @@ export class ViewTripsComponent implements OnInit {
     @ViewChild("to")
     toSearch: ElementRef;
 
-    trips:any
+    trips:any =[];
     mobile: Boolean;
     rating:any;
     time:any;
     search:any = [];
     searchValidation:Boolean;
-    message:any;
+    message:any = false
 
 
 
 
   async ngAfterContentInit() {
     await this.addTripService.getAllTrips().toPromise().then((res) =>{
-      this.trips = res
-      console.log(this.trips)
+      console.log(res)
+      for (let i in res){
+        if(res[i].active == true){
+          this.trips.push(res[i])
+        }
+      }
 
       for (let i in this.trips){
         this.time = this.convertTime(this.trips[i].departureTime,false)

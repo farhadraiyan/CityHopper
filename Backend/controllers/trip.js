@@ -8,7 +8,7 @@ const Car = require("../models/car")
 
 let createTrip = async function (req, res) {
   //from to has type issue need to fix
-  let reqField = ["name","from", "to", "cost", "departureTime", "luggage", "seatsAvailable", "driver", "rating", "car"]
+  let reqField = ["name","from", "to", "cost", "departureTime", "luggage", "seatsAvailable", "driver", "rating", "car","active"]
   //erro handle with Joi
   let joiResult = erroHandler.joiConfigTrip(req.body);
   //if error handler return errors

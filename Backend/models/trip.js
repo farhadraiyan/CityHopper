@@ -73,9 +73,9 @@ const Trip = mongoose.Schema({
     type: mongoose.Schema.Types.Mixed,
     ref: 'car'
   },
-  car: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'car'
+  active: {
+    type: Boolean,
+    require:true
   },
   tripRequests: [{
     type: mongoose.Schema.ObjectId,

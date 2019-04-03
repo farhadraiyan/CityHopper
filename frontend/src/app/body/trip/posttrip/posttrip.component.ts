@@ -65,7 +65,7 @@ export class PosttripComponent implements OnInit, DoCheck {
       await this.userData.getUserData(this.user['_id']).toPromise().then((res) => {
         this.user = res['user']
         if(this.user.cars){
-        this.carService.getCarById(this.user['_id']).toPromise().then((res) => {
+        this.carService.getCarByUserId(this.user['_id']).toPromise().then((res) => {
             this.car = res['vehicle']
           }).catch((err) => {
           });
@@ -107,11 +107,11 @@ export class PosttripComponent implements OnInit, DoCheck {
     }
     console.log(userCar['_id'])
     this.trip = {from:this.myplace, to:this.myDestination, cost:cost, departureTime:newDate,
-       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user._id, car:userCar['_id'] }
+       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user._id, car:userCar['_id'], active: true }
        console.log(this.trip)
       this.addTripService.addTrip(this.trip).subscribe(data=>{
         console.log(data)
-        //this.router.navigate(['/profilePage'])
+        this.router.navigate(['/profilePage'])
       })
 
 

@@ -59,14 +59,14 @@
                           <option>Medium</option>
                           <option>Large</option>
                         </select>
-                  <div [hidden]="luggage.valid || luggage.pristine" class="alert alert-danger">Luggage is required</div>
+                  
                   </div>
                 </div>
                 <div class="form-group row">
                     <label for="amount" class="col-sm-4  col-md-4 col-12 col-form-label">Amount/Passenger</label>
                     <div class="col-sm-8 col-md-8 col-12">
                       <input  required [(ngModel)]="trip.price" #price="ngModel" name="price" id="price" type="text" class="form-control" id="amount" placeholder="Amount">
-                      <div [hidden]="price.valid || price.pristine" class="alert alert-danger">Price is required</div>
+
                     </div>
                   </div>
                 <div class="form-group row" >
