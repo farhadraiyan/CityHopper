@@ -5,6 +5,8 @@ import { AuthenticationService } from 'src/app/data-service/authentication.servi
 import { Router } from '@angular/router';
 import { UserDataService } from '../../../data-service/user-data.service';
 import { TripService } from '../../../data-service/trip.service';
+import { CarService } from '../../../data-service/car.service';
+import { NgForm, NgModel} from '@angular/forms';
 
 // import { } from 'googlemaps';
 declare var google: any
@@ -25,10 +27,11 @@ export class PosttripComponent implements OnInit, DoCheck {
   fromSearch: ElementRef;
   @ViewChild("to")
   toSearch: ElementRef;
-  trip:any
+  trip = {}
   user:any
   tripName:any
-  car:Boolean = false;
+  car:any
+  message:any
 
   //date and time picker
   time = {hour: 13, minute: 30};
@@ -43,7 +46,8 @@ export class PosttripComponent implements OnInit, DoCheck {
     private authinticateService: AuthenticationService,
     private router: Router,
     private userData: UserDataService,
-    private addTripService: TripService
+    private addTripService: TripService,
+    private carService: CarService
 
   ) { }
   ngDoCheck() {
@@ -60,7 +64,13 @@ export class PosttripComponent implements OnInit, DoCheck {
     } else {
       await this.userData.getUserData(this.user['_id']).toPromise().then((res) => {
         this.user = res['user']
-        console.log(this.user)
+        if(this.user.cars){
+        this.carService.getCarById(this.user['_id']).toPromise().then((res) => {
+            this.car = res['vehicle']
+            console.log(this.car)
+          }).catch((err) => {
+          });
+        }
       }).catch((err) => {
       });
   }
@@ -73,6 +83,7 @@ export class PosttripComponent implements OnInit, DoCheck {
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
+    this.car = false;
 
     //create search FormControl
     this.searchControl = new FormControl();
@@ -85,16 +96,23 @@ export class PosttripComponent implements OnInit, DoCheck {
 
   }
 
-  onSubmit(date,seats,luggage,price){
+  onSubmit(date,seats,luggage,price,vehicle){
     var newDate = date.value +" "+ this.time['hour']+ ":" + this.time['minute'] +":00";
     var cost = +price.value
+    var userCar
+    for (let value of this.car) {
+      var car = value.make +" "+ value.model
+      if(vehicle.value == car)
+      {
+        userCar = value;
+        console.log(userCar)
+      }
+    }
     this.trip = {from:this.myplace, to:this.myDestination, cost:cost, departureTime:newDate,
-       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user._id, car:this.user['car'] }
-      console.log(this.trip)
-
+       seatsAvailable:seats.value, luggage:luggage.value, driver: this.user._id, car:userCar }
       this.addTripService.addTrip(this.trip).subscribe(data=>{
         data = this.trip;
-        window.alert("Trip Added!");
+        this.router.navigate(['/profilePage'])
       })
 
     }

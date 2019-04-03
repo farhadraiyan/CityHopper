@@ -11,7 +11,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Model</label>
-                    <input type="text" class="form-control rounded" id="inputEmail4" name="model" [(ngModel)]="carData.model" #model=ngModel placeholder="Model">
+                    <input  type="text" class="form-control rounded" id="inputEmail4" name="model" [(ngModel)]="carData.model" #model=ngModel placeholder="Model">
                     <div [hidden]="model.valid || model.pristine" class="alert alert-danger">Car Model is required</div>
                 </div>
               </div>
@@ -34,7 +34,7 @@
                 <img [src]="carData.imageURL" height="200px" width="350px" alt="">
             </div>
         </div>
-        
+
     </div>
     <div class="row">
       <div class="col-sm-12 col-md-12">

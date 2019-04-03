@@ -3,6 +3,8 @@ const TripRequest = require('../models/trip')
 const _ = require('lodash');
 const erroHandler = require("../library/errorhandlers")
 const User = require("../models/user")
+const Car = require("../models/car")
+
 
 let createTrip = async function (req, res) {
   //from to has type issue need to fix
@@ -20,8 +22,11 @@ let createTrip = async function (req, res) {
   let createTrip;
   try {
     createTrip = await new TRIP(tripData)
-    //this is how get access to the user
+    //this is how get access to the user and the car
     const user = await User.findById(createTrip.driver)
+    const car = await Car.findById(createTrip.car)
+     
+    createTrip.car = car
      
       createTrip.driver = user
      
@@ -32,6 +37,7 @@ let createTrip = async function (req, res) {
     })
 
   }
+ 
   let savedTrip;
   try {
     

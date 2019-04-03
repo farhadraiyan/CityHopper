@@ -91,6 +91,7 @@ export class ViewTripsComponent implements OnInit {
 
   convertTime(isoTime,validation) {
 
+
     var timeStr = isoTime;
     var date = new Date(timeStr);
     var day = date.getDate();
@@ -120,7 +121,7 @@ export class ViewTripsComponent implements OnInit {
     return dateStr
   }
 
-  onSubmit(from,to,date){
+onSubmit(from,to,date){
     var validation = false;
     var dates = this.convertTime(date.value,true)
     for (let i in this.trips){
