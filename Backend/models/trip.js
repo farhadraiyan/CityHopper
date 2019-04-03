@@ -6,12 +6,17 @@ const TripRequestSchema = mongoose.Schema({
     ref: 'user',
     required: true
   },
+  tripId: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'trip'
+  },
   seatsRequested: {
     type: Number,
     required: true
   },
   Confirmed: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   time_created: {
     type: Date,
@@ -66,6 +71,10 @@ const Trip = mongoose.Schema({
   },
   car: {
     type: mongoose.Schema.Types.Mixed,
+    ref: 'car'
+  },
+  car: {
+    type: mongoose.Schema.ObjectId,
     ref: 'car'
   },
   tripRequests: [{

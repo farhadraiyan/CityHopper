@@ -1,40 +1,33 @@
-<div>
-  <div>
-    <div class="trip-info-block">
-      <div class="places">
-        <p>Toronto</p>
-        <p>to</p>
-        <p>Vancouver</p>
-      </div>
-      <div class="departure-arrival">
-        <div class="row">
-          <div class="col-sm-6">
-            <h5>Departure</h5>
-            <p>Address Line 1 <br>Address Line 2</p>
-          </div>
-          <div class="col-sm-6">
-            <p>Date</p>
-            time
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <h5>Arrival</h5>
-            <p>Address Line 1 <br>Address Line 2</p>
-          </div>
-          <div class="col-sm-6">
-            hide-actions
-          </div>
-        </div>
-      </div>
-      <div class="user-info">
-        <div class="user-image rounder-circle">
-          <img src="" alt="">
-        </div>
-      </div>
-      <div class="trip-cost">
 
+  <div class="info-trip">
+      <div id="trips" class="border rounded bg-light">
+      <div class="trip-info-block">
+        <div class="row justify-content-center">
+            <div class="col-sm col-md-2 col-lg-2  text-center border-right pt-2">
+                Montreal <br>
+                <i class="fas fa-arrow-down"></i><br>
+                Toronto
+            </div>
+            <div class="col-sm col-md-3 col-lg-4 text-center border-right pt-4">
+             <div class="row">
+                <div class="col">
+                  Departure: <br>
+                  Departure Time HERE
+                </div>
+            </div>
+          </div>
+             <div class="col-sm col-md-2 col-lg-2  text-center ">
+                  <img src="" class="profile rounded-circle mx-auto d-block " alt="driver" width="100" height="100">
+              </div>
+              <div class="col-sm col-md-2 col-lg-2  border-right text-center pt-4">
+                  FirstNAme LastName <br>
+                  <ngb-rating [rate]=rating></ngb-rating>
+              </div>
+                 <div class="col-sm col-md-2 col-lg-2 text-center pt-2">
+                   <button class="btn btn-primary btn-sm" > Accept</button><br><br>
+                   <button class="btn btn-danger btn-sm" > Decline</button>
+              </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
+      </div>
+  </div> 

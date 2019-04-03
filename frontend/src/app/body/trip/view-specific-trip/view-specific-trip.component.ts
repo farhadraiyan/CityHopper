@@ -1,9 +1,9 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild, DoCheck, ɵbypassSanitizationTrustStyle} from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild, DoCheck, ɵbypassSanitizationTrustStyle } from '@angular/core';
 import { TripService } from '../../../data-service/trip.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from "@agm/core";
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { config } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CarService } from '../../../data-service/car.service'
@@ -25,7 +25,7 @@ export class ViewSpecificTripComponent implements OnInit {
   searchControl: FormControl;
   zoom: number;
   myplace: object;
-  myDestination:object;
+  myDestination: object;
   @ViewChild("from")
   fromSearch: ElementRef;
   @ViewChild("to")
@@ -34,7 +34,7 @@ export class ViewSpecificTripComponent implements OnInit {
   constructor(private tripService: TripService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private router:Router,
+    private router: Router,
     config: NgbRatingConfig,
     private addTripService: TripService,
     private _route: ActivatedRoute,
@@ -44,54 +44,51 @@ export class ViewSpecificTripComponent implements OnInit {
 
     config.max = 5
     config.readonly = true;
-    }
-    rating:any
-    id:any;
-    tripData:any
-    time:any
-    car:any
+  }
+  rating: any
+  id: any;
+  tripData: any
+  time: any
 
   ngOnInit() {
 
-  //initialize map
-  this.zoom = 4;
-  this.latitude = 39.8282;
-  this.longitude = -98.5795;
+    //initialize map
+    this.zoom = 4;
+    this.latitude = 39.8282;
+    this.longitude = -98.5795;
     //set current position
-    this.addTripService.setCurrentPosition(this.latitude,this.longitude,this.zoom);
-  //create search FormControl
-  this.searchControl = new FormControl();
+    this.addTripService.setCurrentPosition(this.latitude, this.longitude, this.zoom);
+    //create search FormControl
+    this.searchControl = new FormControl();
 
-    this.rating= 3
+    this.rating = 3
     //get the id comming from view Trips
-    this._route.queryParams.subscribe(params => {this.id =params.id;});
+    this._route.queryParams.subscribe(params => { this.id = params.id; });
 
     // get trips on db by id
-      this.tripService.getOneTrip(this.id).subscribe(data => {
-        this.tripData = data;
-        var date = this.convertTime(this.tripData['departureTime'],false)
-
-        console.log(this.tripData['car'])
-        this.tripData['departureTime'] = date
-        this.time =  date.substring(16,23);
-      });
+    this.tripService.getOneTrip(this.id).subscribe(video => {
+      this.tripData = video;
+      var date = this.convertTime(this.tripData['departureTime'], false)
+      this.tripData['departureTime'] = date
+      this.time = date.substring(16, 23);
+    });
 
   }
 
-  convertTime(isoTime,validation) {
+  convertTime(isoTime, validation) {
 
 
     var timeStr = isoTime;
     var date = new Date(timeStr);
     var day = date.getDate();
     var year = date.getFullYear();
-    var month = date.getMonth()+1;
+    var month = date.getMonth() + 1;
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var pm = date.getTimezoneOffset();
-    var ampm="am"
-    var months = [ "January", "February", "March", "April", "May", "June",
-           "July", "August", "September", "October", "November", "December" ];
+    var ampm = "am"
+    var months = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"];
 
     if (hours == 12) {
       ampm = 'pm';
@@ -101,19 +98,12 @@ export class ViewSpecificTripComponent implements OnInit {
       hours -= 12;
       ampm = 'pm';
     }
-    if(validation ==  true){
-      day =day+1
-      var dateStr = months[month-1]+" "+ day +", "+ year;
-    }else{
-      var dateStr = months[month-1]+" "+day+", "+year+" - "+hours+":"+minutes+ ampm;
+    if (validation == true) {
+      day = day + 1
+      var dateStr = months[month - 1] + " " + day + ", " + year;
+    } else {
+      var dateStr = months[month - 1] + " " + day + ", " + year + " - " + hours + ":" + minutes + ampm;
     }
     return dateStr
   }
-
-
-
-
-
 }
-
-
