@@ -6,7 +6,8 @@ import { MapsAPILoader } from "@agm/core";
 import { Router } from '@angular/router';
 import { config } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { CarService } from '../../../data-service/car.service'
+import { CarService } from '../../../data-service/car.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 
 // import { } from 'googlemaps';
@@ -30,6 +31,7 @@ export class ViewSpecificTripComponent implements OnInit {
   fromSearch: ElementRef;
   @ViewChild("to")
   toSearch: ElementRef;
+  closeResult: string;
 
   constructor(private tripService: TripService,
     private mapsAPILoader: MapsAPILoader,
@@ -38,7 +40,8 @@ export class ViewSpecificTripComponent implements OnInit {
     config: NgbRatingConfig,
     private addTripService: TripService,
     private _route: ActivatedRoute,
-    private carService: CarService) {
+    private carService: CarService,
+    private modalService: NgbModal) {
 
 
 
@@ -111,4 +114,23 @@ export class ViewSpecificTripComponent implements OnInit {
     }
     return dateStr
   }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
 }
