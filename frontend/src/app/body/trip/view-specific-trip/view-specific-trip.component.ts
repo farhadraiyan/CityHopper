@@ -8,6 +8,9 @@ import { config } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CarService } from '../../../data-service/car.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { MessageService } from 'src/app/data-service/message.service';
+import { AuthenticationService } from 'src/app/data-service/authentication.service';
+import { Message } from 'src/app/models/Message';
 
 
 // import { } from 'googlemaps';
@@ -41,7 +44,9 @@ export class ViewSpecificTripComponent implements OnInit {
     private addTripService: TripService,
     private _route: ActivatedRoute,
     private carService: CarService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    private authService: AuthenticationService,
+    private messageServie: MessageService) {
 
 
 
@@ -53,7 +58,7 @@ export class ViewSpecificTripComponent implements OnInit {
   tripData: any
   time: any
   car:any
-
+  messageData = new Message();
   async ngOnInit() {
 
     //initialize map
@@ -131,6 +136,19 @@ export class ViewSpecificTripComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  sendMessage(){
+    this.messageData.to = this.tripData.driver._id;
+    this.messageData.from = this.authService.getUserDetails()['_id']
+    this.messageServie.sendMessage(this.messageData).subscribe(
+      (res) => {
+        console.log(res)
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
   }
 
 }
