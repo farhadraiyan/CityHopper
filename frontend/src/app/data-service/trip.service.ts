@@ -9,11 +9,11 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class TripService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
 
   addTrip(trip): Observable<any> {
-    return this.http.post('http://localhost:3000/trip/create',trip);
+    return this.http.post('http://localhost:3000/trip/create', trip);
   }
 
   getAllTrips(): Observable<any> {
@@ -26,10 +26,18 @@ export class TripService {
       return data;
     }));
   }
+  sendRequest(reqData) {
+    let header = new HttpHeaders();
+    header.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/trip/sendRequest', reqData).pipe(
+      map((res) => {
+        return res
+      })
+    )
+  }
 
 
-
-  public setCurrentPosition(latitude,longitude,zoom) {
+  public setCurrentPosition(latitude, longitude, zoom) {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         latitude = position.coords.latitude;

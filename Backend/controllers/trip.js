@@ -1,5 +1,5 @@
-const TRIP = require('../models/trip')
-const TripRequest = require('../models/trip')
+const {TRIP} = require('../models/trip')
+const { TripRequest } = require('../models/trip')
 const _ = require('lodash');
 const erroHandler = require("../library/errorhandlers")
 const User = require("../models/user")
@@ -79,7 +79,6 @@ let createTripRequest = async function (req, res) {
     })
   }
   let data = _.pick(req.body, reqFields)
-
   let trip
   try {
     trip = await TRIP.findById(data.tripId)
@@ -92,6 +91,7 @@ let createTripRequest = async function (req, res) {
   let newTripReq
   try {
     newTripReq = await new TripRequest(data)
+    console.log(newTripReq)
   } catch (error) {
     return res.status(400).send({
       message: 'Error creating trip request',
@@ -239,7 +239,7 @@ let sendTripRequest = async function (req, res) {
   let reqFields = ['riderId', 'tripId' ,'seatsRequested', 'additionalDetails']
   // add fields to error if errors getting user information
   reqFields.forEach(function (field) {
-    if (!req.params[field] || req.params[field] === '') {
+    if (!req.body[field] || req.body[field] === '') {
       errors[field] = `${field.replace(/_/g, ' ')} is required`
     }
   })
@@ -265,8 +265,6 @@ let sendTripRequest = async function (req, res) {
       error: error.message
     })
   }
-
-  
 }
 
 module.exports = {

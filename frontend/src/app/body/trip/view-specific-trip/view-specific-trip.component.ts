@@ -7,10 +7,11 @@ import { Router } from '@angular/router';
 import { config } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CarService } from '../../../data-service/car.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'src/app/data-service/message.service';
 import { AuthenticationService } from 'src/app/data-service/authentication.service';
 import { Message } from 'src/app/models/Message';
+import { TripRequest } from 'src/app/models/TripRequest';
 
 
 // import { } from 'googlemaps';
@@ -47,9 +48,6 @@ export class ViewSpecificTripComponent implements OnInit {
     private modalService: NgbModal,
     private authService: AuthenticationService,
     private messageServie: MessageService) {
-
-
-
     config.max = 5
     config.readonly = true;
   }
@@ -57,9 +55,10 @@ export class ViewSpecificTripComponent implements OnInit {
   id: any;
   tripData: any
   time: any
-  car:any
+  car: any
+
   messageData = new Message();
-  
+  tripRequestData = new TripRequest();
   async ngOnInit() {
 
     //initialize map
@@ -79,7 +78,7 @@ export class ViewSpecificTripComponent implements OnInit {
     this.tripService.getOneTrip(this.id).subscribe(data => {
       this.tripData = data
       console.log(this.tripData.driver.firstName)
-      this.carService.getCarById(this.tripData.car).subscribe(data=>{
+      this.carService.getCarById(this.tripData.car).subscribe(data => {
         this.car = data
       })
       var date = this.convertTime(this.tripData['departureTime'], false)
@@ -122,7 +121,7 @@ export class ViewSpecificTripComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -135,14 +134,28 @@ export class ViewSpecificTripComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
-  sendMessage(){
+  sendMessage() {
     this.messageData.to = this.tripData.driver._id;
     this.messageData.from = this.authService.getUserDetails()['_id']
     this.messageServie.sendMessage(this.messageData).subscribe(
+      (res) => {
+        console.log(res)
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
+  }
+
+  sendTripRequest() {
+    this.tripRequestData.riderId = this.tripData.driver._id;
+    this.tripRequestData.tripId = this.tripData._id
+    this.tripRequestData.Confirmed = false;
+    this.tripService.sendRequest(this.tripRequestData).subscribe(
       (res) => {
         console.log(res)
       },
