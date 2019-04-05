@@ -26,7 +26,7 @@ const TripRequestSchema = mongoose.Schema({
     type: String
   }
 })
-const Trip = mongoose.Schema({
+const TripSchema = mongoose.Schema({
   from: {
     type: mongoose.Schema.Types.Mixed,
     ref: 'place',
@@ -79,12 +79,12 @@ const Trip = mongoose.Schema({
   },
   tripRequests: [{
     type: mongoose.Schema.ObjectId,
-    ref: 'Trip'
+    ref: 'TripRequest'
   }]
 })
 
-Trip.methods.addTripRequest = async function (tripReqID) {
-  this.TripRequests.push(tripReqID)
+TripSchema.methods.addTripRequest = async function (tripReqID) {
+  this.tripRequests.push(tripReqID)
   let updatedTrip
   try {
     updatedTrip = await this.save()
@@ -93,5 +93,10 @@ Trip.methods.addTripRequest = async function (tripReqID) {
   }
   return updatedTrip
 }
-module.exports = mongoose.model('TripRequest', TripRequestSchema)
-module.exports = mongoose.model('Trip', Trip);
+
+const TripRequest = mongoose.model('TripRequest', TripRequestSchema)
+const TRIP = mongoose.model('Trip', TripSchema)
+module.exports = {
+  TripRequest,
+  TRIP
+}
