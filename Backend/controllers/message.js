@@ -57,10 +57,10 @@ let findMessageById = async function (req, res) {
 
 let findMessagesBySenderId = async function (req, res) {
   let errors = {}
-  let reqFields = ['userId']
+  let reqFields = ['userid']
   // add fields to error if errors getting user information
   reqFields.forEach(function (field) {
-    if (!req.params[field] || req.params[field] === '') {
+    if (!req.body[field] || req.body[field] === '') {
       errors[field] = `${field.replace(/_/g, ' ')} is required`
     }
   })
@@ -71,24 +71,96 @@ let findMessagesBySenderId = async function (req, res) {
       errors: errors,
     })
   }
-  let userId = req.params.userid
-
-  let allMessages
+  let userId = req.body.userid
+  console.log(userId)
+  let sentMessages
   try {
-    allMessages = Message.find({ $or: [{ 'from': userId }, { 'to': userId }] })
-    if (allMessages.length < 0 || !allMessages) {
-      return res.status(400).send({
-        error: 'Error getting all messages for the user, try agian later'
-      })
-    }
+    sentMessages = await Message.find({'from': userId})
   } catch (error) {
     return res.status(400).send({
       error: error.message
     })
   }
+  let recievedMessages
+  try {
+    recievedMessages = await Message.find({'to': userId})
+  } catch (error) {
+    return res.status(400).send({
+      error: error.message
+    })
+  }
+  let messagesSent = []
+  if (sentMessages.length > 0) {
+    let sender
+    try {
+      sender = await User.findById(sentMessages[0].from)
+    } catch (error) {
+      return res.status(400).send({
+        error: error.message
+      })
+    }
+    for (let message of sentMessages) {
+      let reciever
+      try {
+        reciever = await User.findById(message.to)
+      } catch (error) {
+        return res.status(400).send({
+          error: error.message
+        })
+      }
+      let data = {
+        message: message.message,
+        to: {
+          name: `${reciever.firstName} ${reciever.lastName}`,
+          id: reciever._id
+        },
+        from: {
+          name: `${sender.firstName} ${sender.lastName}`,
+          id: sender._id
+        }
+      }
+      messagesSent.push(data)
+    }
+  }
+
+  let messagesRecieved = []
+  if (recievedMessages.length > 0) {
+    let sender
+    try {
+      sender = await User.findById(recievedMessages[0].to)
+    } catch (error) {
+      return res.status(400).send({
+        error: error.message
+      })
+    }
+    for (let message of recievedMessages) {
+      let reciever
+      try {
+        reciever = await User.findById(message.from)
+      } catch (error) {
+        return res.status(400).send({
+          error: error.message
+        })
+      }
+      let data = {
+        message: message.message,
+        to: {
+          name: `${sender.firstName} ${sender.lastName}`,
+          id: sender._id
+        },
+        from: {
+          name: `${reciever.firstName} ${reciever.lastName}`,
+          id: reciever._id
+        }
+      }
+      messagesRecieved.push(data)
+    }
+  }
+
+
   return res.status(200).send({
-    message: 'Success',
-    data: allMessages
+    sent: messagesSent,
+    recieved: messagesRecieved
   })
 }
 

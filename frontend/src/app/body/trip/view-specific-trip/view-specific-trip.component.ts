@@ -59,6 +59,7 @@ export class ViewSpecificTripComponent implements OnInit {
   time: any
   car:any
   messageData = new Message();
+  
   async ngOnInit() {
 
     //initialize map

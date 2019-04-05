@@ -12,7 +12,7 @@ import { SettingsPersonalDetailsComponent } from './body/user/settings/settings-
 import { SettingsVehiclesComponent } from './body/user/settings/settings-vehicles/settings-vehicles.component';
 import { SettingsPaymentComponent } from './body/user/settings/settings-payment/settings-payment.component';
 import { ProfilePageComponent } from './body/user/profile-page/profile-page.component';
-import { MessageComponent } from './body/user/message/message/message.component';
+import { MessageComponent } from './body/message/message.component';
 import { SettingsVehicleRoutingComponent } from './body/user/settings/settings-vehicle-routing/settings-vehicle-routing.component';
 import { ViewTripsComponent } from './body/trip/view-trips/view-trips.component';
 import { SettingsVehicleUpdatesComponent } from './body/user/settings/settings-vehicle-updates/settings-vehicle-updates.component';

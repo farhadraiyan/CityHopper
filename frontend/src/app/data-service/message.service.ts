@@ -15,7 +15,7 @@ export class MessageService {
     let header = new HttpHeaders();
     
     header.append('Content-Type','application/json');
-    return this.http.get(`http://localhost:3000/find/${msgId}`).pipe(map(get =>{
+    return this.http.get(`http://localhost:3000/find`).pipe(map(get =>{
        get => get.json();
        return get;
     }));
@@ -30,6 +30,7 @@ export class MessageService {
       return res;
     }))
   }
+
 
   sendMessage(msgData){
     let header = new HttpHeaders();
