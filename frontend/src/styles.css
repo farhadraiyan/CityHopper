@@ -11,3 +11,7 @@
 .padding-right10{
     padding-left: 25px;
 }
+
+.hover-item.button:hover{
+    background-color: #b7e1e5;
+}
