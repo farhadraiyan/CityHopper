@@ -14,6 +14,10 @@ const messageSchema = mongoose.Schema({
   message: {
     type: String,
     required: true
+  },
+  time_created: {
+    type: Date,
+    default: Date.now
   }
 })
 

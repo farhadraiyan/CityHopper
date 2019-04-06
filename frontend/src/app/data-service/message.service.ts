@@ -11,11 +11,10 @@ export class MessageService {
 
   constructor(private http:HttpClient) { }
 
-  getMessageId(msgId): Observable<any>{
-    let header = new HttpHeaders();
-    
+  getMessageId(userid): Observable<any>{
+    let header = new HttpHeaders();    
     header.append('Content-Type','application/json');
-    return this.http.get(`http://localhost:3000/find`).pipe(map(get =>{
+    return this.http.post(`http://localhost:3000/message/find/From`, userid).pipe(map(get =>{
        get => get.json();
        return get;
     }));

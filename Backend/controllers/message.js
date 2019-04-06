@@ -117,7 +117,8 @@ let findMessagesBySenderId = async function (req, res) {
         from: {
           name: `${sender.firstName} ${sender.lastName}`,
           id: sender._id
-        }
+        },
+        time: message.time_created
       }
       messagesSent.push(data)
     }
@@ -151,7 +152,8 @@ let findMessagesBySenderId = async function (req, res) {
         from: {
           name: `${reciever.firstName} ${reciever.lastName}`,
           id: reciever._id
-        }
+        },
+        time: message.time_created
       }
       messagesRecieved.push(data)
     }

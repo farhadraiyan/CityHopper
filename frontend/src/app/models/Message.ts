@@ -1,6 +1,6 @@
 export class Message{
     _id?: String;
     to: String;
-    from: String;
+    from: String; 
     message: String;
 }

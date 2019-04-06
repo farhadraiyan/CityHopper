@@ -17,16 +17,27 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Reply to "Name"</h4>
+      <h4 class="modal-title" id="modal-basic-title">Chat Messages</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
+    </div>
+    <h6>Recieved Messages</h6>
+    <div class="container" *ngFor="let recieved of this.messageData['recieved']">
+      <p>{{recieved.message}}</p>
+      <span class="time-right">11:00</span>
+    </div>
+    <hr style="color:black">
+    <h6>Send Messages</h6>
+    <div class="container darker" *ngFor="let sent of this.messageData['sent']">
+      <p>{{sent.message}}</p>
+      <span class="time-left">{{this.today.getHours() + ":" + this.today.getMinutes() + "--" + this.today.getMonth()}}</span>
     </div>
     <form class="form-group" #msg="ngForm">
       <div class="modal-body">
           <div class="row">
             <div class="col-sm-12">
-              <!-- <textarea class="form-control" id="message" name="message" #message="ngModel" [(ngModel)]="messageData.message" rows="7"></textarea> -->
+              <textarea class="form-control" id="message" name="message" rows="2"></textarea>
             </div>
           </div>
       </div>
