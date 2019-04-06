@@ -1,17 +1,19 @@
 <div class="container minheight80">
-  <button type="button" class="btn btn-md btn-outline-dark mt-3" (click)="open(content)">
-    <div class="row">
-      <div class="col-sm-3 col-md-3">
-        <h6 class="text-right mt-1">Message from Igor: </h6>
+  <div>
+    <button type="button" class="btn btn-md btn-outline-dark mt-3" (click)="open(content)">
+      <div class="row">
+        <div class="col-sm-3 col-md-3">
+          <h6 class="text-right mt-1">Name</h6>
+        </div>
+        <div class="col-sm-9 col-md-9">
+          <p class="text-left">This is the message thats goint to sadkaljsdkjahsdkj haskjdhakjshdklajdshlka
+            ksjdhaksjdhkajsdhkajshdkjasdha
+            skjdhaksdjhaksjdhkajsdhaksjd
+          </p>
+        </div>
       </div>
-      <div class="col-sm-9 col-md-9">
-        <p class="text-left">This is the message thats goint to sadkaljsdkjahsdkj haskjdhakjshdklajdshlka
-          ksjdhaksjdhkajsdhkajshdkjasdha
-          skjdhaksdjhaksjdhkajsdhaksjd
-        </p>
-      </div>
-    </div>
-  </button>
+    </button>
+  </div>
 </div>
 
 
@@ -22,16 +24,34 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <h6>Recieved Messages</h6>
-    <div class="container" *ngFor="let recieved of this.messageData['recieved']">
-      <p>{{recieved.message}}</p>
-      <span class="time-right">11:00</span>
+    <div class="container">
+      <h6>Recieved Messages</h6>
+      <div *ngFor="let recieved of this.messageData['recieved']">
+        <div class="row">
+          <div class="col-sm-10">
+              <p>{{recieved.message}}</p>
+              <span class="time-right">11:00</span>
+          </div>
+          <div class="col-sm-2">
+              <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" alt="avatar" style="height:35px; width:35px; border-radius: 50%;">
+          </div>
+        </div>
+      </div>
     </div>
     <hr style="color:black">
-    <h6>Send Messages</h6>
-    <div class="container darker" *ngFor="let sent of this.messageData['sent']">
-      <p>{{sent.message}}</p>
-      <span class="time-left">{{this.today.getHours() + ":" + this.today.getMinutes() + "--" + this.today.getMonth()}}</span>
+    <div class="container">
+      <h6>Send Messages</h6>
+      <div *ngFor="let sent of this.messageData['sent']">
+        <div class="row">
+          <div class="col-sm-2">
+            <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" alt="avatar" style="height:35px; width:35px; border-radius: 50%;">
+          </div>
+          <div class="col-sm-10">
+            <p>{{sent.message}}</p>
+            <p class="text-right">{{sent.time | date : "medium"}}</p>
+          </div>
+        </div>
+      </div>
     </div>
     <form class="form-group" #msg="ngForm">
       <div class="modal-body">

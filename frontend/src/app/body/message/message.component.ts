@@ -13,15 +13,16 @@ export class MessageComponent implements OnInit {
 
   closeResult: string;
   messageData = {}
-  sentData = []
-  receivedData = []
-  today: any;
+  name: any;
+  sentTime: any;
+  sentName: any;
+  recievedTime: any;
+  recievedName: any;
 
   constructor(private modalService: NgbModal, private messageService: MessageService, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.getMessageByUserId();
-    this.deb()
   }
 
   getMessageByUserId(){
@@ -31,9 +32,6 @@ export class MessageComponent implements OnInit {
     this.messageService.getMessageId(data).subscribe(
       (res) => {
         this.messageData = res;
-        this.today = new Date(this.messageData['sent'][0].time)
-      
-        console.log(this.today.getHours() + ":" + this.today.getMinutes() + ":" + this.today.getDate())
       },
       (err) => {
         console.log(err)
@@ -41,9 +39,6 @@ export class MessageComponent implements OnInit {
     )
   }
   
-  deb(){
-    console.log(this.sentData)
-  }
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

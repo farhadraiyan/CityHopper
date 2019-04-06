@@ -13,7 +13,7 @@ const messageSchema = mongoose.Schema({
   },
   message: {
     type: String,
-    required: true
+    required: true,
   },
   time_created: {
     type: Date,
