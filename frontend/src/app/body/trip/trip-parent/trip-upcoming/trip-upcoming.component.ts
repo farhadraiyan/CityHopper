@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../../data-service/authentication.service';
-import {Headers, Http , HttpClient} from '@angular/http';
+import {Headers, Http} from '@angular/http';
 @Component({
   selector: 'app-trip-upcoming',
   templateUrl: './trip-upcoming.component.html',
