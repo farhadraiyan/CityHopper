@@ -207,6 +207,7 @@ let getTripRequestForDriver = async function (req, res) {
   let filteredTrips = allDriverTrips.filter((trip) => {
     return trip.driver._id == driverId
   })
+
   let tripArray = filteredTrips.map((item) => {
     let data = {}
     data.from = item.from.name
@@ -214,12 +215,15 @@ let getTripRequestForDriver = async function (req, res) {
     data.tripRequests = item.tripRequests
     return data
   })
+
   let responseBody = []
-  console.log('TripIdArray', tripArray)
   for (const trip of tripArray) {
     let requestDetails
     try {
       requestDetails = await TripRequest.find({_id: { $in : trip.tripRequests}})
+      console.log('-------------------------------------------')
+      console.log('TripReq', requestDetails)
+      console.log('-------------------------------------------')
     } catch (error) {
       console.log(error)
     }

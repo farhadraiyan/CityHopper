@@ -152,7 +152,7 @@ export class ViewSpecificTripComponent implements OnInit {
   }
 
   sendTripRequest() {
-    this.tripRequestData.riderId = this.tripData.driver._id;
+    this.tripRequestData.riderId = this.authService.getUserDetails()['_id']
     this.tripRequestData.tripId = this.tripData._id
     this.tripRequestData.Confirmed = false;
     this.tripService.sendRequest(this.tripRequestData).subscribe(
