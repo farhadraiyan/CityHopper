@@ -45,13 +45,11 @@ export class MessageComponent implements OnInit {
 
   }
   
-  sendMessage(newMessage){
+  sendMessage(){
     for(let recived of this.messageData['recieved']){
       this.messageS.to = recived.from.id
     }
-    for(let sent of this.messageData['sent']){
-      this.messageS.from = sent.to.id
-    }
+    this.messageS.from = this.authService.getUserDetails()['_id']
     this.messageService.sendMessage(this.messageS).subscribe(
       (res) => {
         console.log(res)
