@@ -1,5 +1,5 @@
 <div class="container minheight80">
-  <h4 class="modal-title" id="modal-basic-title">Chat Messages</h4>
+  <h4 class="modal-title" id="modal-basic-title">Reply to {{recieved.from.name}}</h4>
   <h6 class="text-right">Recieved From</h6>
   <div *ngFor="let recieved of this.messageData['recieved']">
     <button type="button" class="btn btn-md btn-outline-dark mt-3" style="width: 100%;"  (click)="open(content)">
