@@ -109,6 +109,7 @@ let findMessagesBySenderId = async function (req, res) {
         })
       }
       let data = {
+        id: message._id,
         message: message.message,
         to: {
           name: `${reciever.firstName} ${reciever.lastName}`,
@@ -144,6 +145,7 @@ let findMessagesBySenderId = async function (req, res) {
         })
       }
       let data = {
+        id: message._id,
         message: message.message,
         to: {
           name: `${sender.firstName} ${sender.lastName}`,
