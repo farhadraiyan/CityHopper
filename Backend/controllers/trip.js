@@ -173,7 +173,86 @@ let getTripRequestsForTrip = async function (req, res) {
   })
 }
 
+let getTripRequestForDriver = async function (req, res) {
+  console.log('param', req.params)
+  let errors = {}
+  let reqFields = ['driverId']
+  // add fields to error if errors getting user information
+  reqFields.forEach(function (field) {
+    if (!req.params[field] || req.params[field] === '') {
+      errors[field] = `${field.replace(/_/g, ' ')} is required`
+    }
+  })
+  if (Object.keys(errors).length) {
+    return res.status(400).send({
+      msg: 'error getting trip request',
+      errors: errors,
+    })
+  }
+  let driverId = req.params.driverId
+  let allDriverTrips
+  try {
+    allDriverTrips = await TRIP.find()
+    if (!allDriverTrips || allDriverTrips.length < 1) {
+      return res.status(404).send({
+        msg: 'error getting trip request. Trips not found.'
+      })
+    }
+  } catch (error) {
+    return res.status(400).send({
+      msg: 'Error trip requests',
+      error: error.message
+    })
+  }
+  let filteredTrips = allDriverTrips.filter((trip) => {
+    return trip.driver._id == driverId
+  })
+  let tripArray = filteredTrips.map((item) => {
+    let data = {}
+    data.from = item.from.name
+    data.to = item.to.name
+    data.tripRequests = item.tripRequests
+    return data
+  })
+  let responseBody = []
+  console.log('TripIdArray', tripArray)
+  for (const trip of tripArray) {
+    let requestDetails
+    try {
+      requestDetails = await TripRequest.find({_id: { $in : trip.tripRequests}})
+    } catch (error) {
+      console.log(error)
+    }
+    for (const tripRequest of requestDetails) {
+      let data = {
+        to: trip.to,
+        from: trip.from,
+        request: tripRequest
+      }
+      responseBody.push(data)
+    }
+  }
+  for(const tripReq of responseBody) {
+    let user
+    try {
+      user = await User.findById(tripReq.request.riderId)
+    } catch (error) {
+      console.log(error)
+    }
+    tripReq.user =  {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      id: user._id,
+      image: user.imageUrl
+    }
+  }
+  return res.status(200).send({
+    data: responseBody
+  })
+}
+
 let getTripRequestForRider = async function (req, res) {
+  console.log(req.params)
   let errors = {}
   let reqFields = ['riderId']
   // add fields to error if errors getting user information
@@ -204,6 +283,23 @@ let getTripRequestForRider = async function (req, res) {
       errors: error.message
     })
   }
+  let tripReqIDArray = allRequestsForRider.map(item => item.tripId)
+  console.log('tID', tripReqIDArray)
+  let trips
+  try {
+    trips = await TRIP.find({_id: {$in: tripReqIDArray}})
+    if (!trips || trips.length < 1) {
+      return res.status(404).send({
+        msg: 'error getting trip request. Trips not found.'
+      })
+    }
+  } catch (error) {
+    return res.status(400).send({
+      msg: 'error getting trip request',
+      errors: error.message
+    })
+  }
+
   return res.status(200).send({
     message: 'Success',
     data: allRequestsForRider
@@ -273,5 +369,6 @@ module.exports = {
   createTripRequest,
   getTripRequestsForTrip,
   getTripRequestForRider,
+  getTripRequestForDriver,
   getTrips,getOneTrip
 }

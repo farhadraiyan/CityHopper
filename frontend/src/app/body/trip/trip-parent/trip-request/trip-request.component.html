@@ -1,32 +1,34 @@
 
-  <div class="info-trip">
-      <div id="trips" class="border rounded bg-light">
+  <div class="info-trip mt-3" *ngFor="let data of trips | filter : filterargs">
+      <div id="trips" class="border rounded bg-light" >
       <div class="trip-info-block">
-        <div class="row justify-content-center">
-            <div class="col-sm col-md-2 col-lg-2  text-center border-right pt-2">
-                Montreal <br>
-                <i class="fas fa-arrow-down"></i><br>
-                Toronto
-            </div>
-            <div class="col-sm col-md-3 col-lg-4 text-center border-right pt-4">
-             <div class="row">
-                <div class="col">
-                  Departure: <br>
-                  Departure Time HERE
+        <div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-sm col-md-2 col-lg-2  text-center border-right pt-2">
+                    {{data.from}} <br>
+                    <i class="fas fa-arrow-down"></i><br>
+                    {{data.to}}
                 </div>
+                <div class="col-sm col-md-3 col-lg-4 text-center border-right pt-4">
+                 <div class="row">
+                    <div class="col">
+                      <b>User Message:</b>
+                      <p>{{data.request.additionalDetails}}</p>
+                    </div>
+                </div>
+              </div>
+                 <div class="col-sm col-md-2 col-lg-2  text-center ">
+                      <img src="{{data.user.image}}" class="profile rounded-circle mx-auto d-block " alt="driver" width="100" height="100">
+                  </div>
+                  <div class="col-sm col-md-2 col-lg-2  border-right text-center pt-4">
+                      {{data.user.firstName}} {{data.user.lastName}} <br>
+                      <!-- <ngb-rating [rate]=rating></ngb-rating> -->
+                  </div>
+                     <div class="col-sm col-md-2 col-lg-2 text-center pt-2">
+                       <button class="btn btn-primary btn-sm" > Accept</button><br><br>
+                       <button class="btn btn-danger btn-sm" > Decline</button>
+                  </div>
             </div>
-          </div>
-             <div class="col-sm col-md-2 col-lg-2  text-center ">
-                  <img src="" class="profile rounded-circle mx-auto d-block " alt="driver" width="100" height="100">
-              </div>
-              <div class="col-sm col-md-2 col-lg-2  border-right text-center pt-4">
-                  FirstNAme LastName <br>
-                  <ngb-rating [rate]=rating></ngb-rating>
-              </div>
-                 <div class="col-sm col-md-2 col-lg-2 text-center pt-2">
-                   <button class="btn btn-primary btn-sm" > Accept</button><br><br>
-                   <button class="btn btn-danger btn-sm" > Decline</button>
-              </div>
         </div>
       </div>
       </div>
