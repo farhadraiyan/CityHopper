@@ -1,5 +1,5 @@
 export class Message{
-    _id?: String;
+    msgId?: String;
     to: String;
     from: String; 
     message: String;

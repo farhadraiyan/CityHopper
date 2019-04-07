@@ -41,14 +41,12 @@ export class MessageComponent implements OnInit {
     )
   }
 
-  getMessageBtId(){
-
-  }
   
   sendMessage(){
     for(let recived of this.messageData['recieved']){
       this.messageS.to = recived.from.id
     }
+    console.log(this.messageS.to)
     this.messageS.from = this.authService.getUserDetails()['_id']
     this.messageService.sendMessage(this.messageS).subscribe(
       (res) => {
@@ -58,6 +56,15 @@ export class MessageComponent implements OnInit {
         console.log(err)
       }
     )
+  }
+
+  deleteSenderMessage(){
+    for(let msgId of this.messageData['sent']){
+      this.messageS.msgId= msgId.id 
+    }
+
+    console.log(this.messageS.msgId)
+
   }
 
   open(content) {
