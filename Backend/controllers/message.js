@@ -213,9 +213,46 @@ let sendMessage = async function (req, res) {
   })
 }
 
+let deleteMessage = async (req, res) => {
+  let errors = {}
+  let reqFields = ['msgId']
+  reqFields.forEach(function(field){
+    if(!req.body[field] || req.body[field] === ''){
+      errors[field] = `${field.replace(/_/g,' ')} is required`
+    }
+  })
+  if(Object.keys(errors).length){
+    return res.status(400).send({
+      msg: 'error deleting car',
+      errors: errors
+    })
+  }
+
+  let data = req.body
+  console.log(data)
+  let deleteMessage 
+  try {
+    deleteMessage = await Message.findByIdAndDelete(data.msgId)
+    if(!deleteMessage){
+      return res.status(400).send({
+        msg: "Could not delete Message, Please try again"
+      })
+    }
+    return res.status(200).send({
+      msg: "Message Deleted Successfully",
+      deleteMessage: deleteMessage
+    })
+  } catch (error) {
+    return res.status(404).send({
+      msg: "Message Not found"
+    })
+  }
+}
+
 module.exports = {
   findAll,
   findMessageById,
   findMessagesBySenderId,
-  sendMessage
+  sendMessage,
+  deleteMessage
 }

@@ -1,5 +1,5 @@
 <div class="container minheight80">
-  <h4 class="modal-title" id="modal-basic-title">Reply to {{recieved.from.name}}</h4>
+  <h4>Chat Messages</h4>
   <h6 class="text-right">Recieved From</h6>
   <div *ngFor="let recieved of this.messageData['recieved']">
     <button type="button" class="btn btn-md btn-outline-dark mt-3" style="width: 100%;"  (click)="open(content)">
@@ -18,7 +18,7 @@
   </div>
   <h6 class="mt-2">Sent to</h6>
   <div *ngFor="let sent of this.messageData['sent']">
-      <button type="button" class="btn btn-md btn-outline-dark mt-3"  style="width: 100%;" >
+      <button type="button" class="btn btn-md btn-outline-dark mt-3"  style="width: 100%;" (click)="open(content2)">
         <div class="row">
           <div class="col-sm-3 col-md-3">
               <h6 class="text-right mt-1">{{sent.to.name}}</h6>
@@ -52,8 +52,32 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-md btn-outline-dark" (click)="sendMessage()">Reply</button>
+        <button type="button" class="btn btn-md btn-outline-danger" (click)="deleteMessage()">Delete Message</button>
         <button type="button" class="btn btn-md btn-outline-info" (click)="modal.close('Save click')">Close</button>
       </div>
     </form>
   </ng-template>
   
+  <ng-template #content2 let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Chat Messages</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-group" #msg="ngForm">
+        <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <textarea class="form-control" id="message" name="message" #message="ngModel" [(ngModel)]="messageS.message" rows="6"></textarea>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-md btn-outline-dark" (click)="sendAgain()">Send Again</button>
+          <button type="button" class="btn btn-md btn-outline-danger" (click)="deleteSenderMessage()">Delete Message</button>
+          <button type="button" class="btn btn-md btn-outline-info" (click)="modal.close('Save click')">Close</button>
+        </div>
+      </form>
+    </ng-template>
+    
