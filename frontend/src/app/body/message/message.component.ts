@@ -12,7 +12,8 @@ import { AuthenticationService } from 'src/app/data-service/authentication.servi
 export class MessageComponent implements OnInit {
 
   closeResult: string;
-  messageData = {}
+  messageData = {};
+  messageS = new Message();
   name: any;
   sentTime: any;
   sentName: any;
@@ -32,13 +33,34 @@ export class MessageComponent implements OnInit {
     this.messageService.getMessageId(data).subscribe(
       (res) => {
         this.messageData = res;
+        console.log(this.messageData)
       },
       (err) => {
         console.log(err)
       }
     )
   }
+
+  getMessageBtId(){
+
+  }
   
+  sendMessage(newMessage){
+    for(let recived of this.messageData['recieved']){
+      this.messageS.to = recived.from.id
+    }
+    for(let sent of this.messageData['sent']){
+      this.messageS.from = sent.to.id
+    }
+    this.messageService.sendMessage(this.messageS).subscribe(
+      (res) => {
+        console.log(res)
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
+  }
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

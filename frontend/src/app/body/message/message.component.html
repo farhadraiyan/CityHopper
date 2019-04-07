@@ -1,19 +1,37 @@
 <div class="container minheight80">
-  <div>
-    <button type="button" class="btn btn-md btn-outline-dark mt-3" (click)="open(content)">
+  <h4 class="modal-title" id="modal-basic-title">Chat Messages</h4>
+  <h6 class="text-right">Recieved From</h6>
+  <div *ngFor="let recieved of this.messageData['recieved']">
+    <button type="button" class="btn btn-md btn-outline-dark mt-3" style="width: 100%;"  (click)="open(content)">
       <div class="row">
         <div class="col-sm-3 col-md-3">
-          <h6 class="text-right mt-1">Name</h6>
+          <p class="text-right">{{recieved.time | date : "medium"}}</p>
         </div>
-        <div class="col-sm-9 col-md-9">
-          <p class="text-left">This is the message thats goint to sadkaljsdkjahsdkj haskjdhakjshdklajdshlka
-            ksjdhaksjdhkajsdhkajshdkjasdha
-            skjdhaksdjhaksjdhkajsdhaksjd
-          </p>
+        <div class="col-sm-6 col-md-6">
+            <p class="text-right">{{recieved.message}}</p>
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <h6 class="text-left mt-1">{{recieved.from.name}}</h6>
         </div>
       </div>
     </button>
   </div>
+  <h6 class="mt-2">Sent to</h6>
+  <div *ngFor="let sent of this.messageData['sent']">
+      <button type="button" class="btn btn-md btn-outline-dark mt-3"  style="width: 100%;" >
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+              <h6 class="text-right mt-1">{{sent.to.name}}</h6>
+          </div>
+          <div class="col-sm-6 col-md-6">
+              <p class="text-left">{{sent.message}}</p>
+          </div>
+          <div class="col-sm-3 col-sm-3"> 
+              <p class="text-right">{{sent.time | date : "medium"}}</p>
+          </div>
+        </div>
+      </button>
+    </div>
 </div>
 
 
@@ -24,46 +42,16 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="container">
-      <h6>Recieved Messages</h6>
-      <div *ngFor="let recieved of this.messageData['recieved']">
-        <div class="row">
-          <div class="col-sm-10">
-              <p>{{recieved.message}}</p>
-              <span class="time-right">11:00</span>
-          </div>
-          <div class="col-sm-2">
-              <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" alt="avatar" style="height:35px; width:35px; border-radius: 50%;">
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr style="color:black">
-    <div class="container">
-      <h6>Send Messages</h6>
-      <div *ngFor="let sent of this.messageData['sent']">
-        <div class="row">
-          <div class="col-sm-2">
-            <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" alt="avatar" style="height:35px; width:35px; border-radius: 50%;">
-          </div>
-          <div class="col-sm-10">
-            <p>{{sent.message}}</p>
-            <p class="text-right">{{sent.time | date : "medium"}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
     <form class="form-group" #msg="ngForm">
       <div class="modal-body">
           <div class="row">
             <div class="col-sm-12">
-              <textarea class="form-control" id="message" name="message" rows="2"></textarea>
+              <textarea class="form-control" id="message" name="message" #message="ngModel" [(ngModel)]="messageS.message" rows="6"></textarea>
             </div>
           </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-md btn-outline-dark" (click)="sendMessage()">Reply</button>
-        <button type="button" class="btn btn-md btn-outline-danger" (click)="delete()">Delete Message</button>
         <button type="button" class="btn btn-md btn-outline-info" (click)="modal.close('Save click')">Close</button>
       </div>
     </form>
