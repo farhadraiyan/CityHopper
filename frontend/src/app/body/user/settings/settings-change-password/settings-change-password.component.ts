@@ -16,26 +16,21 @@ export class SettingsChangePasswordComponent implements OnInit {
     , private authService: AuthenticationService) { }
   
   user = new User();
-
-  ngOnInit() {
-  }
-
   newPassword = "";
   rePassword = "";
   errorMessage = "";
   errorMessage2 = "";
+  successMessage = "";
+
+  ngOnInit() {
+    this.newPassword = "";
+    this.rePassword = "";
+    this.errorMessage = "";
+    this.errorMessage2 = "";
+    this.successMessage = "";
+  }
+
   updatePass(password, newPassword, rePassword){
-    // let data = this.user;
-    // data.userId = this.authService.getUserDetails()['_id'];
-    // this.userService.updatePassword(this.user.password).subscribe(
-    //   res => {
-    //     console.log(res)
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   }
-    // )
-    console.log(newPassword, rePassword, password)
     if (newPassword.value !== rePassword.value) {
       return this.errorMessage = "Password does not match"
     }else if(newPassword.value == "" || rePassword.value =="" || password.value ==""){
@@ -50,12 +45,14 @@ export class SettingsChangePasswordComponent implements OnInit {
     }
     this.userService.updatePassword(data).subscribe(
         res => {
-          console.log(res)
+          this.successMessage = res.message
+          this._router.navigate(['/settings'],{queryParams: {'authentication': 'Password Updated Successfully'}});
         },
         err => {
           this.errorMessage2 = "Invalid Password";
         }
       )
+
   }
 
 

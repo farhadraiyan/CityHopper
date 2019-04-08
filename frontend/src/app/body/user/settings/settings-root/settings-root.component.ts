@@ -14,7 +14,9 @@ export class SettingsRootComponent implements OnInit {
   message:any;
   ngOnInit() {
 
-    this._route.queryParams.subscribe(params => {this.message =params['authentication']});
+    this._route.queryParams.subscribe(params => {
+      this.message = params['authentication']}
+      );
     console.log(this.message)
   }
 

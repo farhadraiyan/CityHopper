@@ -30,8 +30,8 @@
         </div>
         <div class="col-sm-8 col-md-4" (click)="chooseImages()" >
             <input (change)="onFileChanged($event)" style="visibility: hidden" type="file" name="image" id="image">
-            <div class="veh-image img-responsive mt-4">
-                <img [src]="carData.imageURL" height="200px" width="350px" alt="">
+            <div class="veh-image img-responsive">
+                <img [src]="carData.imageURL" height="200px" width="300px" alt="">
             </div>
         </div>
 

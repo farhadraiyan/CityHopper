@@ -53,9 +53,13 @@ export class SettingsVehicleUpdatesComponent implements OnInit {
 
   updateCar(){
     this.carService.editCar(this.carData, this.carId).subscribe(
-      err =>{
+      res =>{
+        this.router.navigate(['/settings'],{queryParams: {'authentication': 'Car updated successfully'}});
+      },
+      err => {
         console.log(err)
       }
+      
     )
   }
 

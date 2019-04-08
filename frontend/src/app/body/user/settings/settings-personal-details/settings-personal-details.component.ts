@@ -42,7 +42,7 @@ export class SettingsPersonalDetailsComponent implements OnInit {
       console.log(err)
     });
 
-    this.router.navigate(['/settings'],{queryParams: {'authentication': 'successful'}});
+    this.router.navigate(['/settings'],{queryParams: {'authentication': 'User Successfully updated'}});
 
 
   }
