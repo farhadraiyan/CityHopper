@@ -1,31 +1,30 @@
-<div class="info-trip" *ngFor="let data of trips | filter : filterargs">
+<div class="info-trip mt-3" *ngFor="let data of trips | filter : filterargs">
   <div id="trips" class="border rounded bg-light">
     <div class="trip-info-block">
       <div class="row justify-content-center">
         <div class="col-sm col-md-2 col-lg-2  text-center border-right pt-2">
-          Montreal <br>
+          {{data.from.name}} <br>
           <i class="fas fa-arrow-down"></i><br>
-          Toronto
+          {{data.to.name}}
         </div>
         <div class="col-sm col-md-3 col-lg-4 text-center border-right pt-4">
           <div class="row">
             <div class="col">
               Departure: <br>
-              Departure Time HERE
+              {{getFormatedDate(data.departureTime)}}
             </div>
           </div>
         </div>
         <div class="col-sm col-md-2 col-lg-2  text-center ">
-          <img src="" class="profile rounded-circle mx-auto d-block " alt="driver" width="100" height="100">
+          <img src="{{data.driver.imageUrl}}" class="profile rounded-circle mx-auto d-block " alt="driver" width="100"
+            height="100">
         </div>
         <div class="col-sm col-md-2 col-lg-2  border-right text-center pt-4">
-          FirstNAme LastName <br>
-          <ngb-rating [rate]=rating></ngb-rating>
+          {{data.driver.firstName}} {{data.driver.lastName}}<br>
         </div>
         <div class="col-sm col-md-2 col-lg-2 text-center pt-2">
-          <h5>CAD $213</h5>
-          <br>
-          <button class="btn btn-danger btn-sm"> Decline</button>
+          <h6 class="mt-3">Status: Not accepted</h6>
+          <button class="btn btn-danger btn-sm mt-2"> Cancel</button>
         </div>
       </div>
     </div>
