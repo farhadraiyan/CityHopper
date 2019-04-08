@@ -288,10 +288,9 @@ let getTripRequestForRider = async function (req, res) {
     })
   }
   let tripReqIDArray = allRequestsForRider.map(item => item.tripId)
-  console.log('tID', tripReqIDArray)
   let trips
   try {
-    trips = await TRIP.find({_id: {$in: tripReqIDArray}})
+    trips = await TRIP.find({'_id': {$in: tripReqIDArray}})
     if (!trips || trips.length < 1) {
       return res.status(404).send({
         msg: 'error getting trip request. Trips not found.'
@@ -306,7 +305,7 @@ let getTripRequestForRider = async function (req, res) {
 
   return res.status(200).send({
     message: 'Success',
-    data: allRequestsForRider
+    data: trips
   })
 }
 

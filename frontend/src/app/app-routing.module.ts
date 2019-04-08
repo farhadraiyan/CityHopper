@@ -21,7 +21,6 @@ import { SettingsChangePasswordComponent } from './body/user/settings/settings-c
 import { ViewSpecificTripComponent } from './body/trip/view-specific-trip/view-specific-trip.component';
 import { TripParentComponent } from './body/trip/trip-parent/trip-parent.component';
 import { TripRequestComponent } from './body/trip/trip-parent/trip-request/trip-request.component';
-import { TripArchiveComponent } from './body/trip/trip-parent/trip-archive/trip-archive.component';
 import { TripUpcomingComponent } from './body/trip/trip-parent/trip-upcoming/trip-upcoming.component';
 
 
@@ -98,9 +97,6 @@ const routes: Routes = [
     path: 'trips',
     component: TripParentComponent,
     children: [{
-      path: 'archive',
-      component: TripArchiveComponent
-    }, {
       path: 'requests',
       component: TripRequestComponent
     }, {

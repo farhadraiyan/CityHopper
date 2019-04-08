@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Message } from 'src/app/models/Message';
 import { MessageService } from 'src/app/data-service/message.service';
 import { AuthenticationService } from 'src/app/data-service/authentication.service';
@@ -25,13 +25,15 @@ export class MessageComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private messageService: MessageService, private authService: AuthenticationService) { }
 
+  APIInterval: any
+
   ngOnInit() {
     this.getMessageByUserId();
-    this.loadFunc()
+    this.APIInterval = window.setInterval(() => {
+      this.getMessageByUserId()
+    }, 10000)
   }
-
-
-  getMessageByUserId(){
+  getMessageByUserId() {
     let data = {
       userid: this.authService.getUserDetails()['_id']
     }
@@ -46,8 +48,8 @@ export class MessageComponent implements OnInit {
     )
   }
 
-  
-  sendMessage(){
+
+  sendMessage() {
     this.messageS.from = this.authService.getUserDetails()['_id']
     this.messageService.sendMessage(this.messageS).subscribe(
       (res) => {
@@ -61,37 +63,30 @@ export class MessageComponent implements OnInit {
     )
   }
 
-  deleteMessage(){
+  deleteMessage() {
     let data = {
       msgId: this.messageS.msgId
     }
     let conf = confirm("are you sure you want to delete this message")
-    if(conf == true){
+    if (conf == true) {
       this.messageService.deleteMessage(data).subscribe(
-      () =>{
-        this.getMessageByUserId()
-        this.modalService.dismissAll()
-      },
-      err => {
-        console.log(err)
-      }
-    )
-    }else{
+        () => {
+          this.getMessageByUserId()
+          this.modalService.dismissAll()
+        },
+        err => {
+          console.log(err)
+        }
+      )
+    } else {
       console.log("canced")
     }
   }
 
-  loadFunc(){
-    window.setInterval(()=>{
-      this.getMessageByUserId()
-    }, 10000)
-  }
-
-
   open(content, clickMsgId, recievedId) {
     this.messageS.msgId = clickMsgId;
     this.messageS.to = recievedId;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -105,14 +100,14 @@ export class MessageComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    this.loadFunc();
+    clearInterval(this.APIInterval)
   }
 
 }
