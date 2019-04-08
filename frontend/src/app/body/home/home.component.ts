@@ -76,7 +76,6 @@ export class HomeComponent implements OnInit {
 
             }
           }
-          console.log(this.myplace)
 
         });
       });
@@ -119,7 +118,8 @@ export class HomeComponent implements OnInit {
 
 
   onSubmit(){
-    this.router.navigate(['/viewTrips'],{queryParams: {'myPlace': this.myplace,"myDestination":this.myDestination}});
+
+    this.router.navigate(['/viewTrips'],{queryParams: {'myPlace': this.myplace['name'],"myDestination":this.myDestination['name']}});
   }
 
 

@@ -46,7 +46,6 @@ export class ViewTripsComponent implements OnInit {
 
   async ngAfterContentInit() {
     await this.addTripService.getAllTrips().toPromise().then((res) =>{
-      console.log(res)
       for (let i in res){
         if(res[i].active == true){
           this.trips.push(res[i])
@@ -60,6 +59,14 @@ export class ViewTripsComponent implements OnInit {
     }).catch((err) => {
      console.log(err)
    });
+   this._route.queryParams.subscribe(params => {
+    this.myplace = params['myPlace'],
+    this.myDestination =  params['myDestination']
+    if(params['myPlace']){
+      this.onSubmit(this.myplace, this.myDestination,"")
+    }
+   })
+
 
   }
 
@@ -70,23 +77,12 @@ export class ViewTripsComponent implements OnInit {
     else{
       this.mobile = false;
     }
-    this._route.queryParams.subscribe(params => {
-      this.myplace = params['myPlace'],
-      this.myDestination =  params['myDestination']
-      if(this.myplace){
-        this.homeSearch(this.myplace,this.myDestination)
-      }
-     })
 
     this.rating= 3
     this.loadautocompleteFrom();
     this.loadautocompleteTo();
   }
 
-  homeSearch(from,to){
-    this.homeSearch = from['name']
-
-  }
 
 
 
@@ -125,6 +121,10 @@ export class ViewTripsComponent implements OnInit {
     }
     return dateStr
   }
+
+
+
+
 
 onSubmit(from,to,date){
     var validation = false;
