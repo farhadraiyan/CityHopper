@@ -223,7 +223,7 @@ let deleteMessage = async (req, res) => {
   })
   if(Object.keys(errors).length){
     return res.status(400).send({
-      msg: 'error deleting car',
+      msg: 'error deleting message',
       errors: errors
     })
   }
