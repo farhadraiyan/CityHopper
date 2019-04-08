@@ -17,8 +17,8 @@ declare var google: any
 })
 export class PosttripComponent implements OnInit, DoCheck {
   title: string = 'Google map';
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lng: number;
   searchControl: FormControl;
   zoom: number;
   myplace: object;
@@ -32,6 +32,9 @@ export class PosttripComponent implements OnInit, DoCheck {
   tripName:any
   car:any
   message:any
+  origin:any
+  destination:any
+  direction:any= true
 
   //date and time picker
   time = {hour: 13, minute: 30};
@@ -49,7 +52,15 @@ export class PosttripComponent implements OnInit, DoCheck {
     private addTripService: TripService,
     private carService: CarService
 
-  ) { }
+  ) {
+    if (navigator)
+    {
+    navigator.geolocation.getCurrentPosition( pos => {
+        this.lng = +pos.coords.longitude;
+        this.lat = +pos.coords.latitude;
+      });
+    }
+   }
   ngDoCheck() {
 
   }
@@ -76,23 +87,24 @@ export class PosttripComponent implements OnInit, DoCheck {
 }
 
 
-  ngOnInit() {
 
-    //initialize map
+  ngOnInit() {
+    this.direction = true
     this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
+    this.lat = 39.8282;
+    this.lng = -98.5795;
 
     //create search FormControl
     this.searchControl = new FormControl();
 
-    //set current position
-    this.addTripService.setCurrentPosition(this.latitude,this.longitude,this.zoom);
-    this.loadautocompleteFrom();
-    this.loadautocompleteTo();
 
 
+    this.addTripService.setCurrentPosition(this.lat,this.lng,this.zoom);
+   //set current position
+   this.loadautocompleteFrom();
+   this.loadautocompleteTo();
   }
+
 
   onSubmit(date,seats,luggage,price,vehicle){
     var newDate = date.value +" "+ this.time['hour']+ ":" + this.time['minute'] +":00";
@@ -151,9 +163,11 @@ export class PosttripComponent implements OnInit, DoCheck {
 
 
           //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+
+          this.origin = {
+            lat:this.myplace['location'].geoLocationFrom.coordinates[0],
+            lng:this.myplace['location'].geoLocationFrom.coordinates[1]
+          }
 
         });
       });
@@ -189,11 +203,12 @@ export class PosttripComponent implements OnInit, DoCheck {
               country:place.address_components[3].long_name,
             }
           }
-          this.tripName = this.myplace['name'] +" "+this.myDestination['name']
           //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+          this.destination ={
+            lat:this.myDestination['location'].geoLocationFrom.coordinates[0],
+            lng:this.myDestination['location'].geoLocationFrom.coordinates[1]
+          }
+          this.direction = false
         });
       });
     });

@@ -59,7 +59,7 @@
                           <option>Medium</option>
                           <option>Large</option>
                         </select>
-                  
+
                   </div>
                 </div>
                 <div class="form-group row">
@@ -84,15 +84,26 @@
                   </div>
 
           </form>
+          <div *ngIf="this.direction == true">
+          dkfjlkdsaflkds
+          </div>
         </div>
+
 
         <div class="mymap col-md-6 col-12 mb-4">
 
           <!-- this creates a google map on the page with the given lat/lng from -->
           <!-- the component as the initial center of the map: -->
-          <agm-map id="map" [latitude]="latitude" [longitude]="longitude">
-            <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+
+
+
+
+          <agm-map id="map" [latitude]="lat" [longitude]="lng">
+            <agm-marker *ngIf="this.direction == true" [latitude]="latitude" [longitude]="longitude"></agm-marker>
+            <agm-direction *ngIf="this.direction == false" [origin]="this.origin" [destination]="this.destination"></agm-direction>
           </agm-map>
+
+        
         </div>
       </div>
 

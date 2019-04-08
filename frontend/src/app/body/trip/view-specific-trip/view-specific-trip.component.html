@@ -111,15 +111,13 @@
       <img [src]="car.vehicle.imageURL" class="profile rounded mx-auto d-block mt-4" alt="driver" width="350"
         height="250">
     </div>
-    <div class="mapshow col-sm-6 mt-5 text-center">
+    <div class="mapshow col-md-6 col-12 mb-4">
       <!-- this creates a google map on the page with the given lat/lng from -->
       <!-- the component as the initial center of the map: -->
-      <agm-map id="map" [latitude]="latitude" [longitude]="longitude">
-        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-      </agm-map>
+     <agm-map [latitude]="lat" [longitude]="lng">
+     <agm-direction [origin]="this.origin" [destination]="this.destination"></agm-direction>
+    </agm-map>
 
-
-    </div>
   </div>
 </div>
 
