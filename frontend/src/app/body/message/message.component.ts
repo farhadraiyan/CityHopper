@@ -84,7 +84,7 @@ export class MessageComponent implements OnInit {
   loadFunc(){
     window.setInterval(()=>{
       this.getMessageByUserId()
-    }, 6000)
+    }, 10000)
   }
 
 
@@ -107,6 +107,12 @@ export class MessageComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.loadFunc();
   }
 
 }
