@@ -57,14 +57,16 @@ export class ViewSpecificTripComponent implements OnInit {
   time: any
   car: any
 
+  origin = { lat: 0, lng: 0}
+  destination = { lat: 0, lng: 0 }
+
   messageData = new Message();
   tripRequestData = new TripRequest();
   async ngOnInit() {
 
-    //initialize map
-    this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
+    console.log(origin)
+
+
     //set current position
     this.addTripService.setCurrentPosition(this.latitude, this.longitude, this.zoom);
     //create search FormControl
@@ -77,13 +79,21 @@ export class ViewSpecificTripComponent implements OnInit {
     // get trips on db by id
     this.tripService.getOneTrip(this.id).subscribe(data => {
       this.tripData = data
-      console.log(this.tripData.driver.firstName)
       this.carService.getCarById(this.tripData.car).subscribe(data => {
         this.car = data
       })
       var date = this.convertTime(this.tripData['departureTime'], false)
       this.tripData['departureTime'] = date
       this.time = date.substring(16, 23);
+      console.log(this.tripData.to.location.geoLocationFrom.coordinates[0])
+      this.origin ={
+        lat:this.tripData.from.location.geoLocationFrom.coordinates[0],
+        lng:this.tripData.from.location.geoLocationFrom.coordinates[1]
+      }
+      this.destination = {
+        lat:this.tripData.to.location.geoLocationFrom.coordinates[0],
+        lng:this.tripData.to.location.geoLocationFrom.coordinates[1]
+      }
     });
 
   }
