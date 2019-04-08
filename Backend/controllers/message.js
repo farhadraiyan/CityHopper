@@ -228,11 +228,12 @@ let deleteMessage = async (req, res) => {
     })
   }
 
-  let data = req.body.msgId
+  let data = req.body
   console.log(data)
   let deleteMessage 
   try {
     deleteMessage = await Message.findByIdAndDelete(data.msgId)
+    console.log(deleteMessage)
     if(!deleteMessage){
       return res.status(400).send({
         msg: "Could not delete Message, Please try again"
