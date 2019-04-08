@@ -44,8 +44,7 @@ export class MessageService {
   }
 
   deleteMessage(msgId){
-    console.log(msgId)
-    return this.http.delete('http://localhost:3000/message/delete', msgId).pipe(
+    return this.http.post('http://localhost:3000/message/delete', msgId).pipe(
       map(res => {
         console.log(res)
       })

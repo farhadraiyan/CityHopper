@@ -228,7 +228,7 @@ let deleteMessage = async (req, res) => {
     })
   }
 
-  let data = req.body
+  let data = req.body.msgId
   console.log(data)
   let deleteMessage 
   try {
