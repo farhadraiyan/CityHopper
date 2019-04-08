@@ -1,8 +1,8 @@
 <div class="container minheight80">
   <h4>Chat Messages</h4>
-  <h6 class="text-right">Recieved From</h6>
+  <h6 class="text-right">Recieved Messages</h6>
   <div *ngFor="let recieved of this.messageData['recieved']">
-    <button type="button" class="btn btn-md btn-outline-dark mt-3" style="width: 100%;"  (click)="open(content, recieved.id, recieved.from.id)">
+    <button type="button" class="btn btn-md btn-outline-dark mt-1 mb-1" style="width: 100%;"  (click)="open(content, recieved.id, recieved.from.id)">
       <div class="row">
         <div class="col-sm-3 col-md-3">
           <p class="text-right">{{recieved.time | date : "medium"}}</p>
@@ -13,22 +13,16 @@
         <div class="col-sm-3 col-md-3">
             <h6 class="text-left mt-1">{{recieved.from.name}}</h6>
         </div>
-        <div class="col-sm-3 col-md-3">
-          <h6 class="text-left mt-1">{{recieved.from.id}}</h6>
-      </div>
       </div>
     </button>
   </div>
-  <h6 class="mt-2">Sent to</h6>
+  <h6 class="mt-2">Sent Messages</h6>
   <div *ngFor="let sent of this.messageData['sent']">
-      <button type="button" class="btn btn-md btn-outline-dark mt-3"  style="width: 100%;" (click)="open(content2, sent.id, sent.to.id)">
+      <button type="button" class="btn btn-md btn-outline-dark mt-1 mb-1"  style="width: 100%;" (click)="open(content2, sent.id, sent.to.id)">
         <div class="row">
           <div class="col-sm-3 col-md-3">
               <h6 class="text-right mt-1">{{sent.to.name}}</h6>
           </div>
-          <div class="col-sm-3 col-md-3">
-            <h6 class="text-right mt-1">{{sent.id}}</h6>
-        </div>
           <div class="col-sm-6 col-md-6">
               <p class="text-left">{{sent.message}}</p>
           </div>

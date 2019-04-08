@@ -49,6 +49,8 @@ export class MessageComponent implements OnInit {
     this.messageService.sendMessage(this.messageS).subscribe(
       (res) => {
         console.log(res)
+        this.getMessageByUserId()
+        this.modalService.dismissAll();
       },
       (err) => {
         console.log(err)
@@ -60,15 +62,20 @@ export class MessageComponent implements OnInit {
     let data = {
       msgId: this.messageS.msgId
     }
-    this.messageService.deleteMessage(data).subscribe(
-      res =>{
-        console.log(res)
+    let conf = confirm("are you sure you want to delete this message")
+    if(conf == true){
+      this.messageService.deleteMessage(data).subscribe(
+      () =>{
+        this.getMessageByUserId()
+        this.modalService.dismissAll()
       },
       err => {
         console.log(err)
       }
     )
-
+    }else{
+      console.log("canced")
+    }
   }
 
   open(content, clickMsgId, recievedId) {
