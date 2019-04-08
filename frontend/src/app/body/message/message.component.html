@@ -2,7 +2,7 @@
   <h4>Chat Messages</h4>
   <h6 class="text-right">Recieved From</h6>
   <div *ngFor="let recieved of this.messageData['recieved']">
-    <button type="button" class="btn btn-md btn-outline-dark mt-3" style="width: 100%;"  (click)="open(content)">
+    <button type="button" class="btn btn-md btn-outline-dark mt-3" style="width: 100%;"  (click)="open(content, recieved.id, recieved.from.id)">
       <div class="row">
         <div class="col-sm-3 col-md-3">
           <p class="text-right">{{recieved.time | date : "medium"}}</p>
@@ -13,16 +13,22 @@
         <div class="col-sm-3 col-md-3">
             <h6 class="text-left mt-1">{{recieved.from.name}}</h6>
         </div>
+        <div class="col-sm-3 col-md-3">
+          <h6 class="text-left mt-1">{{recieved.from.id}}</h6>
+      </div>
       </div>
     </button>
   </div>
   <h6 class="mt-2">Sent to</h6>
   <div *ngFor="let sent of this.messageData['sent']">
-      <button type="button" class="btn btn-md btn-outline-dark mt-3"  style="width: 100%;" (click)="open(content2)">
+      <button type="button" class="btn btn-md btn-outline-dark mt-3"  style="width: 100%;" (click)="open(content2, sent.id, sent.to.id)">
         <div class="row">
           <div class="col-sm-3 col-md-3">
               <h6 class="text-right mt-1">{{sent.to.name}}</h6>
           </div>
+          <div class="col-sm-3 col-md-3">
+            <h6 class="text-right mt-1">{{sent.id}}</h6>
+        </div>
           <div class="col-sm-6 col-md-6">
               <p class="text-left">{{sent.message}}</p>
           </div>
@@ -74,8 +80,8 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-md btn-outline-dark" (click)="sendAgain()">Send Again</button>
-          <button type="button" class="btn btn-md btn-outline-danger" (click)="deleteSenderMessage()">Delete Message</button>
+          <button type="button" class="btn btn-md btn-outline-dark" (click)="sendMessage()">Send Again</button>
+          <button type="button" class="btn btn-md btn-outline-danger" (click)="deleteMessage()">Delete Message</button>
           <button type="button" class="btn btn-md btn-outline-info" (click)="modal.close('Save click')">Close</button>
         </div>
       </form>

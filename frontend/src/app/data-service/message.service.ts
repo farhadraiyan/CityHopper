@@ -32,12 +32,22 @@ export class MessageService {
 
 
   sendMessage(msgData){
+    console.log(msgData)
     let header = new HttpHeaders();
     header.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/message/send', msgData).pipe(
       map(res => {
         res => res.json();
         return res;
+      })
+    )
+  }
+
+  deleteMessage(msgId){
+    console.log(msgId)
+    return this.http.delete('http://localhost:3000/message/delete', msgId).pipe(
+      map(res => {
+        console.log(res)
       })
     )
   }

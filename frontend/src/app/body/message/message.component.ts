@@ -3,6 +3,7 @@ import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Message } from 'src/app/models/Message';
 import { MessageService } from 'src/app/data-service/message.service';
 import { AuthenticationService } from 'src/app/data-service/authentication.service';
+import { DomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
 
 @Component({
   selector: 'app-message',
@@ -19,6 +20,7 @@ export class MessageComponent implements OnInit {
   sentName: any;
   recievedTime: any;
   recievedName: any;
+  sendandrecieve: any;
 
   constructor(private modalService: NgbModal, private messageService: MessageService, private authService: AuthenticationService) { }
 
@@ -43,10 +45,6 @@ export class MessageComponent implements OnInit {
 
   
   sendMessage(){
-    for(let recived of this.messageData['recieved']){
-      this.messageS.to = recived.from.id
-    }
-    console.log(this.messageS.to)
     this.messageS.from = this.authService.getUserDetails()['_id']
     this.messageService.sendMessage(this.messageS).subscribe(
       (res) => {
@@ -58,22 +56,31 @@ export class MessageComponent implements OnInit {
     )
   }
 
-  deleteSenderMessage(){
-    for(let msgId of this.messageData['sent']){
-      this.messageS.msgId= msgId.id 
+  deleteMessage(){
+    let data = {
+      msgId: this.messageS.msgId
     }
-
-    console.log(this.messageS.msgId)
+    this.messageService.deleteMessage(data).subscribe(
+      res =>{
+        console.log(res)
+      },
+      err => {
+        console.log(err)
+      }
+    )
 
   }
 
-  open(content) {
+  open(content, clickMsgId, recievedId) {
+    this.messageS.msgId = clickMsgId;
+    this.messageS.to = recievedId;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
