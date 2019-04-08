@@ -287,27 +287,43 @@ let getTripRequestForRider = async function (req, res) {
       errors: error.message
     })
   }
-  let tripReqIDArray = allRequestsForRider.map(item => item.tripId)
-  let trips
-  try {
-    trips = await TRIP.find({'_id': {$in: tripReqIDArray}})
-    if (!trips || trips.length < 1) {
-      return res.status(404).send({
-        msg: 'error getting trip request. Trips not found.'
+  let responseBody = []
+  for (const tripR of allRequestsForRider) {
+    let trip
+    try {
+      trip = await TRIP.findById(tripR.tripId)
+    } catch (error) {
+      return res.status(400).send({
+        msg: 'error getting trip',
+        errors: error.message
       })
     }
-  } catch (error) {
-    return res.status(400).send({
-      msg: 'error getting trip request',
-      errors: error.message
-    })
+
+    let data = {
+      trip: trip,
+      tripRequest: tripR
+    }
+    responseBody.push(data)
   }
 
-  return res.status(200).send({
-    message: 'Success',
-    data: trips
+  res.status(200).send({
+    data: responseBody
   })
-}
+  // let tripReqIDArray = allRequestsForRider.map(item => item.tripId)
+  // let trips
+  // try {
+  //   trips = await TRIP.find({'_id': {$in: tripReqIDArray}})
+  //   if (!trips || trips.length < 1) {
+  //     return res.status(404).send({
+  //       msg: 'error getting trip request. Trips not found.'
+  //     })
+  //   }
+  // } catch (error) {
+    // return res.status(400).send({
+    //   msg: 'error getting trip request',
+    //   errors: error.message
+    // })
+  }
 
 let getTrips = async function(req,res){
   try{
@@ -366,6 +382,109 @@ let sendTripRequest = async function (req, res) {
   }
 }
 
+let acceptDeclineTripRequest = async function (req, res) {
+  let errors = {}
+  let reqFields = ['status', 'tripRequestId']
+  // add fields to error if errors getting user information
+  reqFields.forEach(function (field) {
+    if (!req.body[field] || req.body[field] === '') {
+      errors[field] = `${field.replace(/_/g, ' ')} is required`
+    }
+  })
+  let data = _.pick(req.body, reqFields)
+
+  let tripRequest
+  try {
+    tripRequest = await TripRequest.findById(data.tripRequestId)
+    if (!tripRequest) {
+      return res.status(400).send({
+        message: "Error getting a trip request."
+      })
+    }
+  } catch (error) {
+    return res.status(400).send({
+      message: "Error getting a trip request.",
+      error: error.message
+    })
+  }
+
+  let savedTripRequest
+
+  if (data.status === 'accepted') {
+    tripRequest.Confirmed = true
+    try {
+      savedTripRequest = await tripRequest.save()
+      if (!savedTripRequest) {
+        return res.status(400).send({
+          message: "Error saving a trip request."
+        })
+      }
+      return res.status(200).send({
+        message: 'Trip Request Confirmed'
+      })
+    } catch (error) {
+      return res.status(400).send({
+        message: "Error saving a trip request.",
+        error: error.message
+      })
+    }
+
+  } else if (data.status === 'declined') {
+    tripRequest.Confirmed = false
+    try {
+      savedTripRequest = await tripRequest.save()
+      if (!savedTripRequest) {
+        return res.status(400).send({
+          message: "Error saving a trip request."
+        })
+      }
+      return res.status(200).send({
+        message: 'Trip Request Confirmed'
+      })
+    } catch (error) {
+      return res.status(400).send({
+        message: "Error saving a trip request.",
+        error: error.message
+      })
+    }
+  }
+}
+
+let cancelTripRequest = async function (req, res) {
+  let errors = {}
+  let reqFields = ['id']
+  // add fields to error if errors getting user information
+  reqFields.forEach(function (field) {
+    if (!req.params[field] || req.params[field] === '') {
+      errors[field] = `${field.replace(/_/g, ' ')} is required`
+    }
+  })
+  if (Object.keys(errors).length) {
+    return res.status(400).send({
+      msg: 'error getting trip request',
+      errors: errors,
+    })
+  }
+  let tripRequest
+  try {
+    tripRequest = await TripRequest.findByIdAndDelete(req.params.id)
+    if (!tripRequest) {
+      return res.status(400).send({
+        error: "Trip Request Not Found."
+      })
+    }
+  } catch (error) {
+    return res.status(400).send({
+      error: "Trip Request Not Found.",
+      message: error.message
+    })
+  }
+  return res.status(200).send({
+    message: 'successfully deleted Trip Request',
+    request: tripRequest
+  })
+}
+
 module.exports = {
   // findAllTrip,
   createTrip,
@@ -373,5 +492,7 @@ module.exports = {
   getTripRequestsForTrip,
   getTripRequestForRider,
   getTripRequestForDriver,
-  getTrips,getOneTrip
+  getTrips,getOneTrip,
+  acceptDeclineTripRequest,
+  cancelTripRequest
 }

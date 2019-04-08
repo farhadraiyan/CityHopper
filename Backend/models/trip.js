@@ -15,8 +15,7 @@ const TripRequestSchema = mongoose.Schema({
     required: true
   },
   Confirmed: {
-    type: Boolean,
-    default: false
+    type: Boolean
   },
   time_created: {
     type: Date,
