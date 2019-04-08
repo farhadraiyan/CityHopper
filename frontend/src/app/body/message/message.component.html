@@ -1,5 +1,5 @@
 <div class="container minheight80">
-  <h4>Chat Messages</h4>
+  <h4 class="mt-3">Chat Messages</h4>
   <h6 class="text-right">Recieved Messages</h6>
   <div *ngFor="let recieved of this.messageData['recieved']">
     <button type="button" class="btn btn-md btn-outline-dark mt-1 mb-1" style="width: 100%;"  (click)="open(content, recieved.id, recieved.from.id)">

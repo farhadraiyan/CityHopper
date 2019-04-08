@@ -4,6 +4,7 @@ import { Message } from 'src/app/models/Message';
 import { MessageService } from 'src/app/data-service/message.service';
 import { AuthenticationService } from 'src/app/data-service/authentication.service';
 import { DomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
+import { load } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-message',
@@ -26,7 +27,9 @@ export class MessageComponent implements OnInit {
 
   ngOnInit() {
     this.getMessageByUserId();
+    this.loadFunc()
   }
+
 
   getMessageByUserId(){
     let data = {
@@ -77,6 +80,13 @@ export class MessageComponent implements OnInit {
       console.log("canced")
     }
   }
+
+  loadFunc(){
+    window.setInterval(()=>{
+      this.getMessageByUserId()
+    }, 6000)
+  }
+
 
   open(content, clickMsgId, recievedId) {
     this.messageS.msgId = clickMsgId;
