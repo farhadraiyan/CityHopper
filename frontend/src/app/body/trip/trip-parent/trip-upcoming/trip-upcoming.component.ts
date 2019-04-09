@@ -32,10 +32,11 @@ export class TripUpcomingComponent implements OnInit {
     return `${D_a_t_e[0]} at ${D_a_t_e[1].substr(0, 5)}`
   }
 
-  payNow(riderId, tripId){
+  payNow(riderId, tripId, tripRequestID){
     let data ={
       tripId: tripId,
-      riderId: riderId
+      riderId: riderId,
+      tripRequestID: tripRequestID
     }
     return this.http.post(`http://localhost:3000/payment/create-payment`, data).toPromise().then((res) => {
       let url = JSON.parse(res['_body'])['paymentURL']

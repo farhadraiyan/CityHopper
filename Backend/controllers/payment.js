@@ -15,6 +15,8 @@ var total;
 /*Payment Controller goes here */ 
 
 exports.createPayment = async function (req, res) {
+    console.log(req.body)
+    console.log(req.body.tripRequestID)
     var trip
     try {
         trip = await TRIP.findById({_id:req.body.tripId})
@@ -72,7 +74,7 @@ exports.createPayment = async function (req, res) {
             "item_list": {
                 "items": [{
                     "name": tripName,
-                    "sku": trip.id,
+                    "sku": req.body.tripRequestID,
                     "price": total,
                     "currency": "CAD",
                     "quantity": 1
@@ -113,7 +115,7 @@ let  handlePaypalSuccessPayment = async function (req ,res, error, payment) {
             error: "error generating payment",
             message: error.message
         })
-    } 
+    }
     let data = {}
     data.paymentId = payment.id
     data.payerId = payment.payer.payer_info.payer_id
@@ -121,7 +123,7 @@ let  handlePaypalSuccessPayment = async function (req ,res, error, payment) {
     data.merchantId = payment.transactions[0].payee.merchant_id
     data.transactionAmount = payment.transactions[0].amount.total
     data.transactionDetails = payment.transactions[0].description
-    console.log(data)
+
     let paypalData
     try {
         paypalData = await new paymentModel(data)
@@ -152,6 +154,39 @@ let  handlePaypalSuccessPayment = async function (req ,res, error, payment) {
         })
     }
 
+    let tripRequestID = payment.transactions[0].item_list.items[0].sku
+    console.log(tripRequestID)
+    let tripRequest
+    try {
+        tripRequest = await TripRequest.findById(tripRequestID)
+        console.log(tripRequest)
+        if (!tripRequest) {
+            return res.status(200).send({
+                message: "Payment processed successfully but error updating trip, contact our support."
+            })
+        }
+    } catch (error) {
+        return res.status(200).send({
+            message: "Payment processed successfully but error updating trip, contact our support.",
+            error: error.message
+        })
+    }
+    tripRequest.paymentStatus = true
+
+    let savedTrip
+    try {
+        savedTrip = await tripRequest.save()
+        if (!savedTrip) {
+            return res.status(200).send({
+                message: "Payment processed successfully but saving updating trip, contact our support."
+            })
+        }
+    } catch (error) {
+        return res.status(200).send({
+            message: "Payment processed successfully but error updating trip, contact our support.",
+            error: error.message
+        })
+    }
     return res.redirect('http://localhost:4200/trips/upcoming')
 
 }

@@ -23,6 +23,10 @@ const TripRequestSchema = mongoose.Schema({
   },
   additionalDetails: {
     type: String
+  },
+  paymentStatus: {
+    type: Boolean,
+    default: false
   }
 })
 const TripSchema = mongoose.Schema({
