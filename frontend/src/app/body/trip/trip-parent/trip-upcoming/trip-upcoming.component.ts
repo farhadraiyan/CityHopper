@@ -47,6 +47,8 @@ export class TripUpcomingComponent implements OnInit {
     })
   }
 
+  
+
   cancelTripRequest(tripReqId) {
     return this.http.delete(`http://localhost:3000/trip/cancelRequest/${tripReqId}`).toPromise().then((res) => {
       this.getAllTripRequests()
