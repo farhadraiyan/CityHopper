@@ -1,6 +1,7 @@
 const paypal = require('paypal-rest-sdk');
 const config = require('../config/config');
-const Trip = require('../models/trip');
+const { TRIP } = require('../models/trip')
+const { TripRequest } = require('../models/trip')
 const paymentModel = require('../models/payment');
 const _ = require('lodash');
 
@@ -16,7 +17,7 @@ var total;
 exports.createPayment = async function (req, res) {
     var trip
     try {
-        trip = await Trip.findById({_id:req.body.id})
+        trip = await TRIP.findById({_id:req.body.tripId})
         if(!trip){
             return res.status(400).send({
                 msg: 'error finding trip'
@@ -29,38 +30,35 @@ exports.createPayment = async function (req, res) {
     } catch (error) {
         return res.status(400).send({
             msg: 'Unable to find trip',
+            error: error.message
+        })
+    }
+
+    //This endpoint is importent and needed for future implementation.
+
+    var tripRequest
+    try{
+        tripRequest = await TripRequest.findOne({riderId: req.body.riderId})
+        if(!tripRequest){
+            return res.status(400).send({
+                msg: 'error finding trip request',
+            })
+        }
+        res.status({
+            msg: "Trip Request Found",
+            data: tripRequest
+        })
+    } catch(error){
+        return res.status(400).send({
+            msg: "Trip Request not found",
             error: error
         })
     }
 
-    // This endpoint is importent and needed for future implementation.
-
-    // var tripRequest
-    // try{
-    //     tripRequest = await Trip.findById({_id: req.body.riderId})
-    //     if(!tripRequest){
-    //         return res.status(400).send({
-    //             msg: 'error finding trip request',
-    //         })
-    //     }
-    //     res.status({
-    //         msg: "Trip Request Found",
-    //         data: tripRequest
-    //     })
-    // } catch(error){
-    //     return res.status(400).send({
-    //         msg: "Trip Request not found",
-    //         error: error
-    //     })
-    // }
-
     const tripName = JSON.stringify(trip.from.name + " to " + trip.to.name)
-    console.log(trip.cost)
-    
-    // this let must be changed once tripRequest database implementaton will be added
-    var seatRequest = 1;
-    total = trip.cost * seatRequest + (trip.cost * seatRequest * 20/100);
-
+   
+    total = trip.cost * tripRequest.seatsRequested + (trip.cost * tripRequest.seatsRequested * 20/100);
+    console.log(total)
     const create_payment_json = {
         "intent": "sale",
         "payer": {
@@ -84,7 +82,7 @@ exports.createPayment = async function (req, res) {
                 "currency": "CAD",
                 "total": total
             },
-            "description": "Transction for " + tripName + ", with the amount of $" + trip.cost + " CAD."
+            "description": "Transction for " + tripName + ", with the amount of $" + total + " CAD."
         }]
     };
     
@@ -97,8 +95,12 @@ exports.createPayment = async function (req, res) {
         } else {
             for(let links of payment.links){
                 if(links.rel === "approval_url"){
-                    console.log(links.href)
-                    res.redirect(links.href)
+                    // res.setHeader("Access-Control-Allow-Origin", "*")
+                    // console.log(links.href)
+                    // res.redirect(links.href)
+                    return res.status(200).send({
+                        paymentURL: links.href
+                    })
                 }
             }
         }
@@ -150,9 +152,7 @@ let  handlePaypalSuccessPayment = async function (req ,res, error, payment) {
         })
     }
 
-    return res.status(200).send({
-        savedPaypalData
-    })
+    return res.redirect('http://localhost:4200/trips/upcoming')
 
 }
 exports.paymentSuccess = async (req, res) =>{
