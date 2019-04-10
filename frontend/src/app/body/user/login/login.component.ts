@@ -21,7 +21,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
-    this._route.queryParams.subscribe(params => {this.message =params['authentication'];});
+    this._route.queryParams.subscribe(params => {
+      this.message =params['authentication'];
+      
+    });
 
   }
 
