@@ -44,7 +44,7 @@ export class SettingsVehiclesComponent implements OnInit {
       formData.append(key, data[key])
     }
     await this.http.post('http://localhost:3000/car/register', formData).toPromise().then((res) => {
-      console.log(res)
+      this._router.navigate(['/settings'],{queryParams: {'authentication': 'Car added successfully'}});      
     }).catch((err) => {
       console.log(err)
     })
